@@ -1,0 +1,66 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsfonts, amsmath}
+\usepackage{amssymb, amsthm}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\fl}{fl}
+\usepackage{newunicodechar}
+\newunicodechar{∫}{\int}
+\newunicodechar{∈}{\in}
+\newunicodechar{ξ}{\xi}
+\newunicodechar{‴}{'''}
+\newunicodechar{″}{''}
+\newunicodechar{′}{'}
+
+
+\newcommand{\D}{\mathrm{d}}
+\newcommand{\p}{\partial}
+
+
+
+\begin{document}
+
+\section*{M10.6.}
+Niech $f ∈ C^4[a,b]$,
+$h = \frac{b-a}{2}, m = \frac{a+b}{2}$,
+$F(t) = f(m-ht)$.
+
+Błąd metody Simpsona wynosi
+\begin{align*}
+∫_a^b f(x) \,dx - \frac{h}{3}\left(f(a) + 4f(a+h) + f(a+2h)\right) & \\
+= h \left(∫_{-1}^1 F(t) dt - 1/3(F(-1) + 4F(0) + F(1))\right).
+\end{align*}
+
+Niech
+$$G(t) = ∫_{-t}^t F(u) du - t/3(F(-t) + 4F(0) + F(t)),$$
+wtedy błąd to $hG(1)$.
+
+Niech $H(t) = G(t) - t^5G(1)$.
+Zauważmy, że
+$H(0) = H(1) = 0$, więc $H′$ się zeruje w pewnym $ξ_1 ∈ (0,1)$.
+$$G′(x) = F(x) + F(-x) - \frac{x}{3}(-F′(-x) + F′(x)) - \frac{1}{3}(F(-x) + 4F(0) + F(x)).$$
+$H′(0) = 0,$ więc $H″$ się zeruje w pewnym $ξ_2 ∈ (0, ξ_1).$
+$$G″(x) = F′(x) - F′(-x) - \frac{x}{3}(F″(-x) + F″(x)) - \frac{2}{3}(-F′(-x) + F′(x)).$$
+$H″(0) = 0$, więc $H‴$ się zeruje w pewnym $ξ_3 ∈ (0, ξ_2)$.
+\begin{align*}
+G‴(x)
+&= F″(x) + F″(-x) - \frac{x}{3}(-F‴(-x) + F‴(x)) - F″(-x) - F″(x) \\
+&= -\frac{x}{3}(F‴(x) - F‴(-x)), \\
+H‴(ξ_3) &= -\frac{ξ_3}{3}(F‴(ξ_3) - F‴(-ξ_3)) - 60 ξ_3^2 G(1) = 0.
+\end{align*}
+
+Z twierdzenia o wartości średniej
+$$F‴(ξ_3) - F‴(-ξ_3) = 2ξ_3 \frac{F‴(ξ_3) - F‴(-ξ_3)}{2ξ_3} = 2ξ_3 F^{(4)}(ξ_4)$$
+dla pewnego $ξ_4 ∈ (-ξ_3, ξ_3).$
+
+Zatem
+$$0 = H‴(ξ_3) = -\frac{ξ_3}{3} 2ξ_3 F^{(4)}(ξ_4) - 60ξ_3^2 G(1)
+            = -ξ_3^2 \left(\frac{2}{3}F^{(4)}(ξ_4) + 60 G(1)\right),$$
+$$G(1) = -\frac{F^{(4)}(ξ_4)}{90} = -h^4 \frac{f^{(4)}(ξ_4)}{90}$$
+i błąd wynosi $h G(1) = -\frac{f^{(4)} (ξ_4)}{90} h^5$.
+
+
+\end{document}

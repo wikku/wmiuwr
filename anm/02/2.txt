@@ -1,0 +1,28 @@
+Niech f(p,q) = p - \sqrt{p^2-q}
+
+f'_p(x,y) = 1 - x/sqrt(x^2-y)
+f'_q(x,y) = 1/(2(sqrt(x^2-y)))
+
+f(p(1+d_p), q(1+d_q)) \approx f(p,q) + p d_p f'_p (p,q) + q d_q f'_q(p,q)
+	= p - \sqrt{p^2-q}
+	+ p d_p (1 - p/sqrt(p^2-q))
+	+ q d_q 1/(2(sqrt(x^2-y)))
+
+cond_p(p,q) = (p f'_p(p,q))/f(p,q) =
+	p (1 - p/sqrt(p^2-q)) / (p - \sqrt{p^2-q}) =
+	p (\sqrt{p^2-q} - p) / \sqrt{p^2-q}(p - \sqrt{p^2-q}) =
+	p (\sqrt{p^2-q} - p) / \sqrt{p^2-q}(p - \sqrt{p^2-q}) =
+	-p / \sqrt{p^2-q} =
+	-1/\sqrt{1-q/p^2}
+
+cond_q(p,q) = (q f'_q(p,q))/f(p,q) =
+	q / (2(sqrt(p^2-q))) (p - \sqrt{p^2-q}) =
+	(q / (p - \sqrt{p^2 - q})) / (2(sqrt{p^2-q})) =
+	(q / (p - \sqrt{p^2 - q})) / (2(sqrt{p^2-q})) =
+	(q (p + \sqrt{p^2 + q}))/ (p^2 - p^2 + q)) / (2(sqrt{p^2-q})) =
+	(p + \sqrt{p^2 + q}) / (2(sqrt{p^2-q})) =
+	(1 + \sqrt{1 + q/p^2}) / (2(sqrt{1-q/p^2}))
+
+
+
+

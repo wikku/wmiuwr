@@ -1,0 +1,50 @@
+∫_{-1}^1 x^{2n}/sqrt(1-x^2) dx =   [x = sin t ; dx = cos t dt ]
+∫_{-π/2}^{π/2} sin^{2n} t dt = π (2n-1)!! / (2n)!!
+
+P_0(x) = 1                                π
+P_1(x) = x                               π/2
+P_k(x) = xP_{k-1}(x) - d_k P_{k-2}(x)
+
+d_k = ‖ P_{k-1} ‖ / ‖ P_{k-2} ‖
+d_k = ‖ xP_{k-2} - d_{k-1} P_{k-3}(x) ‖ / ‖ P_{k-2} ‖
+
+P_{2m} parzysty, P_{2m+1} nieparzysty
+
+P_2(x) = x^2 - 1/2                      π 3/8 - 4π/8 +  2π/8 = π/8
+P_3(x) = x^3 - 3/4 x                    π15/48 - π9/16 + π9/32 = π/32
+P_4(x) = x^4 - 3/4 x^2 - 1/4(x^2 - 1/2)
+       = x^4 - x^2 + 1/8
+
+
+Najpierw znajdziemy nienormalne
+T_0(x) = 1
+T_1(x) = x
+T_k(x) = 2x T_{k-1}(x) - T_{k-2}
+
+< T_n, x T_{k-1} - 1/4 T_{k-2} >
+0 dla n < k-2
+< T_{k-2}, x T_{k-1} > - 1/4< T_{k-2} , T_{k-2} >
+< T_{k-2}, x^2 T_{k-2} - 1/4x T_{k-3} > - 1/4< T_{k-2} , T_{k-2} >
+< T_{k-2}, x T_{k-1} - 1/4 T_{k-2} >
+< T_{k-2}, x^2 T_{k-2} - 1/4x T_{k-3} - 1/4 T_{k-2} >
+< x T_{k-2}, T_{k-1} > - 1/4< T_{k-2} , T_{k-2} >
+< T_{k-1} - 1/4 T_{k-2}, T_{k-1} > - 1/4< T_{k-2} , T_{k-2} >
+
+< T_{k-1}, 2x T_{k-1} - T_{k-2} >
+= < T_{k-1}, 2x T_{k-1} > - < T_{ , T_{k-2} >
+
+To są przeskalowane wielomiany Czebyszewa
+P_0(x) = 1
+P_1(x) = x
+P_2(x) = x^2 - 1/2                      = 2^{-1}T_2(x)
+P_k(x) = x P_{k-1}(x) - 1/4 P_{k-2}(x)  = 2^{1-k} T_k(x)
+
+Wystarczy sprawdzić prostopadłość P_k z P_{k-1} i P_k z P_{k-2}
+< P_{k-1}, x P_{k-1} - 1/4 P_{k-2}  > = 0 (nieparzystość i P_{k-1} ⊥ P_{k-2})
+
+< P_{k-2}, x P_{k-1} - 1/4 P_{k-2} >
+= < x P_{k-2}, P_{k-1} > - 1/4< P_{k-2} , P_{k-2} >
+= < P_{k-1} - c P_{k-2}, P_{k-1} > - 1/4< P_{k-2} , P_{k-2} >
+= < P_{k-1} - c P_{k-2}, P_{k-1} > - 1/4< P_{k-2} , P_{k-2} >
+= < P_{k-1} , P_{k-1} > - 1/4< P_{k-2} , P_{k-2} >
+= ‖ P_{k-1} ‖ - 1/4 ‖ P_{k-2} ‖

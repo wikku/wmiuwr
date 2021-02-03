@@ -1,0 +1,12 @@
+Znaleźć 5-ty wielomian optymalny w sensie normy jednostajnej na [-1, 1] dla
+f(x) = 2018x^7 + 12x^5 + x^4 + x^3 + x^2 + x + 1
+
+
+
+Wielomian 2^{1-n} T_n ma najmniejszą normę jednostajną na [-1,1] spośród
+wszystkich wielomianów monicznych i jego ekstrema mogą tworzyć alternans
+
+Zatem jeśli znajdziemy w(x) takie, że
+f(x)/2018 - w(x) = 2^{-6} T_7(x),
+to w(x) będzie wielomianem optymalnym
+w(x) będzie 5-tego stopnia, bo T_n ma zerowy współczynnik przy potędze n-1

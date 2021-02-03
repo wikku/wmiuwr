@@ -1,0 +1,7 @@
+Niech g(x) = f(x)/sqrt(|f'(x)|)
+Wtedy g'(x) = (2f'(x)^2 - f(x)f"(x))/(2f'(x)sqrt(|f'(x)|))
+
+g(x)/g'(x) = (2f'(x)f(x))/(2f'(x)^2 - f(x)f"(x))
+
+x-(f(x)f'(x))/(f'(x)^2-f(x)f"(x)/2) = x-g(x)/g'(x)
+po prawej mamy wzór iteracyjny metody Newtona na funkcji g.

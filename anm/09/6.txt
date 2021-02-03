@@ -1,0 +1,29 @@
+x ∈ [0, 2π]  |sin (x) - w(x)|
+x ∈ [-π, π]  |sin (x+π) - w(x+π)|
+x ∈ [-π, π]  |-sin (x) - w(x+π)|
+x ∈ [-π, π]  |sin (x) - p(x)|, gdzie p(x) = -w(x+π)
+
+wystarczy znaleźć wielomian p optymalny dla sin(x) na [-π, π]
+(przesuwanie i odbijanie wielomianów nie zmienia stopnia)
+
+sin(x) nieparzysty, więc p też musi być nieparzysty, bo
+część parzysta tylko by pogarszała przybliżenie (po jednej stronie zera)
+
+p(x) = ax
+dla pewnego a > 0
+
+sin(x) - p(x) = sin x - ax
+(sin(x) - p(x))' = cos x - a
+
+punkty alternansu w ekstremach czyli ±arccos(a), ±π
+
+chcemy
+sin(arccos(a)) - p(arccos(a)) = -(sin(π) - p(π))
+sin(arccos(a)) - a*arccos(a) = aπ
+
+a ≈ 0.21723362821222...
+
+
+w(x) = -p(x-π) = -a(x-π) ≈ -0.217233x + 0.682459
+
+

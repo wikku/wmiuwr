@@ -1,0 +1,21 @@
+H_{2n+1} = \sum_{k=0}^n f(x_k)h_k(x) + \sum_{k=0}^n f'(x_k)g_k(x)
+
+h_k(x) = (1-2(x-x_k)l'_k(x_k))l_k^2(x)
+g_k(x) = (x-x_k)l_k^2(x)
+l_k(x) = p_{n+1}(x)/((x-x_k)p'_{n+1}(x_k))
+
+h'_k(x) = -2l'_k(x_k)l_k^2(x)
+          + 2(1-2(x-x_k)l'_k(x_k))l_k(x)l'_k(x)
+        = 2l_k(x) (-l'_k(x_k) + (1-2(x-x_k)l'_k(x_k))l'_k(x))
+g'_k(x) = l_k^2(x) + 2(x-x_k)l_k(x)l'_k(x) =
+        = l_k(x)*(l_k(x) + 2(x-x_k)l'_k(x))
+
+l_k(x_i) = 1 jeśli i=k lub 0 w przeciwnym wypadku
+g_k(x_i) = 0
+h_k(x_i) = 1 jeśli i=k lub 0 w przeciwnym wypadku
+g'_k(x_i) = 1 jeśli i=k lub 0 w przeciwnym wypadku
+h'_k(x_i) = 0
+
+H_{2n+1}(x_i) = f(x_i)
+H'_{2n+1}(x_i) = f'(x_i)
+

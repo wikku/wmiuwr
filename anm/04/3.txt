@@ -1,0 +1,11 @@
+0 = f(a) = f'(a) ≠ f"(a)
+
+Z twierdzenia Taylora w pobliżu a mamy
+f(x)  ≈ f"(s)(x-a)^2/2
+f'(x) ≈ f"(s)(x-a)
+dla pewnego s
+
+(x - f(x)/f'(x)) - a ≈ x - a - (x-a)/2 = 1/2(x-a)
+
+Z każdą iteracją błąd się zmniejsza o połowę,
+czyli rząd zbieżności jest liniowy

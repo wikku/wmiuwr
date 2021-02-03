@@ -1,0 +1,20 @@
+Załóżmy, że f'(x) > 0 i f''(x) > 0
+
+Niech f(a) = 0
+
+f'(x) > 0 oznacza, że funkcja jest rosnąca, a więc różnowartościowa.
+Zatem a to jedyny pierwiastek.
+
+Skoro f'' > 0, to funkcja jest wypukła.
+To oznacza, że jej styczne są pod jej wykresem.
+
+
+Rozpatrzmy przypadek gdy f(x0) > 0.
+Jeśli f(x_n) > 0, to dla x_{n+1} wyliczonego metodą Newtona mamy
+f(x_{n+1}) > 0 i x_{n+1} < x_n.
+Czyli ciąg x_n zbiega do jakiejś liczby, a metoda Newtona jeśli zbiega to do
+poprawnego wyniku.
+
+
+Rozpatrzmy przypadek gdy f(x0) < 0.
+Wtedy symetrycznie f(x_n) rośnie, a x_n maleje, więc też zbiega.

@@ -1,0 +1,17 @@
+O schemacie Hornera możemy myśleć tak, że w każdej iteracji dowiadujemy się
+o nowym współczynniku, który zostaje wyrazem wolnym, a reszta wielomianu
+mnoży się przez x.
+Musimy na każdym kroku poprawiać nasze wyniki częściowe.
+
+Wygodnie będzie, jeśli będziemy liczyć wartość d-tej pochodnej podzieloną
+przez d!, na końcu zwrócimy odpowiednio pomnożony wynik.
+
+Przy liczeniu wartości pochodnej d stopnia musimy zaktualizować składniki
+$a = a_k k (k-1) ... (k-d+1) x^{k-d}/d! = a_k \binom{k}{d} x^{k-d}$
+do
+$a_k (k+1) k (k-1) ... (k-d+2)/d! x^{k-d+1} = a_k\binom{k+1}{d} x^{k-d+1} =
+a_k \binom{k}{d} x^{k-d+1} + a_k \binom{k}{d-1} x^{k-(d-1)}$
+Lewy składnik to jest x razy to, co mieliśmy, a prawy to niższa pochodna.
+Jeśli d=0 to zamiast niższej pochodnej (jej nie ma) trzeba jeszcze dodać
+otrzymany wyraz wolny.
+

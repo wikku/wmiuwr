@@ -1,0 +1,11 @@
+Mamy f^{(n+1)}(x) > 0 dla x_0 < x < x_{n+1}
+
+f(x) - L(x) = f^{(n+1)}(z(x))\prod_{k=0}^n(x-x_k) dla x_0 < z(x) < x_n
+f(x) - M(x) = f^{(n+1)}(z(x))\prod_{k=1}^{n+1}(x-x_k) dla x_1 < z(x) < x_{n+1}
+
+Dla x w przedziale (x_k, x_{k+1})
+sgn(f(x)-L(x)) = sgn(\prod_{i=0}^n(x-x_i)) = (-1)^{n-k}
+sgn(f(x)-M(x)) = sgn(\prod_{i=1}^{n+1}(x-x_i)) = (-1)^{n-k+1}
+
+f(x_k) = L(x_k) = M(x_k)
+

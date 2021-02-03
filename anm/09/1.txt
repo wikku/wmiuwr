@@ -1,0 +1,20 @@
+Niech P_k będzie ciągiem wielomianów ortogonalnych w przedziale [-a, a]
+z parzystą funkcją wagową
+
+Wystarczy rozpatrzyć wielomiany standardowe ortogonalne i pokazać,
+że w P_{2m} są tylko parzyste potęgi x, a w P_{2m+1} nieparzyste
+
+P_0(x) = 1
+P_1(x) = x - β_1
+P_k(x) = (x-β_k) P_{k-1}(x) - γ_k P_{k-2}(x)
+gdzie β_k = <x P_{k-1}, P_{k-1}> / <P_{k-1}, P_{k-1}> = 0
+      γ_k = <P_{k-1}, P_{k-1}> / <P_{k-2}, P_{k-2}>
+
+
+Dla P_0, P_1 teza jest prawdziwa
+
+Załóżmy, że teza prawdziwa dla P_0, …, P_{k-1}
+P_k(x) = x P_{k-1} x + γ_k P_{k-2}(x)
+x P_{k-1}(x) i γ_k P_{k-2}(x) mają potęgi x tej samej parzystości, więc
+teza prawdziwa dla P_k
+

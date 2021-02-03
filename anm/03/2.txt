@@ -1,0 +1,4 @@
+Dla funkcji f(x) = x^2 mamy f(0) = 0, f'(x) = 2x i funkcję iteracji
+F(x) = x - x^2/2x = x/2
+więc zbieżność jest liniowa,
+bo z każdym krokiem błąd obliczonego pierwiastka maleje dwukrotnie.

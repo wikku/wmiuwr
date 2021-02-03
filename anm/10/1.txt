@@ -1,0 +1,13 @@
+∫_{-1}^1 T_{2n+1}(x) dx = 0 bo funkcja jest nieparzysta
+
+∫_{-1}^1 T_{2n}(x) dx
+= ∫_{-1}^1 cos(2n arccos x) dx
+[ x = cos t, dx = - sin t dt ]
+= ∫_0^π cos(2nt) sin t dt
+= 1/2 ∫_0^π sin((2n+1)t) - sin((2n-1)t) dt
+= 1/2 [ cos((2n-1)t) / (2n-1) - cos((2n+1)t) / (2n+1) ]_{t=0}^π
+= 1/2 ( - 1/(2n-1) - 1/(2n-1) + 1/(2n+1) + 1/(2n+1) )
+= 1/(2n+1) - 1/(2n-1)
+= (2n-1 - 2n - 1)/(4n^2-1)
+= 2/(1-4n^2)
+

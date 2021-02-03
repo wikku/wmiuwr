@@ -1,0 +1,28 @@
+Wszystkie ciągi zbiegają do zera.
+
+# 1/n^2
+
+n^2q/(n+1)^2 = n^2q/(n^2+2n+1)
+q=1, mu = 1
+
+# 1/2^2^n
+
+(2^2^(n+1))/(2^2^n)^q = (2^(2*2^n))/(2^(q*2^n))
+q = 2, mu = 1
+
+# 1/sqrt(n)
+
+sqrt(n+1)/sqrt(n)^q = sqrt((n+1)/n^q)
+q = 1, mu = 1
+
+# 1/e^n
+
+e^(n+1)/(e^(qn)) = e^(n+1-qn)
+
+q=1, mu = e
+
+# 1/n^n
+
+n^(n+1)/(n^(qn)) = n^(n+1 - qn)
+
+q>1, mu=0

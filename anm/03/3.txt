@@ -1,0 +1,28 @@
+Niech f(x) = x^2-1
+
+Zajmijmy się -1<a<1 i b>1, przypadek a<-1 i -1 < b < 1 jest symetryczny.
+Zatem zajmujemy się miejscem zerowym x=1.
+
+Z powodu wypukłości sieczna zawsze przetnie oś x dla x < 1, czyli będzie się
+zmieniać tylko lewy koniec przedziału.
+
+W tym przypadku regula falsi działa tak,
+że iterujemy F zdefiniowaną poniżej na lewy koniec przedziału
+
+F(a) = (af(b) - bf(a))/(f(b)-f(a))
+     = (a(b^2-1)- b(a^2-1))/(b^2-a^2)
+     = (ab^2-a - ba^2-b)/(b^2-a^2)
+
+F(a) - 1 =
+     = (ab^2 - a - ba^2 + b - b^2 + a^2)/(b^2-a^2)
+     = (a-1)(b-1)/(a+b)
+
+(F(a)-1)/(a-1)
+     = (b-1)/(a+b)
+
+Przy F iterowane na a dąży do 1, więc powyższe dąży do stałej (b-1)/(1+b),
+a rząd zbieżności wynosi jeden
+
+
+
+

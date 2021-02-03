@@ -1,0 +1,6 @@
+Wielomiany Czebyszewa są ortogonalne
+
+Wiemy z poprzedniej listy normy
+
+∑ <f, T_i> / <T_i, T_i> T_i(x)
+= ∑' 2/π <f, T_i> T_i(x)

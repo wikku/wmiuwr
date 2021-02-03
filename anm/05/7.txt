@@ -1,0 +1,20 @@
+Niech R(x) = f(x) - L_1(x)
+Ustalmy tymczasowo x.
+
+Niech Y(t) = R(t) - R(x)/((x-x0)(x-x1))*(t-x0)(t-x1)
+
+x0, x1 to pierwiastki R i W, więc mamy Y(x0) = Y(x1) = 0
+Mamy też Y(x) = 0. Y ma co najmniej 3 pierwiastki, więc Y" ma jakiś
+pierwiastek z w [x0, x1].
+Y"(t) = R"(t) - R(x)/((x-x0)(x-x1))*2
+L_1 jest stopnia 1, więc R"(t) = f"(t)
+Y"(t) = f"(t) - R(x)/((x-x0)(x-x1))*2
+0 = f"(z) - R(x)/((x-x0)(x-x1))*2
+
+Mamy dla x w [x0,x1]
+R(x) = f(x) - L_1(x) = f"(z(x))(x-x0)(x-x1)/2
+gdzie z(x) w [x0,x1]
+
+Maksimum |(x-x0)(x-x1)| jest osiągane dla x = (x0+x1)/2
+
+|R(x)| <= M_2(x1-x0)^2/8

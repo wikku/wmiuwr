@@ -1,0 +1,10 @@
+nie wprost wielomian w_n* n-tego stopnia optymalny spośród
+wielomianów stopnia ≤n+1
+
+wtedy
+alternans f-w_n* ma n+3 ekstrema
+alternans f-w_n* ma n+2 miejsca zerowe
+(f-w_n*)' ma n+1 miejsc zerowych
+(f-w_n*)^(n+1) ma miejsce zerowe
+(f-w_n*)^(n+1) = f^(n+1)
+ale f miał mieć dodatnie pochodne

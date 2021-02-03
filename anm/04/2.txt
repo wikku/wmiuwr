@@ -1,0 +1,13 @@
+f(z) = f(x+iy) = u(x,y) + iv(x,y)
+
+Cauchy-Riemann:
+∂u/∂x = ∂v/∂y, ∂u/∂y = -∂v/∂x
+
+f(z)/f'(z) =
+(u + iv)/(∂u/∂x + i∂v/∂x) =
+(u∂u/∂x + v∂v/∂x + i(v∂u/∂x - u∂v/∂x))/((∂u/∂x)^2 + (∂v/∂x)^2) =
+(u∂u/∂x + v∂v/∂x + i(u∂u/∂y + v∂v/∂y))/((∂u/∂x)^2 + (∂v/∂x)^2) =
+
+ϕ(x+iy)
+= x + (u∂u/∂x + v∂v/∂x) /((∂u/∂x)^2 + (∂v/∂x)^2) +
+i(y + (u∂u/∂y + v∂v/∂y))/((∂u/∂x)^2 + (∂v/∂x)^2)

@@ -1,0 +1,20 @@
+Ustalmy x w [a,b].
+
+Niech g(t) = f(t) - H_{2n+1}(t) - K(p_{n+1}(t)^2),
+gdzie K takie, że g(x) = 0.
+
+g(t) ma podwójne pierwiastki w każdym x_i, czyli
+ma 2(n+1)+1 pierwiastków w [a,b]
+Z twierdzenia Rolle'a pomiędzy każdą parą pierwiastków funkcji
+ciągłej jest jakiś pierwiastek jej pochodnej.
+Każde różniczkowanie zmniejsza liczbę pierwiastków o 1
+
+g^(2n+2) ma 1 pierwiastek na [a,b]
+g^(2n+2)(t) = f^(2n+2)(t) - K(2n+2)!
+
+Czyli ten pierwiastek to szukane ξ, bo
+bo f^(2n+2)(ξ) = K(2n+2)!
+i mamy
+f(x) - H_{2n+1}(x) = K(p_{n+1}(x))^2
+                   = 1/(2n+2)!*f(ξ)*(p_{n+1}(x))^2
+

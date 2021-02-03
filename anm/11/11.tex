@@ -1,0 +1,207 @@
+%! TEX TS-program = xelatex
+%! TEX program = xelatex
+
+\documentclass[a4paper, 12pt]{article}
+%\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage{breqn}
+\usepackage[margin=1.2in]{geometry}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{\sum}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{\sum}} % sum bis
+%\newcommand{∑}{\sump}
+
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Π}{\Pi}
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{◁}{\triangleleft}
+\newunicodechar{▷}{\triangleright}
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr AN
+\newunicodechar{⇒}{\implies} % Digr =>
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\to\else\textrightarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+\ExplSyntaxOn
+\AtBeginDocument
+ {
+  \char_set_active_eq:nN { `: } \colon
+  \mathcode`:="8000
+ }
+\ExplSyntaxOff
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+
+\begin{document}
+
+
+\maketitle
+
+\section*{M11.1}
+
+Wielomiany Czebyszewa spełniają równość $T_n(\cos θ) = \cos (nθ)$,
+a ekstrema wielomianu $T_n$ są w punktach
+$u_k = \cos \left(\frac{kπ}{n}\right)$.
+Zatem
+
+\begin{align*}
+T_{n+j}(u_k)
+&= T_{n+j} \left(\cos \left(\frac{kπ}{n}\right)\right) \\
+&= \cos \left(\frac{(n+j)kπ}{n}\right) \\
+&= \cos \left(kπ+\frac{jkπ}{n}\right) \\
+&= (-1)^k · \cos \frac{jkπ}{n} \\
+&= T_n(u_k) · T_j(u_k).
+\end{align*}
+
+\section*{M11.2}
+
+Niech $ε > 0$.
+Oznaczmy $x_{ni}$ zera $n+1$-szego wielomianu ortogonalnego z wagą $p$,
+a $A_{ni}$ to odpowiednie współczynniki z kwadratury Gaussa.
+
+Z tw. Weierstrassa istnieje $w$ taki, że $f-w < ε$ na $[a,b]$.  % p waga
+Dla $n > \deg w$ wzór Gaussa jest dokładny, więc mamy
+\begin{align*}
+\abs{G_n(f) - I(f)}
+&≤ \abs{∫_a^b p(x) f(x)\,dx - ∫_a^b p(x) w(x) \, dx} \\
+&+ \abs{∑_{i=0}^n A_{ni}w(x_{ni}) - ∑_{i=0}^n A_{ni}f(x_{ni})} \\
+&≤ ∫_a^b p(x)\abs{f(x) - w(x)}\,dx + ∑_{i=0}^n A_{ni}\abs{w(x_{ni})- f(x_{ni})} \\
+&≤ ε ∫_a^b p(x)\,dx + ε∑_{i=0}^n A_{ni} = 2ε ∫_a^b w(x) \, dx.
+\end{align*}
+
+
+\section*{M11.3}
+Błąd złożonej metody Simpsona dla $∫_0^{π} \sin x\,dx$ możemy oszacować z góry przez
+$$\frac{h^4}{180}(π-0)\sin^{(4)}(ξ) ≤ \frac{π^5}{180 n^4}.$$
+Zatem jeśli $n≥18$, to otrzymamy błąd $≤ 2·10^{-5}$.
+Można eksperymentalnie sprawdzić, że wystarczy $n=16$.
+
+Błąd złożonej metody trapezów dla $∫_0^{π} \sin x\,dx$ możemy oszacować z góry przez
+$$\abs{-\frac{π^3}{12n^2}\sin^{(2)}(ξ)} ≤ \frac{π^3}{12n^2}.$$
+Zatem jeśli $n≥360$, to otrzymamy błąd $≤ 2·10^{-5}$.
+Można eksperymentalnie sprawdzić, że wystarczy $n=287$.
+
+\section*{M11.4}
+$$w_n(x) = \sump_{k=0}^n a_k T_k(x)$$
+
+\begin{align*}
+∫_{-1}^{1} w_n(x) \, dx
+&= \sump_{i=0}^n a_i ∫_{-1}^1 T_i(x) \, dx \\
+&= \sump_{i=0}^{⌊ n/2 ⌋} a_{2i} ∫_{-1}^1 T_{2i}(x) \, dx \\
+&= 2 \sump_{i=0}^{⌊ n/2 ⌋} \frac{a_{2i}}{1-4i^2} & \text{M10.1}
+\end{align*}
+
+
+\section*{M11.5}
+
+$$e^{e^{e^x}}$$
+
+\section*{M11.7}
+Niech $w_n(x) = ∑_{j=0}^n c_j \cos(jx)$.
+Wtedy
+$$v_n(t) = w_n(\arccos t) = ∑_{j=0}^n c_j \cos(j \arccos t) = ∑_{j=0}^n c_j T_j(t).$$
+
+Wielomiany Czebyszewa $T_n$ tworzą ciąg ortogonalny dla iloczynu skalarnego
+\begin{align*}
+⟨f,g⟩
+= ∫_{-1}^1 \frac{1}{\sqrt{1-x^2}} f(x) g(x) \, dx
+= ∫_0^{π} f(\cos t) g(\cos t) \, dt,
+\end{align*}
+
+zatem zminimalizowanie całki
+$$∫_0^{π} \left(π - x^2 - w_n(x)\right)^2\,dx
+=∫_0^{π} \left(π - (\arccos (\cos x))^2 - v_n(\cos x)\right)^2\,dx$$
+sprowadza się do znalezienia wielomianu optymalnego dla $f(t) = π - (\arccos t)^2$.
+Jest to po prostu rzut ortogonalny $f$ na $Π_n$, więc
+$$c_j = \frac{⟨f, T_j⟩}{⟨T_j, T_j⟩}.$$
+
+
+
+
+\end{document}

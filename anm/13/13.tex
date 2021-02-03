@@ -1,0 +1,306 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+%\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\to\else\textrightarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+\begin{document}
+
+%\maketitle
+\section*{M13.1}
+\subsection*{(a)}
+$$\norm{\mathbf{x}}_1 = ∑_{k=1}^n \abs{x_k}$$
+Dodatnia określoność i jednorodność są oczywiste.
+Nierówność trójkąta dla norm wynika z nierówności trójkąta dla wartości
+bezwzględnej:
+\begin{align*}
+	\norm{\mathbf{x} + \mathbf{y}}_1
+	= ∑_{k=1}^n \abs{x_k + y_k}
+	≤ ∑_{k=1}^n \abs{x_k} + ∑_{k=1}^n \abs{y_k}
+	= \norm{\mathbf{x}}_1 + \norm{\mathbf{y}}_1.
+\end{align*}
+
+\subsection*{(b)}
+$$\norm{\mathbf{x}}_∞ = \max_{1 ≤ k ≤ n} \abs{x_k}$$
+Dodatnia określoność i jednorodność są oczywiste.
+\begin{align*}
+	\norm{\mathbf{x} + \mathbf{y}}_∞
+	&= \max_{1 ≤ k ≤ n} \abs{x_k + y_k}
+	≤ \max_{1 ≤ k ≤ n} \left(\abs{x_k} + \abs{y_k}\right) \\
+	&≤ \max_{1 ≤ k ≤ n} \abs{x_k} + \max_{1 ≤ k ≤ n} \abs{y_k}
+	= \norm{\mathbf{x}}_∞ + \norm{\mathbf{y}}_∞
+\end{align*}
+
+\section*{M13.2}
+Mamy pokazać, że
+$$\sup_{\mathbf{x} ∈ ℝ^n \setminus \{\mathbf{0}\}}
+\frac{\norm{A\mathbf{x}}_2}{\norm{\mathbf{x}}_2}
+= \sup_{\norm{\mathbf{x}}_2 = 1} \norm{A\mathbf{x}}_2$$
+jest równe pierwiastkowi kwadratowemu największej wartości własnej $A^\top A$.
+
+Macierz $A^\top A$ jest symetryczna i nieujemnie określona,
+więc ma układ ortonormalny wektorów własnych $(v_i)$ z nieujemnymi wartościami
+własnymi $λ_i$.
+
+Zakładając, że $\mathbf{x} = ∑_{i=1}^n α_i \mathbf{v}_i$ ma normę $1$, mamy
+\begin{align*}
+\norm{A\mathbf{x}}_2^2
+&= \mathbf{x}^⊤ A^⊤ A \mathbf{x}
+= \mathbf{x}^⊤ A^⊤ A ∑_{i=1}^n α_i \mathbf{v}_i
+= \mathbf{x}^⊤ ∑_{i=1}^n α_i A^⊤ A \mathbf{v}_i
+= \left(∑_{i=1}^n α_i \mathbf{v}_i\right)^⊤ ∑_{i=1}^n α_i λ_i \mathbf{v}_i \\
+&= ∑_{i=1}^n α_i \mathbf{v}_i^⊤ ∑_{i=j}^n α_j λ_j \mathbf{v}_j
+= ∑_{i=1}^n ∑_{i=j}^n α_i a_j λ_j \mathbf{v}_i^⊤ \mathbf{v}_j
+= ∑_{i=1}^n α_i^2 λ_i.
+\end{align*}
+Liczby $α_i^2$ tworzą podział jedynki,
+zatem kwadrat normy możemy oszacować z góry przez
+$\max_{1 ≤ k ≤ n} λ_k.$
+To supremum jest osiągane dla odpowiedniego wektora własnego.
+
+
+\section*{M13.3}
+\subsection*{(a)}
+\begin{align*}
+\norm{\mathbf{x}}_∞
+	&= \max_{1 ≤ k ≤ n} \abs{x_k}
+	≤ ∑_{k=1}^n \abs{x_k}
+	= \norm{\mathbf{x}}_1
+	≤ n\max_{1 ≤ k ≤ n} \abs{x_k}
+	≤ n\norm{\mathbf{x}}_∞
+\end{align*}
+
+\subsection*{(b)}
+$$
+	\norm{\mathbf{x}}_∞^2
+	= \max_{1 ≤ k ≤ n} x_k^2
+	≤ ∑_{k=0}^n x_k^2
+	= \norm{\mathbf{x}}_2^2
+	≤ n\max_{1 ≤ k ≤ n} x_k^2
+	≤ n \norm{\mathbf{x}}_∞^2
+$$
+$$
+\norm{\mathbf{x}}_∞ ≤ \norm{\mathbf{x}}_2 ≤ \sqrt{n}\norm{\mathbf{x}}_∞$$
+
+\subsection*{(c)}
+Z nierówności Cauchy'ego-Schwarza
+$$
+\left[\abs{x_1}, …, \abs{x_n}\right]^\top\left[1, …, 1\right]
+≤ \norm{\left[\abs{x_1}, …, \abs{x_n}\right]^\top}_2 \norm{\left[1, …, 1\right]^\top}_2,
+$$
+czyli
+$$
+	\norm{\mathbf{x}}_1
+	= ∑_{k=1}^n \abs{x_k}
+	≤ \sqrt{n}\sqrt{∑_{k=1}^n x_k^2}
+	= \sqrt{n}\norm{\mathbf{x}}_2.
+$$
+
+$$x_1^2 + … + x_n^2 ≤ \left(\abs{x_1} + … + \abs{x_k}\right)^2,$$
+bo po prawej mamy składniki dodatnie i każdy składnik po lewej występuje po
+prawej.
+Zatem
+$$\norm{\mathbf{x}}_2 ≤ \norm{\mathbf{x}}_1.$$
+
+\section*{M13.4}
+Mamy pokazać, że
+$$\sup_{\mathbf{x} ∈ ℝ^n \setminus \{\mathbf{0}\}}
+\frac{\norm{A\mathbf{x}}_∞}{\norm{\mathbf{x}}_∞}
+= \sup_{\norm{\mathbf{x}}_∞ = 1} \norm{A\mathbf{x}}_∞
+= \max_{1 ≤ i ≤ n} ∑_{j=1}^n \abs{a_{ij}}.$$
+
+Dla $\norm{\mathbf{x}}_∞ = 1$ mamy
+\begin{align*}
+\norm{A\mathbf{x}}_∞
+= \max_{1 ≤ i ≤ n} \abs{\left(A\mathbf{x}\right)_i}
+= \max_{1 ≤ i ≤ n} \abs{∑_{j=1}^n a_{ij} x_j}
+≤ \max_{1 ≤ i ≤ n} ∑_{j=1}^n \abs{a_{ij} x_j}
+≤ \max_{1 ≤ i ≤ n} ∑_{j=1}^n \abs{a_{ij}}.
+\end{align*}
+To oszacowanie górne jest osiągane dla $x_j = \sgn a_{ij}$.
+
+\section*{M13.5}
+Wykazać, że wzór
+$$\norm{A}_E = \sqrt{∑_{1≤i,\, j≤n} a_{ij}^2}$$
+definiuje submultiplikatywną normę w $ℝ^{n^2}$ zgodną z normą wektorową
+$\norm{\;·\;}_2$.
+
+Jest to norma, bo jest ona równoważna normie $\norm{\;·\;}_2$ dla wektorów z
+$ℝ^{n^2}$.
+
+Oznaczmy $i$-ty wiersz macierzy $A$ przez $a_{i*}$,
+a $j$-tą kolumnę przez $a_{*j}$.
+
+Korzystając z nierówności Cauchy'ego-Schwarza możemy pokazać
+zgodność normy $\norm{\;·\;}_E$ z $\norm{\;·\;}_2$:
+\begin{align*}
+\norm{A\mathbf{x}}_2^2
+&= ∑_{i=1}^n \left(a_{i*}\mathbf{x}\right)^2
+≤ ∑_{i=1}^n \norm{a_{i*}}_2^2 \norm{\mathbf{x}}_2^2
+= ∑_{1≤i,j≤n}^n a_{ij}^2 \norm{\mathbf{x}}_2^2
+= \norm{A}_E^2 \norm{\mathbf{x}}_2^2.
+\end{align*}
+
+Ze zgodności norm możemy wywnioskować submultiplikatywność:
+Niech $AB = C$, wtedy
+\begin{align*}
+\norm{C}_E
+&= \sqrt{∑_{1≤i,\, j≤n} c_{ij}^2}
+= \sqrt{∑_{1≤j≤n} \norm{c_{*j}}_2^2}
+= \sqrt{∑_{1≤j≤n} \norm{A b_{*j}}_2^2} \\
+&≤ \sqrt{∑_{1≤j≤n} \norm{A}_E^2 \norm{b_{*j}}_2^2}
+= \norm{A}_E \sqrt{∑_{1≤j≤n} \norm{b_{*j}}_2^2}
+= \norm{A}_E \sqrt{∑_{1≤i,\, j≤n} b_{ij}^2} \\
+&= \norm{A}_E \norm{B}_E.
+\end{align*}
+
+\section*{M13.7}
+\subsection*{(a)}
+Niech $L$ to macierz trójkątna dolna z jedynkami na głównej przekątnej.
+Oznaczmy jej odwrotność przez $L'$
+
+Skoro $L L' = I$, to
+$$
+L [l'_{*1} \+ l'_{*2} \+ … \+ l'_{*n}]
+=[L l'_{*1} \+ L l'_{*2} \+ … \+ L l'_{*n}]
+=[e_1 \+ e_2 \+ … \+ e_n].
+$$
+Skupmy się na $k$-tej kolumnie.
+
+Dla kolejnych $1 ≤ i < k$ mamy
+$L_{i*} l'_{*k} = 0$, czyli z zerowości pierwszych $i-1$ wierszy $l'_{*k}$
+i zerowości kolumn dalszych niż $i$ wiersza $L_{i*}$ mamy
+$L_{ii} l'_{ik} = 0$.
+Skoro $L_{ii} = 1$, to $l'_{ik} = 0$.
+
+Podobnie mamy $L_{k*} l'_{*k} = 1$, więc $L_{kk} l'_{kk} = 1$ i $l'_{kk} = 1$.
+
+Zatem $L'$ jest dolnotrójkątna z jedynkami na przekątnej.
+
+\subsection*{(b)}
+Niech $L$ to macierz dolnotrójkątna z jedynkami na przekątnej.
+
+Niech $L_j$ to macierz powstała poprzez wyzerowanie w $L$ wyrazów
+pod przekątną, poza kolumną $j$.
+Są to macierze operacji wierszowych --
+dodawania wielokrotności wierszy mnożonej macierzy do wiersza $j$.
+Odwrotność $L_j$ powstaje poprzez negację wyrazów poza przekątną.
+
+Mamy $L = L_1 L_2 … L_n$ i $L^{-1} = L_n^{-1} L_{n-1}^{-1} … L_1^{-1}$,
+ten iloczyn jest łatwy do obliczenia, bo to tylko operacje wierszowe.
+
+
+
+\end{document}

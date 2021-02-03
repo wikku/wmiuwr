@@ -1,0 +1,25 @@
+M_k = s"(x_k)
+s naturalna, czyli M_0 = s"(x_0) = M_n = s"(x_n) = 0
+
+W każdym przedziale [x_k, x_{k+1}]:
+* s to wielomian stopnia niewiększego niż 3
+* s'' to funkcja liniowa
+* s''' to funkcja stała równa s''[x_{k+1}, x_k]
+
+\int_a^b s''(x)^2 dx
+= \sum_{i=0}^{n-1} \int_{x_i}^{x_{i+1}} s''(x)^2 dx
+= \sum_{i=0}^{n-1}
+  ([s''(x)s'(x)]_{x_i}^{x_{i+1}}
+   - \int_{x_i}^{x_{i+1}} s'''(x) s'(x) dx)
+= \sum_{i=0}^{n-1}
+  ([s''(x)s'(x)]_{x_i}^{x_{i+1}}
+   - s'''(x) (f(x_{i+1}) - f(x_i)))
+= M_n*s'(x_n) - M_0*s'(x_0)
+  - \sum_{i=0}^{n-1} s'''(x) (f(x_{i+1}) - f(x_i))
+= -\sum_{i=0}^{n-1} s'''(x) (f(x_{i+1}) - f(x_i))
+= -\sum_{i=0}^{n-1} s''[x_{i+1}, x_i] (f(x_{i+1}) - f(x_i))
+= \sum_{i=0}^{n-1} (M_i - M_{i+1}) (f(x_{i+1})
+                    - f(x_i)) (x_{i+1} - x_i)
+= \sum_{i=0}^{n-1} (M_i - M_{i+1}) f[x_i, x_{i+1}]
+= \sum_{i=0}^{n-1} (M_i - M_{i+1}) f[x_i, x_{i+1}]
+= \sum_{k=1}^{n-1} M_k(f[x_k, x_{k+1}] - f[x_{k-1}, x_k])

@@ -1,0 +1,5 @@
+Załóżmy, że
+a_1f_1 + ... + a_nf_n = 0
+Wtedy nakładając na równanie iloczyn skalarny z f_k otrzymujemy
+a_kf_k^2 = 0, bo inne składniki są prostopadłe. Zatem a_k=0.
+k mogło być dowolne, co dowodzi liniowej niezależności.

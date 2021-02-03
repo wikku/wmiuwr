@@ -1,0 +1,295 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\to\else\textrightarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{M14.1}
+Z definicji normy indukowanej
+$$
+\norm{A}_p =
+\sup_{\mathbf{x} ≠ \mathbf{0}}
+    \frac{\norm{A\mathbf{x}}_p}{\norm{\mathbf{x}}_p}
+$$
+mamy wprost zgodność normy z normą indukowaną:
+$$\norm{A\mathbf{x}}_p ≤ \norm{A}_p \norm{\mathbf{x}}_p.$$
+
+Korzystając z definicji i łączności mnożenia macierzy otrzymujemy tezę:
+$$
+\norm{AB}_p
+= \sup_{\mathbf{x} ≠ \mathbf{0}}
+    \frac{\norm{AB\mathbf{x}}_p}{\norm{\mathbf{x}}_p}
+≤ \sup_{\mathbf{x} ≠ \mathbf{0}}
+\frac{\norm{A}_p\norm{B\mathbf{x}}_p}{\norm{\mathbf{x}}_p}
+≤ \sup_{\mathbf{x} ≠ \mathbf{0}}
+\frac{\norm{A}_p\norm{B}_p\norm{\mathbf{x}}_p}{\norm{\mathbf{x}}_p}
+= \norm{A}_p\norm{B}_p.
+$$
+
+\section*{M14.2}
+$$
+B=
+\begin{bmatrix}
+	1 & -1 & -1 & … & -1 \\
+	  &  1 & -1 & … & -1 \\
+	  & & \ddots&&\vdots \\
+	  &    &    &  1&  -1 \\
+	  &    &    &   &  1
+\end{bmatrix}
+$$
+
+Macierz $B$ jest trójkątna i ma jedynki na przekątnej,
+więc $\det B = 1$.
+Niech
+$$c_j = [
+	2^{j-2} ,
+	2^{j-3} ,
+	\dots  ,
+	2       ,
+	1       ,
+	1       ,
+	0       ,
+	\dots  ,
+	0
+	]^⊤,
+$$
+tzn. ostatnia jedynka jest na $j$-tej pozycji.
+Mamy $B c_j = e_j$,
+więc macierz $C$ złożona z kolumn $c_j$ jest odwrotnością $B$.
+Jest ona także górnotrójkątna i $\det C = 1$.
+
+Norma $\norm{\;·\;}_∞$ macierzy to jej maksymalna suma modułów w wierszu,
+zatem $\norm{B}_∞ = n$, a $\norm{C}_∞ = 2^{n-1}$.
+Mamy $\mathrm{cond}_∞(B) = \norm{B}_∞\norm{B^{-1}}_∞ = n 2^{n-1} ≫ 1 = \det B$,
+co oznacza,
+że przy rozwiązywaniu układu równań tej macierzy może dojść do dużych błędów.
+
+\section*{M14.4}
+Mamy
+$A\mathbf{x} = \mathbf{b}$
+i
+$A\tilde{\mathbf{x}} = \mathbf{b}-\mathbf{r}$, więc % r — residuum
+$\mathbf{x}-\tilde{\mathbf{x}} = A^{-1}\mathbf{r}$.
+Nakładając obustronnie normę i korzystając ze zgodności norm otrzymujemy
+$$\norm{\mathbf{x}-\tilde{\mathbf{x}}}
+= \norm{A^{-1}\mathbf{r}}
+≤ \norm{A^{-1}}\norm{\mathbf{r}}
+= \norm{A}\norm{A^{-1}}\frac{\norm{\mathbf{r}}}{\norm{A}}
+= \mathrm{cond}(A)\frac{\norm{\mathbf{r}}}{\norm{A}}.$$
+Dalej $\norm{\mathbf{b}} = \norm{A\mathbf{x}} ≤ \norm{A} \norm{\mathbf{x}}$,
+więc dzieląc obustronnie przez $\norm{\mathbf{x}}$ otrzymujemy
+$$\frac{\norm{\mathbf{x}-\tilde{\mathbf{x}}}}{\norm{\mathbf{x}}}
+≤ \mathrm{cond}(A)\frac{\norm{\mathbf{r}}}{\norm{A}\norm{\mathbf{x}}}
+≤ \mathrm{cond}(A)\frac{\norm{\mathbf{r}}}{\norm{\mathbf{b}}}.$$
+
+\section*{M14.6}
+Załóżmy, że wszystkie wartości własne $λ_i$ macierzy $A ∈ ℝ^{n × n}$ są
+rzeczywiste i spełniają nierówności
+$$0 < α ≤ λ_i ≤ β \quad (i=1,2,…,n).$$
+Rozpatrzmy metodę iteracyjną Richardsona
+$$\mathbf{x}^{(x+1)} = (I-τA)\mathbf{x}^{(k)} + τ\mathbf{b} \qquad (k ≥ 0)$$
+zastosowaną do rozwiązywania układu $A\mathbf{x}=\mathbf{b}$,
+gdzie $0 < τ < 2/β$.
+
+Zauważmy, że macierz $I-τA$ ma wektory własne $A$,
+ale z wartościami własnymi $1 - τλ_i$.
+Zatem są one niewiększe niż $1 - τα$ i niemniejsze niż $1 - τβ$.
+Mamy $1- τα < 1$ z dodatniości $τ$ i $α$.
+Mamy $τβ < 2$, więc $1- τβ > -1$.
+Zatem wartości własne $I-τA$ są co do modułu mniejsze niż $1$
+i iteracja jest zbieżna.
+
+\section*{M14.7}
+Załóżmy, że $A$ jest macierzą ze ściśle dominującą przekątną wierszowo.
+Metoda Jacobiego rozpatruje podział $A$ na jej przekątną i macierze pod
+i nad przekątną:
+$A = L + D + U$.
+Następnie przeprowadzamy iterację o wzorze
+$$ \mathbf{x}^{(x+1)} = - D^{-1}(L + U)\mathbf{x}^{(k)} - D^{-1} \mathbf{b}, $$
+tzn. macierz przekształcenia tej metody to $B_J = -D^{-1}(L+U)$.
+
+Macierz $D$ się składa z odwróconych wyrazów na przekątnej macierzy $A$.
+Mnożąc ją z prawej przez $(L+U)$ otrzymujemy macierz $(L+U)$,
+w której każdy wiersz został podzielony przez odpowienią wartość na przekątnej
+$A$.
+Skoro $(L+U)$ ma zera na przekątnej i $\abs{a_{ii}} > ∑_{j=1, \, j≠i}^n \abs{a_{ij}}$,
+to $\norm{B_J}_∞ = \norm{L+U}_∞ < 1$.
+
+Do zbieżności metody wystarczy mieć jakąkolwiek normę macierzy iteracji
+mniejszą niż $1$, zatem w naszym przypadku metoda jest zbieżna.
+
+\section*{M14.8}
+Załóżmy, że $A$ jest macierzą ze ściśle dominującą przekątną wierszowo.
+Metoda Gaussa-Seidela rozpatruje podział $A$ na macierz dolnotrójkątną i ściśle
+górnotrójkątną tzn.  $A = L_* + U$.
+Następnie przeprowadzamy iterację o wzorze
+$$ \mathbf{x}^{(x+1)} = -L_*^{-1}U\mathbf{x}^{(n)} - L_*^{-1} \mathbf{b}.$$
+
+Rozpatrzmy wartości własne macierzy $B_S$:
+\begin{align*}
+	-L_*^{-1}U \mathbf{x} &= λ \mathbf{x}, \\
+	-U \mathbf{x} &= λ L_* \mathbf{x}.
+\end{align*}
+Załóżmy, że $\norm{\mathbf{x}}_∞ = 1$, $\abs{x_i} = 1$.
+Skupiając się na $i$-tym wierszu otrzymujemy
+\begin{align*}
+	-∑_{j=i+1}^n a_{ij} x_j &= λ∑_{j=1}^i a_{ij}x_j \\
+	λ a_{ii} x_i &= -∑_{j=i+1}^n a_{ij} x_j - λ∑_{j=1}^{i-1} a_{ij} x_j \\
+	\abs{λ} \abs{a_{ii}} &≤ ∑_{j=i+1}^n \abs{a_{ij}} - \abs{λ}∑_{j=1}^{i-1} \abs{a_{ij}} \\
+	\abs{λ} &≤
+		\frac{∑_{j=i+1}^n \abs{a_{ij}}}
+		     {\abs{a_{ii}} - ∑_{j=1}^{i-1} \abs{a_{ij}}}.
+\end{align*}
+Z dominacji przekątniowej mamy
+\begin{align*}
+	\abs{a_{ii}} &> ∑_{j=1}^{i-1} \abs{a_{ij}} + ∑_{j=i+1}^n \abs{a_{ij}} \\
+	\abs{a_{ii}} -∑_{j=1}^{i-1} \abs{a_{ij}} &> ∑_{j=i+1}^n \abs{a_{ij}},
+\end{align*}
+a zatem $\abs{λ} < 1$.
+Wszystkie wartości własne są co do modułu mniejsze niż $1$,
+a zatem metoda jest zbieżna.
+
+\section*{M14.9}
+Załóżmy, że $A$ jest macierzą ściśle dominującą kolumnowo.
+Metoda Jacobiego rozpatruje podział $A$ na jej przekątną i macierze pod
+i nad przekątną:
+$A = L + D + U$.
+Następnie przeprowadzamy iterację o wzorze
+$$ \mathbf{x}^{(x+1)} = - D^{-1}(L + U)\mathbf{x}^{(k)} - D^{-1} \mathbf{b}, $$
+tzn. macierz przekształcenia tej metody to $B_J = -D^{-1}(L+U)$.
+
+Rozpatrzmy normę $\norm{C}_N = \norm{D C D^{-1}}_1$.
+Wtedy $\norm{B_J}_N = \norm{(L+U)D^{-1}}_1$.
+Mnożenie z prawej przez macierz diagonalną mnoży kolumny macierzy po lewej przez
+odpowiednie wyrazy na przekątnej.
+To oznacza, że z dominacji przekątniowej dla $C = (L+U)D^{-1}$ mamy
+$∑_{i=1}^n \abs{c_{ij}} < 1$.
+Norma $\norm{\;·\;}_1$ to maksimum takich sum modułów dla kolumn, zatem
+$\norm{B_J}_N < 1$ i iteracja jest zbieżna.
+
+
+
+
+
+
+
+
+\end{document}

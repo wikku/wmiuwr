@@ -1,0 +1,31 @@
+P_0(x) = 1
+P_1(x) = x - c_1
+
+c_1 taki, że 0 = < P_0, P_1 > = < P_0, xP_0 > - c_1 <P_0, P_0>
+
+Załóżmy, że mamy układ standardowych wielomianów ortogonalnych
+P_0, ..., P_{k-1}
+
+P_k możemy zapisać w takiej postaci
+P_k(x) = x P_{k-1}(x) + ∑ β_i P_i(x)
+i chcemy < P_k, P_j > = 0 dla j < k
+
+Dla 0 ≤ j < k-2
+0 = < P_k, P_j > = < xP_{k-1}, P_j > + β_j < P_j, P_j >
+                 = < P_{k-1}, xP_j > + β_j < P_j, P_j >
+                 = β_j < P_j, P_j >
+Zatem β_j = 0
+
+
+0 = < P_k, P_{k-2} > = < P_{k-1}, xP_{k-2} > + β_{k-2} < P_{k-2}, P_{k-2} >
+x P_{k-2} to P_{k-1} odjąć pewna kombinacja liniowa wielomianów prostopadłych
+więc β_{k-2} = - < P_{k-1}, P_{k-1} > / < P_{k-2} , P_{k-2} >
+
+0 = < P_k, P_{k-1} > = < xP_{k-1}, P_{k-1} > + β_{k-1} < P_{k-1}, P_{k-1} >
+β_{k-1} = - < x P_{k-1}, P_{k-1} > / < P_{k-1}, P_{k-1} >
+
+
+
+
+
+

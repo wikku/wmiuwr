@@ -1,0 +1,28 @@
+≅≌
+∫_a^b f(x) dx
+≈ ∫_a^b L_n(f) dx
+= ∫_a^b ∑_{k=0}^n f(x_k) Π_{j=0,j≠k}^n (x-x_j)/(x_k-x_j) dx
+= ∑_{k=0}^n f(x_k) ∫_a^b Π_{j=0,j≠k}^n (x-x_j)/(x_k-x_j) dx
+= ∑_{k=0}^n f(x_k) ∫_a^b Π_{j=0,j≠k}^n (x-x_j)/(x_k-x_j) dx
+
+A_k := ∫_a^b Π_{j=0,j≠k}^n (x-x_j)/(x_k-x_j) dx
+     = ∫_a^b Π_{j=0,j≠k}^n (x-a-jh)/(a+kh-a-jh) dx
+     = ∫_a^b Π_{j=0,j≠k}^n (x-a-jh)/(kh-jh) dx
+     = 1/h ∫_0^{b-a} Π_{j=0,j≠k}^n (x-jh)/(k-j) dx
+     = ∫_0^n Π_{j=0,j≠k}^n (th-jh)/(k-j) dt
+     = h ∫_0^n Π_{j=0,j≠k}^n (t-j)/(k-j) dt
+     = h (-1)^{n-k} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n (t-j) dt
+
+B_k := A_k/(b-a) = A_k/(nh)
+     = 1/n (-1)^{n-k} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n (t-j) dt
+całka z wielomianu o współczynnikach wymiernych na przedziale
+o końcach wymiernych jest wymierna, wszystkie pozostałe czynniki
+też są wymierne
+
+B_{n-k} = 1/n (-1)^{k} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠n-k}^n (t-j) dt
+        = 1/n (-1)^{k} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n (t-n+j)) dt
+        = 1/n (-1)^{k+n} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n ((n-t)-j) dt
+        = 1/n (-1)^{k+n} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n (t-j) dt
+        = 1/n (-1)^{k+n-2k} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n (t-j) dt
+        = 1/n (-1)^{n-k} 1/(k!(n-k)!) ∫_0^n Π_{j=0,j≠k}^n (t-j) dt
+        = B_k

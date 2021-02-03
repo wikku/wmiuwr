@@ -1,0 +1,18 @@
+Wykazać, że T(x) = 2^{1-n} T_n(x) ma najmniejszą normę jednostajną
+w przedziale [-1,1] spośród wielomianów monicznych stopnia ≤ n
+
+Rozpatrzmy najpierw tylko wielomiany stopnia dokładnie n.
+
+Załóżmy nie wprost, że mamy w_n stopnia n moniczny taki, że
+‖w_n‖ < ‖T‖
+
+Rozpatrzmy punkty alternansu T, -1 = x_0 < … < x_n = 1
+
+Wartości w ekstremach T(x_i) = (-1)^i 2^{1-n}, więc
+f(x) = T(x) - w_n(x) ma naprzemienne znaki w x_i
+f jest stopnia < n i ma n miejsc zerowych, sprzeczność
+
+T(x) ma także normę niewiększą od dowolnego wielomianu stopnia <n,
+bo minimalna norma wielomianów niższego stopnia jest większa
+
+

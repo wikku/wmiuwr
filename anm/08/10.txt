@@ -1,0 +1,26 @@
+Wyznaczyć pierwszy wielomian optymalny w sensie aproksymacji jednostajnej
+dla funkcji f(x) = sqrt(x) w przedziale [0,1]
+
+Chcemy zaproksymować pierwiastek na [0,1] funkcją liniową,
+musimy mieć punkty x0, x1, x2 alternansu
+
+x0 = 0, bo jeśli 0 < x0, to różnica byłaby większa na lewo od x0, czyli
+nie byłby to dobry punkt alternansu
+podobnie x2 = 1
+
+w(x) = ax + b
+
+w(0) - f(0) = b
+w(1) - f(1) = a + b - 1 = b    =>   a = 1
+f(x1) - w(x1) = sqrt(x1) - ax1 - b = b
+   => x1 = x1^2 + 4bx1 + 4b^2
+   => x1^2 + (4b-1)x1 + 4b^2 = 0
+
+   Δ = 16b^2 - 8b + 1 - 16b^2 = 1 - 8b
+
+   chcemy najmniejsze b (czyli też błąd przybliżenia),
+   dla którego jest rozwiązanie
+
+   b=1/8, x=1/4
+
+w(x) = x + 1/4

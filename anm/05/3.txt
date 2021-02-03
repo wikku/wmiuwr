@@ -1,0 +1,13 @@
+Indukcja:
+Dla k=0 działa
+
+Załóżmy, że p[x,x_1,...,x_{k-1}] jest wielomianem stopnia n-k+1.
+Wiemy, że iloraz różnicowy jest funkcją symetryczną, więc
+p[x_k,x_1,...,x_{k-1}] = p[x_1,...,x_k].
+Zatem wielomian (p[x,x_1,...,x_{k-1}] - p[x_1,...,x_k]) od zmiennej x
+ma miejsce zerowe w x_k, czyli jest podzielny przez wielomian (x-x_k)
+
+Ze wzoru rekurencyjnego na iloraz różnicowy
+p[x,x1,...,xk]
+= (p[x,x_1,...,x_{k-1}] - p[x_1,...,x_k])/(x-x_k)
+to wielomian n-k stopnia.

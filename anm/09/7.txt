@@ -1,0 +1,10 @@
+norma jednostajna na [-1,1]
+ln(1+x+x^2) = ln((x+1/2)^2 + 3/4)
+wystarczy rozpatrywać wielomiany parzyste
+
+Z zadania 8.6 aby pokazać lewą nierówność wystarczy znaleźć
+wielomian p stopnia ≤5 i 7 punktów x_i, w których p-f ma naprzemienne
+znaki oraz najmniejszy błąd w x_i wynosi > 0.002
+
+Aby pokazać prawą nierówność wystarczy znaleźć
+wielomian z błędem < 0.009

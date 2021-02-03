@@ -1,0 +1,10 @@
+float32
+cecha w [-126, 127] -- 254 możliwości (255 jeśli liczymy subnormalne)
+mantysa 23-bitowa - 2^23 możliwości
+jeszcze dwie możliwości na znak
+254*2^32*2
+
+float64
+cecha w [-1022, 1023] -- 2046 możliwości (2047 jeśli liczymy subnormalne)
+mantysa 52-bitowa - 2^32 możliwości
+jeszcze dwie możliwości na znak

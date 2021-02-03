@@ -1,0 +1,24 @@
+a)
+
+Wystarczy pokazać, że ciąg wielomianów ortogonalnych monicznych jest
+jednoznacznie wyznaczony.
+
+
+Niech
+P_{n+1}(x) = x^{n+1} - ∑_{k=0}^n P_k(x) < x^{n+1}, P_k > / < P_k, P_k >
+jest on oczywiście prostopadły do poprzednich wyrazów ciągu.
+
+Weźmy dwa wielomiany p,q moniczne stopnia n+1 prostopadłe do P_k dla k≤n.
+Wtedy p-q jest stopnia ≤n i jest prostopadły do p i q.
+Dalej 0 = <p, p-q> - <q, p-q> = <p-q, p-q>, więc p=q.
+
+b)
+
+P_k są liniowo niezależne (M7.6).
+Skoro są różnych stopni, to za pomocą eliminacji można z nich kombinacji
+stworzyć wielomiany 1, x, x², ..., zatem rozpinają całą przestrzeń.
+
+c)
+Q można zapisać jako kombinację liniową wielomianów stopnia ≤ k,
+do których P_k jest prostopadły.
+

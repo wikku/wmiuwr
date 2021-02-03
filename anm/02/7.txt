@@ -1,0 +1,24 @@
+a)
+
+f(x) = 1/(x^2+c)
+
+f'(x) = -2x/(x^2+c)^2
+
+cond(x) =  x f'(x) / f(x) = (-2x^2)/(x^2+c)
+
+Może wybuchnąć np. x = 1, c = -1
+
+b)
+
+f(x) = (1 - cos x)/x^2
+
+f'(x) = (x^2 sin x - 2x(1-cos x))/x^4
+
+cond(x) = x f'(x) / f (x)
+	= (x^2 sin x - 2x(1-cos x))/((1- cos x) x)
+	= (x sin x)/(1-cosx) - 2
+	= (2 x sin x/2 cos x/2)/(2 sin^2 x/2) - 2
+	= (x cos x/2)/(sin x/2) - 2
+	= x cot(x/2) - 2
+
+Wybucha w x = 2pi

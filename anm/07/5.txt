@@ -1,0 +1,21 @@
+Norma ‖f-w*_n‖ = ‖f‖ + ‖w*_n‖ + 2<f, w*_n>,0 jest minimalna, gdy
+
+w*_n możemy zapisać jako kombinacja liniowa bazy  ∑ a_i w_i
+Minimalizujemy
+‖f-w*_n‖² = <f-w*_n, f-w*_n> = <f,f> - 2<f, w*_n> + <w*_n, w*_n>
+          = <f,f> - 2∑ a_i<f,w_i> + ∑ a_i^2<w_i,w_i>
+Czyli pochodna względem a_k musi być zerowa
+-2<f,w_k> + 2a_k<w_k,w_k>  = 0
+a_k = <f,w_k>/<w_k,w_k>
+
+Zatem
+<f-w*_k, w_k> = <f, w_k> - <w*_k, w_k>
+              = <f, w_k> - <∑ w_i<f,w_k>/<w_k, w_k>, w_k>
+              = <f, w_k> - <w_k<f,w_k>/<w_k, w_k>, w_k>
+              = <f, w_k> - <f,w_k>/<w_k,w_k> <w_k, w_k> = 0
+
+W drugą stronę załóżmy dla każdego k mamy <f-w*_n, w_k> = 0
+Wtedy
+<f-w*_n, w> = <f-w*_n, ∑ α_i w_i> = 0,
+czyli f-w*_n jest prostopadły do każdego wielomianu
+‖f-w‖ = ‖w*_n - w_n + (f - w*_n))‖ = ‖ w*_n - w_n ‖ + ‖f-w*_n‖ ≥ ‖f-w*_n‖

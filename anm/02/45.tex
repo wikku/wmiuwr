@@ -1,0 +1,69 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath, amsfonts}
+\usepackage[margin=1in]{geometry}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\fl}{fl}
+
+\newcommand{\D}{\mathrm{d}}
+\newcommand{\p}{\partial}
+
+\title{\vspace{-6ex}}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\begin{document}
+
+\maketitle
+
+\section*{M2.4.}
+
+Notacja: $\langle n \rangle$ intuicyjnie oznacza $n$-krotnie skumulowany błąd względny niewiększy niż $u$.
+Tzn. jeśli mamy $\tilde{x} = x \Pi_{i=1}^n (1+\alpha_i)^{\pm 1}$ dla $|\alpha_i| \le u$, to $\tilde{x} = x\langle n \rangle$.
+Z wykładu wiemy, że $|\langle n \rangle| \le \frac{nu}{1-nu}$
+oraz $\fl(a \diamond b) = (a \diamond b)\langle 1 \rangle$.
+
+
+Teza: Dla każdego $k \in \{0, \dots, n\}$ mamy
+
+$$\tilde{w}_{k} =   a_n x^{n-k} \langle 2(n-k) \rangle + \sum_{i=k}^{n-1}  a_i x^{i-k} \langle 2(i-k)+1 \rangle$$
+
+Dowód:
+
+Przypadek bazowy się zgadza $\tilde{w}_n = a_n$
+
+Krok indukcyjny:
+\begin{align*}
+\tilde{w}_k
+	&= ((\tilde{w}_{k+1} * x)\langle 1 \rangle + a_k)\langle 1 \rangle \\
+	&= \left(\left(a_n x^{n-k} \langle 2(n-k-1)\rangle + \sum_{i=k+1}^{n-1} a_i x^{i-k} \langle 2(i-k-1)+1\rangle \right)
+	    \langle 1 \rangle + a_k\right)\langle 1 \rangle \\
+    &= \left(\left(a_n x^{n-k} \langle 2(n-k-1)+1\rangle + \sum_{i=k+1}^{n-1} a_i x^{i-k} \langle 2(i-k)\rangle \right)
+	    + a_k\right)\langle 1 \rangle \\
+	&= a_n x^{n-k} \langle 2(n-k)\rangle + \sum_{i=k}^{n-1} a_i x^{i-k} \langle 2(i-k)+1\rangle
+\end{align*}
+
+Zatem $\tilde{w}_0 = a_n x^n \langle 2n \rangle + \sum_{i=0}^{n-1} a_i x^i \langle 2i + 1 \rangle$,
+jest to wynik dokładny dla tego samego $x$ i pewnych współczynników $a'_i$ zaburzonych o najwyżej
+$\langle 2n \rangle$ od początkowych $a_i$, czyli algorytm jest poprawny numerycznie.
+
+\section*{M2.5.}
+
+$$\fl(a + a^2) = (a + (a*a)\langle 1 \rangle) \langle 1 \rangle = a\langle 1 \rangle + (a * a) \langle 2 \rangle$$
+
+Znajdźmy rozwiązanie $A = a\langle 1 \rangle + (a * a) \langle 2 \rangle = \bar{a} + \bar{a}^2$ dla $a > 2$.
+Jest to równanie kwadratowe i szukamy rozwiązania blisko $a$, a więc dodatniego i większego z dwóch.
+\begin{align*}
+\bar{a}
+    &= \frac{-1 + \sqrt{1 + 4A}}{2} = \frac{-1}{2} + \sqrt{\frac{1}{4}+A}
+    = \frac{-1}{2} + \sqrt{\frac{1}{4}+ a\langle 1 \rangle + (a * a) \langle 2 \rangle} \\
+    &= \frac{-1}{2} + \sqrt{\left(a\langle 1 \rangle +\frac{1}{2}\right)^2 } 
+    = \frac{-1}{2} + \left( a\langle 1 \rangle +\frac{1}{2} \right) = a \langle 1 \rangle
+\end{align*}
+
+Zatem $\fl(a + a^2)$ jest dokładną wartością $\bar{a} + \bar{a}^2$ dla pewnego $\bar{a} = a\langle 1 \rangle$, więc
+algorytm jest poprawny numerycznie.
+
+\end{document}

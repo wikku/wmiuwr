@@ -1,0 +1,38 @@
+\begin{document}
+
+\iffalse
+M_k = s"(x_k)
+s naturalna, czyli M_0 = s"(x_0) = M_n = s"(x_n) = 0
+
+W każdym przedziale [x_i, x_{i+1}]:
+* s to wielomian stopnia niewiększego niż 3
+* s_i(x) = M_{i+1}/(6h)*(x-x_i)^3 + M_i/(6h)*(x_{i+1}-x)^3
+           + (s(x_{i+1}) - h^2*M_{i+1}/6)*(x-x_i)/h
+           + (s(x_i}) - h^2*M_i/6)*(x_{i+1}-x)/h
+\fi
+
+\begin{align*}
+\int_a^b s(x) dx
+&= \sum_{i=0}^{n-1} \int_{x_i}^{x_{i+1}} s_i(x) dx \\
+&= \sum_{i=0}^{n-1} (
+    M_{i+1}/(6h) \int_{x_i}^{x_{i+1}} (x-x_i)^3 dx
+  + M_i/(6h) \int_{x_i}^{x_{i+1}} (x_{i+1}-x)^3 dx
+  + (s(x_{i+1}) - h^2*M_{i+1}/6)/h \int_{x_i}^{x_{i+1}} x-x_i dx
+  + (s(x_i}) - h^2*M_i/6)/h \int_{x_i}^{x_{i+1}} x_{i+1}-x dx) \\
+&= \sum_{i=0}^{n-1} (
+    M_{i+1}/(6h) * h^4/4
+  + M_i/(6h) * h^4/4
+  + (s(x_{i+1}) - h^2*M_{i+1}/6)/h * h^2/2
+  + (s(x_i}) - h^2*M_i/6)/h * h^2/2) \\
+&= \sum_{i=0}^{n-1} (
+    M_{i+1}/24 * h^3
+  + M_i/24 * h^3
+  + (f(x_{i+1}) - h^2*M_{i+1}/6) * h/2
+  + (f(x_i}) - h^2*M_i/6) * h/2) \\
+&= h^3/12 * \sum_{i=0}^n'' M_i
+  + h \sum_{i&=0}^n'' f(x_i)
+  - h^3/6 * \sum_{i&=0}^n'' M_i \\
+&= h \sum_{i=0}^n'' f(x_i) - h^3/12 * \sum_{i=0}^n'' M_i
+\end{align*}
+\end{document}
+

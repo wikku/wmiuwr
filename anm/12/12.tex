@@ -1,0 +1,224 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage{breqn}
+\usepackage[margin=1.2in]{geometry}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Π}{\Pi}
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{◁}{\triangleleft}
+\newunicodechar{▷}{\triangleright}
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr AN
+\newunicodechar{⇒}{\implies} % Digr =>
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\to\else\textrightarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+\ExplSyntaxOn
+\AtBeginDocument
+ {
+  \char_set_active_eq:nN { `: } \colon
+  \mathcode`:="8000
+ }
+\ExplSyntaxOff
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+
+\begin{document}
+
+\maketitle
+
+\section*{M12.2}
+Mamy daną dziedzinę $[a,b]$, funkcję wagową $p$.
+Chcemy znaleźć $A_0, x_0$ takie,
+że dla dowolnego wielomianu $w$ stopnia $<2$ zachodzi
+$$∫_a^b p(x)w(x) \, dx = A_0 w(x_0).$$
+
+Wiemy, że kwadratura Gaussa $Q_0$ ma rząd $2$, a więc spełnia nasze wymagania.
+Musimy rozważyć ciąg standardowych wielomianów ortogonalnych $P_i$
+prostopadłych w sensie wagi $p$.
+Mamy $P_0(x) = x, P_1(x) = \left(x - \frac{⟨x P_0, P_0⟩}{⟨P_0, P_0⟩}\right)P_0(x)$.
+Zatem
+$$x_0 = \frac{∫_a^b x p(x)\,dx}{∫_a^b p(x)\,dx},$$
+$$A_0 = ∫_a^b p(x) λ_0(x) \, dx = ∫_a^b p(x) \, dx.$$
+
+\section*{M12.3}
+Kwadratura Gaussa $Q_1$ jest rzędu $4$ i żądanej postaci,
+więc spełnia nasze wymagania.
+
+Musimy znaleźć wielomiany ortogonalne dla wagi $(1+x^2)$:
+\begin{align*}
+	P_0(x) &= 1 \\
+	P_1(x) &= x - \frac{⟨x P_0, P_0⟩}{⟨P_0, P_0⟩} = x - \frac{∫_0^1 x + x^3\,dx}{∫_0^1 1 + x^2 \, dx} =  x-\frac{9}{16} \\
+	P_2(x) &= \left(x - \frac{⟨x P_1, P_1⟩}{⟨P_1, P_1⟩}\right)P_1(x) - \frac{⟨P_1,P_1⟩}{⟨P_0,P_0⟩} \\
+	&= \left(x - \frac{∫_0^1 (x+x^3)\left(x- \frac{9}{16}\right)^2\,dx}{∫_0^1
+	(1+x^2)\left(x-
+	\frac{9}{16}\right)^2\,dx}\right)\left(x-\frac{9}{16}\right) - \frac{∫_0^1
+	(1+x^2)\left(x- \frac{9}{16}\right)^2\,dx}{∫_0^1 1 + x^2 \, dx} \\
+	&= \left(x - \frac{829}{1712}\right)\left(x-\frac{9}{16}\right) - \frac{107}{1280} \\
+	&= x^2 - \frac{112 x}{107} + \frac{101}{535} \\
+	&= \left(x - \frac{56}{107} + \frac{\sqrt{4873/5}}{107}\right)\left(x - \frac{56}{107} - \frac{\sqrt{4873/5}}{107}\right).
+\end{align*}
+
+\section*{M12.4}
+Niech $⟨f, g⟩ = ∫_a^b p(x) f(x) g(x) \, dx$ i $P_i$ to standardowe wielomiany
+ortogonalne w sensie normy średniokwadratowej z tą wagą.
+
+Niech $w_n$ to wielomian moniczny stopnia $n$.
+Możemy go zapisać w postaci $P_n + r$,
+gdzie $r$ jest stopnia $<n$.
+Wtedy
+\begin{align*}
+&∫_a^b p(x) (w_n(x))^2 \, dx \\
+&=∫_a^b p(x) (P_n(x))^2 \, dx +
+∫_a^b p(x) (r(x))^2 \, dx +
+2∫_a^b p(x) r(x) P_n(x) \, dx,
+\end{align*}
+gdzie ostatni składnik to $2⟨r, P_n⟩ = 0$.
+Zakładamy, że waga $p$ jest dodatnia,
+więc pierwszy składnik jest stały,
+a aby zminimalizować całość musimy przyjąć $r = 0$.
+
+\section*{M12.7}
+Dla równania postaci $y'(t) = f(t, y(t))$ jawną metodą Eulera jest
+$$y_{n+1} = y_n + h f_n,$$
+a niejawną metodą Eulera jest
+$$y_{n+1} = y_n + h f_{n+1},$$
+gdzie $f_k = f(t_k, y_k), t_k = t_0 + kh, h>0$.
+
+Rozważmy problem
+$$y'(t) = λy(t) \+ (t > 0), \quad y(0) = 1,$$
+gdzie $λ < 0$, $t_0 = 0$.
+Mamy $f(t,y(t)) = λy(t)$.
+
+Jawna metoda Eulera daje nam
+$$y_{n+1} = (1+hλ)y_n,$$
+więc $y_n → 0$ jeśli $\frac{-2}{λ} > h > 0$.
+
+Niejawna metoda Eulera daje nam
+$$y_{n+1} = y_n + hλy_{n+1} = \frac{y_n}{1-hλ}.$$
+Aby $y_n → 0$ musimy mieć $\abs{\frac{1}{1-hλ}} < 1$, a więc zawsze.
+
+\section*{M12.8}
+Rozważmy problem
+$$y'(t) = λy(t) \+ (t > 0), \quad y(0) = 1,$$
+gdzie $λ < 0$, $t_0 = 0$.
+Mamy $f(t,y(t)) = λy(t)$.
+
+Metoda Cranka-Nicolson ma wzór
+$$y_{n+1} = y_n + \frac{h}{2}\left(f_n + f_{n+1}\right).$$
+Stosując go do naszego problemu otrzymujemy
+\begin{align*}
+	y_{n+1}
+	= y_n + \frac{h}{2}\left(λy_n + λy_{n+1}\right)
+	= \frac{1 + \frac{hλ}{2}}{1 - \frac{hλ}{2}}y_n
+	= \frac{2 + hλ}{2 - hλ}y_n.
+\end{align*}
+
+\section*{M12.9}
+Rozważmy problem
+$$y'(t) = λy(t) \+ (t > 0), \quad y(0) = 1,$$
+gdzie $λ < 0$, $t_0 = 0$.
+Mamy $f(t,y) = λy$.
+
+Metoda Heuna ma wzór
+$$y_{n+1} = y_n + \frac{h}{2}\Big(f_n + f(t_{n+1}, y_n + hf_n)\Big).$$
+Stosując go do naszego problemu otrzymujemy
+\begin{align*}
+	y_{n+1}
+	= y_n + \frac{h}{2}\left(λy_n + λy_n + λ^2hy_n\right)
+	= \left(1 + hλ + \frac{λ^2 h^2}{2}\right)y_n.
+\end{align*}
+
+
+\end{document}

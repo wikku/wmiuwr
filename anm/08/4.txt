@@ -1,0 +1,11 @@
+Niech p, q ∈ Π_n będą wielomianami optymalnymi dla funkcji ciągłej
+f na odcinku [a,b] w sensie normy jednostajnej.
+
+p ma jakiś alternans x_0, ..., x_{n+1}.
+BSO p(x_i) = f(x_i) + (-1)^i ε
+
+d(x) = p(x) - q(x) jest stopnia ≤ n
+p(x_i) to na przemian f(x_i)±ε
+|f(x) - q(x)| ≤ ε
+zatem nie ma kolejnych d(x_i), d(x_{i+1}) obu dodatnich lub ujemnych
+zatem d ma n+1 miejsc zerowych, czyli d≡0

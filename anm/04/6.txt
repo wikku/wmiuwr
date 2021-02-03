@@ -1,0 +1,39 @@
+Pierwiastki z^2-uz-v to pojedyncze pierwiastki p(z) = a_0 + ... + a_nz^n
+
+Jakobian to
+[[ ∂b0/∂u ∂b0/∂v ]
+ [ ∂b1/∂u ∂b1/∂v ]]
+=
+[[ c_0 c_1
+ [ c_1 c_2 ]]
+
+gdzie c_k  = b_{k+1} + uc_{k+1} + vc_{k+2}, c_{n+1} = c_n = 0
+      q(z) = b_nz^{n-2} + ... + b_3z + b_2
+      r(z) = b_1(z-u) + b_0
+      p(z) = (z^2-uz-v)q(z) + r(z)
+
+
+p(z) = (z^2-uz-v)q(z) +b_1(z-u) + b_0
+∂p(z)/∂u = 0 = -zq(z) + (z^2-uz-v)∂q(z)/∂u - b1 + (z-u)∂b_1/∂u + ∂b_0/∂u
+∂p(z)/∂v = 0 = -q(z) + (z^2-uz-v)∂q(z)/∂v - b1 + (z-u)∂b_1/∂v + ∂b_0/∂v
+
+b_1=0, bo p się dzieli przez (z^2-uz-v) bez reszty
+
+Niech z1, z2 to pierwiastki z^2-uz-v
+wstawiając mamy
+
+z_i q(z_i) = (z_i-u)∂b_1/∂u + ∂b_0/∂u = c_0 + (z_i-u)c_1
+    q(z_i) = (z_i-u)∂b_1/∂v + ∂b_0/∂v = c_1 + (z_i-u)c_2
+
+ J [1  (z_i-u)]^T = [z_iq(z_i)  q(z_i)]^T
+
+ _      _    _             _       _                  _
+|c_0  c_1|  |   1       1   |     |z_1q(z_1)  z_2q(z_2)|
+|        |  |               |     |                    |
+|c_1  c_2|  |(z_1-u) (z_2-u)|  =  | q(z_1)     q(z_2)  |
+|_      _|  |_             _|     |_                  _|
+
+    J        (z_1-u)≠(z_2-u)             z_1≠z_2
+               nieosobliwa             nieosobliwa
+
+Czyli J także nieosobliwa.

@@ -1,0 +1,21 @@
+norma jednostajna
+E_n(f) = inf_{w ϵ Π_n}  ‖ f - w ‖
+
+E_n(αf) = inf_{w ϵ Π_n}  ‖ αf - w ‖
+        = inf_{w ϵ Π_n}  ‖ αf - αw ‖
+        = |α| (inf_{w ϵ Π_n}  ‖ f - w ‖)
+        = |α| E_n(f)
+
+E_n(f + g) = inf_{w ϵ Π_n}  ‖ f + g - w ‖
+           = inf_{w ϵ Π_n}  ‖ f + g - w - w ‖
+           = inf_{w ϵ Π_n}  ‖ f - w ‖ + ‖ g - w ‖
+           = E_n(f) + E_n(g)
+
+E_n(f+q) = inf_{w ϵ Π_n} ‖ f + q - w ‖
+         = inf_{w ϵ Π_n} ‖ f + q - (w + q) ‖
+         = inf_{w ϵ Π_n} ‖ f - w ‖
+         = E_n(f)
+
+E_n(f) = inf_{w ϵ Π_n}  ‖ f - w ‖
+       ≤ ‖ f - 0 ‖
+       ≤ ‖ f ‖

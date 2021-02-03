@@ -1,0 +1,29 @@
+2^{-q} \le  \frac{x-y}{x} \le 2^{-p}
+
+-q \le \log_2(x-y) - \log_2(x) \le -p
+
+p \le \log_2(x) - \log_2(x-y) \le q
+
+po prawej część całkowita i ułamkowa lewej strony:
+log_2(x) = c_x + \log_2(m_x)
+log_2(x-y) = c_{x-y} + \log_2(m_{x-y})
+
+p \le c_x - c_{x-y} + \log_2(m_x / m_{x-y}) \le q
+
+Stosujemy funkcję niemalejącą podłoga na nierówność
+
+p \le c_x - c_{x-y} \le q
+
+c_x - c_{x-y} to liczba utraconych bitów, bo o tyle musimy przesunąć przecinek
+y żeby przecinki były na tej samej pozycji i można było odjąć.
+
+
+
+
+      (1.m_1...) 2^{c_x}
+    - (1.m_1...) 2^{c_{x-y}}
+    --------------------
+
+      (1.m_1...) 2^{c_x}
+    - (0.0m_1...) 2^{c_{x}}
+    --------------------

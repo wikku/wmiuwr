@@ -1,0 +1,20 @@
+P_{2m}(x) = S_m(x^2)
+P_{2m+1}(x) = x R_m(x^2)
+
+Cel: S_m ortogonalne w [0,a^2] z wagą v(t) = p(sqrt(t))/sqrt(t)
+     R_m ortogonalne w [0,a^2] z wagą w(t) = sqrt(t) p(sqrt(t))
+
+dla i≠j <S_i, S_j>
+= ∫_0^{a^2} p(sqrt(t))/sqrt(t) S_i(t) S_j(t) dt
+[t = x^2;  dt = 2x dx]
+= 2 ∫_0^a p(x)/x S_i(x^2) S_j(x^2) x dx
+= 2 ∫_0^a p(x) P_{2i}(x) P_{2j}(x) dx
+= ∫_{-a}^a p(x) P_{2i}(x) P_{2j}(x) dx = 0
+
+dla i≠j <R_i, R_j>
+= ∫_0^{a^2} sqrt(t) p(sqrt(t)) R_i(t) R_j(t) dt
+[t = x^2;  dt = 2x dx]
+= 2 ∫_0^a x p(x) R_i(x^2) R_j(x^2) x dx
+= 2 ∫_0^a p(x) P_{2i+1}(x) P_{2j+1}(x) dx
+= ∫_{-a}^a p(x) P_{2i+1}(x) P_{2j+1}(x) dx = 0
+

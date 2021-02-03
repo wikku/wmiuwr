@@ -1,0 +1,6 @@
+Niech f(x) = 1
+Wtedy suma B_k to kwadratura Newtona-Cotesa funkcji f na przedziale [0,1]
+Q_n^{NC}(f) = ∑_{k=0}^n A_k = ∑_{k=0}^n B_k
+Kwadratura działa przez całkowanie wielomianu interpolacyjnego, a
+funkcja f jest interpolowana przez wielomian stały
+Wielomian interpolacyjny jest jedyny, więc dostajemy dokładny wynik równy 1

@@ -1,0 +1,22 @@
+P_k są liniowo niezależne, więc tworzą bazę przestrzeni wielomianów.
+W szczególności P_n jest prostopadły do wielomianów mniejszego stopnia
+
+Niech q_k to dzielnik P_n składający się z czynników odpowiadającym
+
+Załóżmy nie wprost, że P_n ma czynnik (x-p)^2.
+
+Wtedy
+<1, P_n^2/(x-p)^2> = \int_a^b p(x)P_n(x)^2/(x-p)^2 dx > 0
+Ale <1, P_n^2/(x-p)^2> = <P_n, P_n/(x-p)^2> = 0,
+bo to wielomiany różnego stopnia.
+Sprzeczność.
+
+Wielomian ze współczynnikami rzeczywistymi rozkłada się na czynniki rzeczywiste
+liniowe lub kwadratowe, więc P_n ma tylko czynniki rzeczywiste liniowe i nie ma
+pierwiastków zespolonych.
+
+
+Załóżmy nie wprost, że P_n ma czynnik x-a (lub analogicznie x-b)
+Wtedy
+sgn <1,P_n^2/(x-a)> = sgn <1, P_n^2> > 0, bo w całce znak się nie zmienia
+ale P_n^2 jest prostopadły do 1, sprzeczność

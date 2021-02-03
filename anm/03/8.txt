@@ -1,0 +1,19 @@
+Niech f(x) = (x (x^2 + 3R)/(3x^2 + R))
+
+Zauważmy, że f(sqrt(R)) = sqrt(R)
+
+f'(x) = 3(R-x^2)^2/(R+3x^2)^2
+f'(sqrt(R)) = 0
+W otoczeniu punktu stałego sqrt(R) wartość bezwgzlędna pochodnej
+jest mniejsza od 1, zatem ciąg iteracji f zbiega do sqrt(R).
+
+f''(x) = -48Rx(R-x^2)/(R+3x^2)^3
+f''(sqrt(R)) = 0
+
+Z twierdzenia Taylora
+f(x) = f(sqrt(R)) + f'''(y)(x-sqrt(R))^3/6
+dla pewnego y pomiędzy x a sqrt(R)
+
+Zatem
+(f(x) - sqrt(R))/(x-sqrt(R))^3
+dąży do jakiejś liczby, czyli ciąg iteracji f jest zbieżny sześciennie.

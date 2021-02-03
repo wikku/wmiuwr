@@ -1,0 +1,11 @@
+f jednostajnie ciągła na [a,b]
+
+Weźmy ε > 0, istnieje n takie, że
+|x1-x2| < (b-a)/n  ⇒  |f(x1) - f(x2)| < ε/(2(b-a))
+
+Metoda trapezów na dowolnym podprzedziale obliczy wartość
+pomiędzy sumą dolną a górną na tym przedziale
+Ale różnica między sumą dolną a górną jest niewiększa niż
+(b-a)/n * ε/(b-a) = ε/n
+Podprzedziałów jest n, więc w sumie błąd wynosi ε
+

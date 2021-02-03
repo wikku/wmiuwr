@@ -1,0 +1,13 @@
+Załóżmy nie wprost, że mamy różne p, q minimalizujące odległość od f
+
+Jeśli p,q są liniowo zależne, to BSO q = αp, α≠1 i
+‖f-g‖ =‖f‖ +‖g‖ + 2<f,g>
+<f, p> = α<f, p>
+<f, p> = 0
+Zatem jedyne minimum jest dla wielomianu zerowego, sprzeczność
+
+
+Jeśli są liniowo niezależne to nierówność trójkąta jest ścisła
+‖f - (p+q)/2)‖ = ‖f - p + f - q)‖/2 < (‖ f-p ‖ + ‖ f-q ‖)/2
+czyli (p+q)/2 różny od p,q ma niewiększą normę. Sprzeczność
+

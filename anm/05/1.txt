@@ -1,0 +1,24 @@
+Lemat:
+Dla danych [x0,...,xn], [y0,...,yn]
+jest jedyny wielomian interpolacyjny stopnia co najwyżej n.
+Dowód:
+Weźmy dwa wielomiany stopnia co najwyżej n interpolujące te dane.
+Wtedy wielomian p-q ma n+1 miejsc zerowych: x0,...,xn.
+Ale p-q musi być stopnia niewiększego niż n, a więc jest musi być wielomianem
+zerowym.
+
+
+(a) \sum_{k=0}^n 1 \lambda_k(x)
+
+To rozwiązanie w postaci Lagrange'a wielomianu interpolującego wartości
+y=[1,...,1].
+Oczywiście wielomianem interpolującym te wartości jest Q(x) = 1, więc
+Q(x) jest równy (a).
+
+(b) \sum_{k=0}^n \lambda_k(0)x_k^j
+
+To wartość w zerze rozwiązania w postaci Lagrange'a wielomianu interpolującego
+[x1^j,...,xn^j].
+Oczywiście wielomianem interpolującym te wartości jest Q(x) = x^j,
+więc Q(0) = 0^j jest równe (b).
+

@@ -1,0 +1,18 @@
+ϕ(α) = α
+Skoro ϕ'(α) = 0, to |ϕ'| < 1 w pewnym otoczeniu α
+i iterowanie ϕ zbiega do α.
+
+Z twierdzenia Taylora i zerowania się odpowiednich pochodnych
+ϕ(x) = α + ϕ^{(p+1)}(s)/(p+1)!(x-a)^{p+1}
+dla pewnego s pomiędzy x i α.
+
+(x_{k+1}-α)/((x_k-α)^{p+1}) =
+(ϕ(x_k)-α)/((x_k-α)^{p+1}) =
+(ϕ^{(p+1)}(s)/(p+1)!(x_k-α)^{p+1})/((x_k-α)^{p+1}) =
+ϕ^{(p+1)}(s)/(p+1)!
+dla pewnego s pomiędzy x_k a α.
+W granicy gdy k \to \infty, to x_k \to α, więc s \to α.
+
+lim_{k \to \infty} (x_{k+1}-α)/(x_k-α)^{p+1} = ϕ^{(p+1)}(α)/(p+1)!
+
+Po nałożeniu wartości bezwzględnej pokazuje to, że rząd zbieżności to p+1.

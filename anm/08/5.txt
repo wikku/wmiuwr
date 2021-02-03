@@ -1,0 +1,9 @@
+Nie wprost:
+załóżmy, że wielomian w ma alternans x_0, …, x_{n+1} i nie jest optymalny
+tzn. ‖ f-w ‖ > ‖ f-v ‖ = ε dla pewnych v,ε
+
+Niech
+d(x) = w(x) - v(x), d to wielomian stopnia ≤ n
+sgn(d(x_i)) = sgn(w(x_i))
+czyli d ma n+1 miejsc zerowych, a więc jest zerowy
+sprzeczność
