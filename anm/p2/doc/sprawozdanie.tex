@@ -1,0 +1,243 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{newunicodechar}
+\usepackage{microtype}
+
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Π}{\Pi}
+\newunicodechar{ℕ}{\N}
+\newunicodechar{ℤ}{\Z}
+\newunicodechar{ℚ}{\Q}
+\newunicodechar{ℝ}{\R}
+\newunicodechar{ℂ}{\C}
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\subseteq} % Digr _)
+\newunicodechar{⊂}{\subseteq} % Digr (C
+\newunicodechar{⊃}{\subseteq} % Digr C)
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+
+
+\date{\today}
+\title{
+	\LARGE \textbf{Pracownia z analizy numerycznej} \\
+	\Large Sprawozdanie do zadania P2.6 \\
+	\large Prowadzący: Filip Chudy}
+\author{Wiktor Kuchta}
+
+\newtheorem{tw}{Twierdzenie}
+
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+Równania różniczkowe zwyczajne pierwszego rzędu postaci
+\begin{equation} \label{eq:1}
+	y' = f(x,y)
+\end{equation}
+są fundamentalnie ważne,
+bo do układu takich równań możemy sprowadzić dowolne
+równanie różniczkowe zwyczajne z jawnym wyrażeniem na najwyższą pochodną.
+W artykule \cite{clenshawnorton} przedstawiono iteracyjną metodę numerycznego
+rozwiązywania
+równań postaci \eqref{eq:1} na dziedzinie ograniczonej
+z warunkiem brzegowym
+${y(ξ)=η}$.
+Polega ona na iteracji Picarda na funkcjach przybliżanych przez wielomiany
+Czebyszewa.
+
+\section{Iteracja Picarda}
+Iteracja Picarda dla równania ze wspomnianymi warunkami polega na obliczaniu
+ciągu funkcji
+\begin{equation} \label{eq:picard}
+	y_i(x) = η + ∫_{ξ}^x f(x, y_{i-1}(x))\,dx,
+\end{equation}
+zaczynając od $y_0(x) = η$.
+Jest jasne, że jeśli ciąg $y_i$ jest zbieżny,
+to zbiega do prawidłowego rozwiązania.
+Można pokazać, że przy odpowiednich warunkach na $f$,
+ten ciąg będzie zbiegał do rozwiązania na jakimś otoczeniu $ξ$.
+Niestety nie możemy oczekiwać zbieżności w ogólności.
+
+\section{Wielomiany Czebyszewa}
+Wielomiany Czebyszewa $T_n(x) = \cos (n \cos^{-1} x)$ mają pewne własności
+przydatne w naszym zadaniu, w szczególności przy ograniczeniu do dziedziny
+$[-1, 1]$.
+Wielomian $T_n$ ma stopień $n$, więc tworzą one bazę wszystkich wielomianów.
+Będziemy oznaczać symbolem $∑'$ sumy,
+w których pierwszy wyraz jest zmiejszony o połowę,
+a $∑''$ sumy, w których pierwszy i ostatni wyraz są zmniejszone o
+połowę.
+
+\subsection{Obliczanie algorytmem Clenshawa}
+Wartości kombinacji liniowych tych wielomianów, tzn.
+\begin{equation} \label{eq:clenshaw}
+	f(x) = \sideset{}{'}{∑}_{i=0}^n c_i T_i(x)
+\end{equation}
+możemy obliczać w czasie liniowym korzystając z algorytmu Clenshawa:
+\begin{align*}
+	b_{n+1} &= b_{n+2} = 0, \\
+	b_i &= 2 x b_{i+1} - b_{i+2} + c_i, \quad (0 ≤ i ≤ n) \\
+	f(x) &= \frac{1}{2} (b_0 - b_2).
+\end{align*}
+Polega on na zależności rekurencyjnej między wielomianami $T_n$.
+
+\subsection{Aproksymacja średniokwadratowa}
+Oznaczmy $x_k = \cos \frac{πk}{n}$ ekstrema wielomianu $T_n$ na $[-1, 1]$.
+Wielomiany $T_0, T_1, \dots, T_n$ są ortogonalne w sensie dyskretnego
+iloczynu skalarnego
+\begin{equation} \label{eq:inner}
+\langle f, g \rangle = \sideset{}{''}{∑}_{i=0}^n f(x_k) g(x_k),
+\end{equation}
+a dokładniej
+$$
+\langle T_i, T_j \rangle =
+	\begin{cases}
+		n, & \text{jeśli }i = j = 0\text{ lub }i = j = n, \\
+		n/2, & \text{jeśli }i = j ≠ 0, \\
+		0, & \text{jeśli }i ≠ j.
+	\end{cases}
+$$
+Oznacza to,
+że dla tego iloczynu skalarnego wielomianem optymalnym $w^*$ dla funkcji $f$
+określonej dla argumentów $x_k$ jest jej rzut ortogonalny na $Π_n$, tzn.
+\begin{align*}
+	w^*
+	&= ∑_{k=0}^n \frac{\langle f, T_k \rangle}{\langle T_k, T_k \rangle} T_k
+	= \frac{2}{n} \sideset{}{''}{∑}_{k=0}^n \langle f, T_k \rangle T_k
+	= \frac{2}{n} \sideset{}{''}{∑}_{k=0}^n T_k \sideset{}{''}{∑}_{i=0}^n f(x_i) T_k(x_i).
+\end{align*}
+Zauważmy, że jeśli przyjmiemy
+$C_n = \frac{f(x_i)}{n}$ i $C_i = \frac{2f(x_i)}{n}$ dla $i < n$,
+to otrzymujemy
+\begin{equation} \label{eq:approx}
+	w^* = \sideset{}{''}{∑}_{k=0}^n T_k \sideset{}{'}{∑}_{i=0}^n C_i T_k(x_i),
+\end{equation}
+gdzie wewnętrzna suma ma postać \eqref{eq:clenshaw}, a więc współrzędne $w^*$ w bazie
+ortogonalnej wielomianów $T_n$ możemy liczyć algorytmem Clenshawa.
+Iloczyn skalarny \eqref{eq:inner} jest dosyć naturalny i możemy spodziewać się, że
+na $[-1, 1]$ aproksymacje w normie przez niego indukowanej będą przydatne w naszym zadaniu.
+
+
+\subsection{Całkowanie}
+Można pokazać, że dla $n ≥ 2$ zachodzi
+\[
+	∫ T_n(x) \, dx = \frac{T_{n+1}(x)}{2(n+1)} - \frac{T_{n-1}(x)}{2(n-1)} + C.
+\]
+Stąd można wywnioskować
+\begin{equation} \label{eq:integrate}
+	∫ \sideset{}{'}{∑}_{k=0}^∞ a'_k T_k(x) \, dx = C T_0(x) + \sideset{}{'}{∑}_{k=1}^∞ a_k T_k(x),
+\end{equation}
+gdzie $a_k = \frac{1}{2k}(a'_{k-1} - a'_{k+1})$.
+
+\section{Metoda Clenshawa-Nortona}
+
+Załóżmy, że równanie różniczkowe postaci \eqref{eq:1}
+zostało sprowadzone do dziedziny $[-1, 1]$ i $ξ ∈ \{ -1, 1 \}$.
+
+Załóżmy, że mamy $y_{i-1}$ zapisane w postaci kombinacji liniowej
+wielomianów Czebyszewa:
+$$ y_{i-1}(x) = \sideset{}{'}{∑}_{k=0}^N a_k T_k(x). $$
+Kierując się wzorem \eqref{eq:picard} iteracji Picarda, powinniśmy
+obliczyć $f(x, y_{i-1}(x))$, a następnie tę funkcję scałkować i poprawić stałą
+tak, by zachodził warunek brzegowy.
+
+Funkcja $f$ może być dowolnej postaci, więc w ogólności jedyne, co możemy zrobić,
+to obliczyć jej wartości na zbiorze dyskretnym.
+Możemy wykorzystać algorytm Clenshawa, aby obliczyć wartości $y_{i-1}(x_s)$,
+gdzie $x_s = \cos \frac{πs}{N}$ to ekstrema $T_N$ na $[-1, 1]$.
+Mając pary $(x_s, y_{i-1}(x_s))$ możemy bez problemu obliczyć wartość $f$ dla
+nich.
+
+Następnie korzystając z \eqref{eq:approx} możemy dla tych punktów znaleźć
+wielomian optymalny $N$-tego stopnia.
+Teraz dzięki \eqref{eq:integrate} możemy znaleźć jego funkcję pierwotną z
+dowolnie wybraną stałą całkowania
+$$F(x) = \sideset{}{'}{∑}_{k=0}^{N+1} A_k T_k(x).$$
+Aby zachodził warunek brzegowy, do $A_0$ dodajemy $2(η-F(ξ))$.
+
+To była jedna iteracja algorytmu.
+Zauważmy, że w jej trakcie zwiększyliśmy liczbę wyrazów sumy o $1$,
+więc każda iteracja pozwala nam aproksymować wynik z większą precyzją.
+Proces możemy zatrzymać na przykład, gdy różnice współczynników między iteracjami
+będą mniejsze niż ustalona liczba.
+
+\section{Działanie w praktyce}
+Pomimo swojej prostoty, metoda działa dobrze w praktyce.
+Jeśli rozwiązaniem jest prosta funkcja analityczna,
+np. funkcja wymierna lub wykładnicza, możemy się spodziewać dość szybkiej zbieżności.
+Znalezienie przykładu, dla którego metoda nie działa nie jest łatwe.
+
+\begin{figure}
+	\centering
+	\resizebox{0.9\linewidth}{!}{\input{p1.pdf_tex}}
+	\caption{$y' = y^2, y(-1) = 0.4$ szybko zbiega do rozwiązania $y = (1.5 - x)^{-1}$.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\resizebox{0.9\linewidth}{!}{\input{p2.pdf_tex}}
+	\caption{Dla wielomianu $P$ metoda rozwiązuje $y' = \frac{d}{dx}P, y(ξ) = P(ξ)$ w $\deg P$ iteracji.}
+\end{figure}
+
+Problemem może niekiedy być dobór parametru $N$ w iteracji.
+Wartości $f(x_s, y_{i-1}(x_s))$ w kilku punktach niekoniecznie mówią dużo o zachowaniu na całej dziedzinie,
+szczególnie jeśli funkcja $y_{i-1}$ jest mało ciekawa.
+Może to powodować utknięcie na nieprawidłowym rozwiązaniu,
+więc czasami może być potrzeba zacząć od dużego $N$ lub zaburzyć $y_0$.
+
+\begin{figure}
+	\centering
+	\resizebox{0.9\linewidth}{!}{\input{p3.pdf_tex}}
+	\caption{Nawet w przypadku wyraźnych nieciągłości, np. $y' = \lfloor xy+1 \rfloor + \lfloor \frac{y}{x+2} \rfloor$ metoda może dać wynik, chociaż wolniej.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\resizebox{0.9\linewidth}{!}{\input{p4.pdf_tex}}
+	\caption{Są oczywiście równania, dla których metoda rozbiega i zachowuje się chaotycznie, np. $y' = \sqrt{1-x^2}\tan y, y(-1) = 1$.}
+\end{figure}
+
+\section{Podsumowanie}
+Metoda iteracyjna Clenshawa-Nortona jest prosta w implementacji i praktyczna
+dla dużej klasy równań różniczkowych.
+Może ona służyć za jedną z metod w repertuarze do rozwiązywania takich problemów,
+lub za podstawę dla usprawnionego algorytmu.
+
+\begin{thebibliography}{1}
+	\bibitem{clenshawnorton}
+		C. W. Clenshaw, H. J. Norton,
+		\textit{The solution of nonlinear ordinary differential equations in
+			Chebyshev series},
+		The Computer Journal 6 (1963), 88--92
+\end{thebibliography}
+
+
+
+\end{document}

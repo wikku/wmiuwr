@@ -1,0 +1,184 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\macheps}{\textsf{\textbf{u}}}
+
+\date{\today}
+\title{
+	\LARGE \textbf{Pracownia z analizy numerycznej} \\
+	\Large Sprawozdanie do zadania P1.5 \\
+	\large Prowadzący: Filip Chudy}
+\author{Wiktor Kuchta}
+
+\newtheorem{tw}{Twierdzenie}
+
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+Funkcja eksponencjalna dzięki swoim własnościom jest jedną z najważniejszych
+funkcji w matematyce czystej i stosowanej.
+Niniejsze sprawozdanie sprawdza metodę obliczania $e^x$ polegającą na
+skorzystaniu z szeregu Taylora po zastosowaniu wzorów redukujących problem
+do $|x| < \frac{1}{2}\ln 2$.
+Obliczenia numeryczne były wykonane w 64-bitowej arytmetyce zmiennoprzecinkowej.
+
+\section{Algorytm obliczania $e^x$}
+\subsection{Sprowadzenie do mniejszej dziedziny}
+Przyjmijmy $z = x\log_2 e = x / \ln 2$, $m = \lfloor z + \frac{1}{2} \rfloor$.
+Wtedy
+$$e^x =
+2^{x\log_2 e} = 2^z = 2^{m + (z-m)} = 2^m 2^{z-m} = 2^m e^{(z-m)\ln 2}.$$
+Liczba $m$ to zaokrąglenie
+$z$ do najbliższej liczby całkowitej\footnote{
+We wzorze w treści zadania powinno być zaokrąglanie w stronę zera
+(obcinanie cyfr po przecinku) zamiast podłogi
+albo pominięte $\sigma = \sgn x$ tak jak tutaj
+}, więc $|z-m| < \frac{1}{2}$.
+Z powyższego wzoru wynika algorytm, który sprowadza problem do
+$(-\frac{1}{2}\ln 2, \frac{1}{2}\ln 2)$
+w kilku prostych operacjach zmiennoprzecinkowych:
+dzielenie przez stałą $\ln 2$, zaokrąglanie, odejmowanie, mnożenie przez
+$\ln 2$ (i potem dodanie liczby całkowitej $m$ do cechy).
+
+Możemy także skorzystać ze wzoru $e^{-x} = 1/e^x$, aby zredukować problem do
+liczb nieujemnych, ale na tym etapie korzyści z tego nie są jasne.
+
+\subsection{Algorytm obliczania sumy częściowej}
+
+Obliczanie
+$$
+\sum_{k=0}^n \frac{x^k}{k!} = 1 + x + \frac{x^2}{2} + \dots + \frac{x^n}{n!}
+$$
+wyraz po wyrazie
+sprawdzając, dla jakiego $n$ mamy $|x^{n+1}/(n+1)!|$ mniejsze od ustalonego
+$\varepsilon$ wiąże się z utratą wydajności lub
+dokładności algorytmu w porównaniu z użyciem schematu Hornera dla
+ustalonego $n$.
+
+Jeśli $0 < x < \frac{1}{2}\ln 2$, to wyrazy sumy będą szybko malejące.
+Aby zminimalizować błędy przy sumowaniu tych składników, powinniśmy
+zawsze dodawać pary liczb zmiennoprzecinkowych o możliwie bliskich rzędach
+wielkości, a więc sumować wyrazy od najmniejszych (od prawej).
+Ale dodawanie od prawej wymagałoby najpierw znalezienia odpowiednio
+małego wyrazu lub obliczanie i spamiętywanie ich od lewej, czyli
+niepotrzebnych obliczeń lub też użycia pamięci.
+
+Sytuacja jest bardziej skomplikowana dla argumentów $-\frac{1}{2}\ln 2 < x < 0$,
+ale sumowanie od końca też powinno być lepsze niż od początku, bo wartości
+bezwzględne wyrazów maleją szybko, więc nie dojdze do dużej utraty cyfr
+znaczących z powodu dodawania składników o przeciwnych znakach.
+
+Z drugiej strony obliczanie tej sumy dla ustalonego $n$ to obliczanie wartości
+ustalonego wielomianu, na co optymalnym algorytmem jest schemat Hornera.
+Nie wykonuje on porównań zmiennoprzecinkowych i wykonuje dwa razy mniej mnożeń,
+jest prostszy i teoretycznie dokładniejszy niż wcześniej opisywany sposób.
+
+Dla porównania zaimplementowałem trzy algorytmy:
+\texttt{naiveexp} sumuje kolejno wyrazy dopóki są większe od parametru $\varepsilon$,
+\texttt{rnaiveexp} tak samo ale spamiętuje wyrazy i sumuje je od końca,
+\texttt{hornerexp} oblicza schematem Hornera sumę częściową stopnia $n$.
+
+\section{Dobór parametrów}
+W przedziale $(-\frac{\ln 2}{2}, \frac{\ln 2}{2})$ funkcja eksponencjalna
+przyjmuje wartości $(\frac{1}{2}\sqrt{2}, \sqrt{2})$.
+Dla wartości tak blisko $1$ błędy względne i bezwzględne będą zbliżone, więc
+teraz będziemy się zajmować tylko błędami bezwzględnymi.
+
+W naszej dziedzinie wyrazy szeregu Taylora szybko maleją, więc błąd bezwzględny
+obliczonej sumy częściowej powinien być w przybliżeniu rzędu pierwszego
+niedodanego wyrazu.
+Naturalnie nie chcielibyśmy uwzględniać wyrazów mniejszych niż różnica
+między wynikiem a sąsiednimi liczbami zmiennoprzecinkowymi, bo one niezależnie
+od algorytmu będą miały znikomy wpływ na wynik.
+W naszym wypadku oznacza to, że teoretycznie chcemy zakończyć sumę częściową na
+wyrazach mniejszych niż $1.11\cdot10^{-16}$,\footnote{
+	Przypadkowo precyzja arytmetyki \macheps,
+	bo liczby w $(\frac{1}{2}\sqrt{2}, 1)$ mają cechę równą $-1$.
+	W przedziale wartości $[1, \sqrt{2})$ ta różnica to oczywiście 2\macheps.}
+czyli zakładając pesymistycznie $x=\frac{1}{2}\ln 2$, zakończyć na wyrazie z
+potęgą $14$.
+
+Z moich eksperymentów w IJulii wynika, że wyliczone powyżej parametry działają
+bardzo dobrze (poza \texttt{naiveexp}, którym już nie będę się zajmował) i
+często dają wynik dokładnie taki, jak wbudowana funkcja eksponencjalna.
+Zmniejszenie $\varepsilon$ daje nieco dokładniejsze wyniki, więc od tej pory
+przyjmuję w algorytmach $\varepsilon = 10^{-17}$ lub $n=14$.
+Algorytm \texttt{hornerexp} działa szybko i $14$ to rozsądna stała liczba
+iteracji, więc nie ma sensu np. wprowadzać heurystyk zmniejszających $n$ dla
+małych argumentów.
+
+Doświadczenia na $(-\frac{1}{2}\ln 2, \frac{1}{2} \ln 2)$ nie wykazały różnic
+w zachowaniu algorytmów dla liczb dodatnich i ujemnych, więc nie będę korzystał
+z $e^{-x} = 1/e^x$, aby sprowadzić problem do liczb jednego znaku.
+
+\section{Działanie na całej osi liczb rzeczywistych}
+Korzystając z algorytmu na redukcję dziedziny i obliczanie funkcji
+eksponencjalnej na tej zawężonej dziedzinie możemy zaimplementować algorytm
+obliczający ją dla dowolnej liczby zmiennoprzecinkowej.
+Wiemy, że na zawężonej dziedzinie \texttt{hornerexp} i \texttt{rnaiveexp}
+są praktycznie bezbłędne, więc tak naprawdę sprawdzimy efekty błędu
+powstałego w algorytmie \texttt{reducerange}.
+
+Na wykresach będę zaznaczał liczbę dokładnych cyfr dziesiętnych wyniku, gdzie
+przy braku błędu przyjmuję $16$ dokładnych cyfr, tzn. jeśli $\tilde{x}$ to błąd
+względny, to jako liczbę dokładnych cyfr przyjmuję
+$$-\log_{10}(\max(\tilde{x}, 10^{-16})).$$
+Na osi poziomej będzie zaznaczony zakres argumentów,
+a oś pionowa będzie oznaczać liczbę dokładnych cyfr.
+
+\begin{figure}
+	\centering
+	\resizebox{\linewidth}{!}{\input{p1.pdf_tex}}
+	\caption{Wykres błędów na $[-0.3, 0.3]$}
+	\label{p1}
+\end{figure}
+
+Wykres \ref{p1} przedziału $[-0.3, 0.3]$ pokazuje, że na tym przedziale
+błędy są takie same jak dla algorytmu bez redukcji dziedziny (czyli znikome).
+\begin{figure}
+	\centering
+	\resizebox{\linewidth}{!}{\input{p2.pdf_tex}}
+	\caption{Wykres błędów na $[0.3, 3]$}
+	\label{p2}
+\end{figure}
+
+
+Na wykresie \ref{p2} przedziału $[0.3, 3]$ widać,
+że algorytm \texttt{reducerange} już coś robi.
+Nadal nie tracimy ani jednej cyfry, ale widać pewien wzór --- błędy są
+największe nieco ponad wielokrotnościami $\ln 2$.
+Wtedy $u$ jest bardzo małe, czyli powstało z różnicy bliskich liczb.
+\begin{figure}
+	\centering
+	\resizebox{\linewidth}{!}{\input{p3.pdf_tex}}
+	\caption{Wykres błędów na $[3, 600]$}
+	\label{p3}
+\end{figure}
+
+
+Na wykresie \ref{p3} przedziału $[3, 600]$ widać kształt odwróconego wykresu
+funkcji logarytmicznej.
+Dla największych argumentów możemy stracić już ponad 4 dokładne cyfry
+dziesiętne.
+Liczba $e^{710}$ jest już za duża i otrzymujemy $\mathtt{Inf}$.
+
+Wykres wygląda symetrycznie względem prostej $x=0$.
+
+
+\section{Podsumowanie}
+Funkcję eksponencjalną można szybko i bardzo dokładnie przybliżyć np. schematem
+Hornera dla $|x| < \frac{1}{2}\ln 2$ i dalej korzystając z tego przybliżyć do 13
+dokładnych cyfr dziesiętnych dla pozostałych liczb zmiennoprzecinkowych.
+Opisany sposób wyboru parametrów algorytmu można zastosować dla arytmetyk
+różnych precyzji.
+
+
+
+\end{document}
