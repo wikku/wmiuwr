@@ -1,11 +1,11 @@
 f[x_1,...,x_k]-f[x_0,...,x_{k-1}]
-= \sum_{i=1}^k f(x_i)/\prod_{j=i,j\not=i}^k(x_i-x_j)
-  - \sum_{i=0}^{k-1} f(x_i)/\prod_{j=0,j\not=i}^{k-1}(x_i-x_j)
-= \sum_{i=1}^k (f(x_i)(x_i-x_0))/\prod_{j=0,j\not=i}^k(x_i-x_j)
-  - \sum_{i=0}^{k-1} (f(x_i)(x_i-x_k))/\prod_{j=0,j\not=i}^k(x_i-x_j)
-= \sum_{i=0}^k (f(x_i)(x_i-x_0))/\prod_{j=0,j\not=i}^k(x_i-x_j)
-  - \sum_{i=0}^k (f(x_i)(x_i-x_k))/\prod_{j=0,j\not=i}^k(x_i-x_j)
-= \sum_{i=0}^k (f(x_i)(x_k-x_0))/\prod_{j=0,j\not=i}^k(x_i-x_j)
-= (x_k-x_0) \sum_{i=0}^k f(x_i)/\prod_{j=0,j\not=i}^k(x_i-x_j)
+= ∑_{i=1}^k f(x_i)/∏_{j=i,j\not=i}^k(x_i-x_j)
+  - ∑_{i=0}^{k-1} f(x_i)/∏_{j=0,j\not=i}^{k-1}(x_i-x_j)
+= ∑_{i=1}^k (f(x_i)(x_i-x_0))/∏_{j=0,j\not=i}^k(x_i-x_j)
+  - ∑_{i=0}^{k-1} (f(x_i)(x_i-x_k))/∏_{j=0,j\not=i}^k(x_i-x_j)
+= ∑_{i=0}^k (f(x_i)(x_i-x_0))/∏_{j=0,j\not=i}^k(x_i-x_j)
+  - ∑_{i=0}^k (f(x_i)(x_i-x_k))/∏_{j=0,j\not=i}^k(x_i-x_j)
+= ∑_{i=0}^k (f(x_i)(x_k-x_0))/∏_{j=0,j\not=i}^k(x_i-x_j)
+= (x_k-x_0) ∑_{i=0}^k f(x_i)/∏_{j=0,j\not=i}^k(x_i-x_j)
 = (x_k-x_0) f[x_0,...,x_k]
 

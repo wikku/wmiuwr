@@ -1,4 +1,4 @@
-Niech p, q ∈ Π_n będą wielomianami optymalnymi dla funkcji ciągłej
+Niech p, q ∈ ∏_n będą wielomianami optymalnymi dla funkcji ciągłej
 f na odcinku [a,b] w sensie normy jednostajnej.
 
 p ma jakiś alternans x_0, ..., x_{n+1}.

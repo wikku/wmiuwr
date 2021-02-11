@@ -12,27 +12,27 @@ W każdym przedziale [x_i, x_{i+1}]:
 \fi
 
 \begin{align*}
-\int_a^b s(x) dx
-&= \sum_{i=0}^{n-1} \int_{x_i}^{x_{i+1}} s_i(x) dx \\
-&= \sum_{i=0}^{n-1} (
-    M_{i+1}/(6h) \int_{x_i}^{x_{i+1}} (x-x_i)^3 dx
-  + M_i/(6h) \int_{x_i}^{x_{i+1}} (x_{i+1}-x)^3 dx
-  + (s(x_{i+1}) - h^2*M_{i+1}/6)/h \int_{x_i}^{x_{i+1}} x-x_i dx
-  + (s(x_i}) - h^2*M_i/6)/h \int_{x_i}^{x_{i+1}} x_{i+1}-x dx) \\
-&= \sum_{i=0}^{n-1} (
+∫_a^b s(x) dx
+&= ∑_{i=0}^{n-1} ∫_{x_i}^{x_{i+1}} s_i(x) dx \\
+&= ∑_{i=0}^{n-1} (
+    M_{i+1}/(6h) ∫_{x_i}^{x_{i+1}} (x-x_i)^3 dx
+  + M_i/(6h) ∫_{x_i}^{x_{i+1}} (x_{i+1}-x)^3 dx
+  + (s(x_{i+1}) - h^2*M_{i+1}/6)/h ∫_{x_i}^{x_{i+1}} x-x_i dx
+  + (s(x_i}) - h^2*M_i/6)/h ∫_{x_i}^{x_{i+1}} x_{i+1}-x dx) \\
+&= ∑_{i=0}^{n-1} (
     M_{i+1}/(6h) * h^4/4
   + M_i/(6h) * h^4/4
   + (s(x_{i+1}) - h^2*M_{i+1}/6)/h * h^2/2
   + (s(x_i}) - h^2*M_i/6)/h * h^2/2) \\
-&= \sum_{i=0}^{n-1} (
+&= ∑_{i=0}^{n-1} (
     M_{i+1}/24 * h^3
   + M_i/24 * h^3
   + (f(x_{i+1}) - h^2*M_{i+1}/6) * h/2
   + (f(x_i}) - h^2*M_i/6) * h/2) \\
-&= h^3/12 * \sum_{i=0}^n'' M_i
-  + h \sum_{i&=0}^n'' f(x_i)
-  - h^3/6 * \sum_{i&=0}^n'' M_i \\
-&= h \sum_{i=0}^n'' f(x_i) - h^3/12 * \sum_{i=0}^n'' M_i
+&= h^3/12 * ∑_{i=0}^n'' M_i
+  + h ∑_{i&=0}^n'' f(x_i)
+  - h^3/6 * ∑_{i&=0}^n'' M_i \\
+&= h ∑_{i=0}^n'' f(x_i) - h^3/12 * ∑_{i=0}^n'' M_i
 \end{align*}
 \end{document}
 

@@ -8,14 +8,14 @@ Ale p-q musi być stopnia niewiększego niż n, a więc jest musi być wielomian
 zerowym.
 
 
-(a) \sum_{k=0}^n 1 \lambda_k(x)
+(a) ∑_{k=0}^n 1 λ_k(x)
 
 To rozwiązanie w postaci Lagrange'a wielomianu interpolującego wartości
 y=[1,...,1].
 Oczywiście wielomianem interpolującym te wartości jest Q(x) = 1, więc
 Q(x) jest równy (a).
 
-(b) \sum_{k=0}^n \lambda_k(0)x_k^j
+(b) ∑_{k=0}^n λ_k(0)x_k^j
 
 To wartość w zerze rozwiązania w postaci Lagrange'a wielomianu interpolującego
 [x1^j,...,xn^j].

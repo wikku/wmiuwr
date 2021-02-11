@@ -1,14 +1,14 @@
 Załóżmy x dodatni.
-Niech f(c) = [B^c, B^{c+1}) = {B^c*m : m \in [1,B)}
+Niech f(c) = [B^c, B^{c+1}) = {B^c*m ∶ m ∈ [1,B)}
 
 
-m \in [B^0, B^1)
-log_B m \in [0, 1)
+m ∈ [B^0, B^1)
+log_B m ∈ [0, 1)
 
 x = sgn(x)mB^c = sgn(x) B^{c+log_B m}
 x/sgn(x) = |x| = B^{c+log_B m}
 log_B |x| = c + log_B m
 
-c całkowite, log_B m \in [0,1), więc
+c całkowite, log_B m ∈ [0,1), więc
 c = floor(log_B |X|), log_B m = log_B |X| - floor(log_B |X|)
 c = floor(log_B |X|), m = B^{log_B |X| - floor(log_B |X|)}

@@ -1,6 +1,6 @@
-max_{-1\le x \le 1} |f(x)-L_n(x)| \le M_{n+1} P_{n+1} / (n+1)!
+max_{-1≤ x ≤ 1} |f(x)-L_n(x)| ≤ M_{n+1} P_{n+1} / (n+1)!
 gdzie M_{n+1} to norma f^{(n+1}) na [-1,1]
-      P_{n+1} to norma \prod_{i=0}^n (x-x_i) na [-1,1]
+      P_{n+1} to norma ∏_{i=0}^n (x-x_i) na [-1,1]
 
 x_i to zera wielomianu Czebyszewa T_{n+1}
 T_{n+1} ma normę 1, ale ma wiodący współczynnik 2^n
@@ -8,7 +8,7 @@ f^{(n+1)}(x) = e^x o normie e
 Zatem M_{n+1} = e, P_{n+1} = 1/2^n
 
 
-max_{-1\le x \le 1} |f(x)-L_n(x)| \le e/((n+1)!*2^n)
+max_{-1≤ x ≤ 1} |f(x)-L_n(x)| ≤ e/((n+1)!*2^n)
 
 można sprawdzić, że n=6 to najmniejsza liczba naturalna, że
-e/((n+1)!*2^n) \le 1e-5
+e/((n+1)!*2^n) ≤ 1e-5

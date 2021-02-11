@@ -11,8 +11,8 @@ dla pewnego s pomiędzy x i α.
 (ϕ^{(p+1)}(s)/(p+1)!(x_k-α)^{p+1})/((x_k-α)^{p+1}) =
 ϕ^{(p+1)}(s)/(p+1)!
 dla pewnego s pomiędzy x_k a α.
-W granicy gdy k \to \infty, to x_k \to α, więc s \to α.
+W granicy gdy k → ∞, to x_k → α, więc s → α.
 
-lim_{k \to \infty} (x_{k+1}-α)/(x_k-α)^{p+1} = ϕ^{(p+1)}(α)/(p+1)!
+lim_{k → ∞} (x_{k+1}-α)/(x_k-α)^{p+1} = ϕ^{(p+1)}(α)/(p+1)!
 
 Po nałożeniu wartości bezwzględnej pokazuje to, że rząd zbieżności to p+1.

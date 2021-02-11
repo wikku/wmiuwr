@@ -2,7 +2,7 @@ a ≤ c ≤ d ≤ b
 
 max_{c ≤ x ≤ d} ‖ f - w_n ‖   ≤   max_{a ≤ x ≤ b} ‖ f - w_n ‖
 
-inf_{w_n ∈ Π_n} max_{c ≤ x ≤ d} ‖ f - w_n ‖
-   ≤   inf_{w_n ∈ Π_n}  max_{a ≤ x ≤ b} ‖ f - w_n ‖
+inf_{w_n ∈ ∏_n} max_{c ≤ x ≤ d} ‖ f - w_n ‖
+   ≤   inf_{w_n ∈ ∏_n}  max_{a ≤ x ≤ b} ‖ f - w_n ‖
 
 E_n(f; [c, d]) ≤ E_n(f; [a, b])

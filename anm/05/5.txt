@@ -1,6 +1,6 @@
 BSO h=1 (mnożymy x, x_i przez 1/h), x_0 = 0 (odejmujemy x_0 od x, x_i)
 
-\prod_{i=0}^n |x-i| <= n!/4 dla 0 < x < n
+∏_{i=0}^n |x-i| ≤ n!/4 dla 0 < x < n
 
 {x} - część ułamkowa x
 |x(1-x)| przyjmuje maksimum równe 1/4 dla x=1/2
@@ -8,12 +8,12 @@ BSO h=1 (mnożymy x, x_i przez 1/h), x_0 = 0 (odejmujemy x_0 od x, x_i)
 
 Niech k = \lfloor x \rfloor
 
-\prod_{i=0}^n (x-i)
-= \left(\prod_{i=0}^{k-1} (x-i)\right) {x}(1-{x})
-  \left(\prod_{i=k+2}^n (i-x)\right)
-<=1/4 \left(\prod_{i=0}^{k-1} k-i+1\right)
-  \left(\prod_{i=k+2}^n i - k \right)
+∏_{i=0}^n (x-i)
+= \left(∏_{i=0}^{k-1} (x-i)\right) {x}(1-{x})
+  \left(∏_{i=k+2}^n (i-x)\right)
+≤ 1/4 \left(∏_{i=0}^{k-1} k-i+1\right)
+  \left(∏_{i=k+2}^n i - k \right)
 = 1/4 (k+1)!(n-k)!
 = 1/4 (k+1)k!(n-k)!
 = 1/4 n! (k+1)/\binom{n}{k}
-<=1/4 n!, bo k < n, \binom{n}{k} >= \binom{k+1}{k} = k+1
+≤ 1/4 n!, bo k < n, \binom{n}{k} ≥ \binom{k+1}{k} = k+1

@@ -3,8 +3,10 @@ F(x) = x - rf(x)
 Mamy f(p) = 0 dla pewnego p, zatem F(p) = p to punkt stały F.
 
 F'(x) = 1 - rf'(x)
-Aby iterowanie wokół punktu stałego zbiegało do niego, musimy mieć
-|F'(p)| < 1, czyli
+Aby iterowanie wokół punktu stałego zbiegało do niego, wystarczy mieć
+|F'(p)| < 1, bo wtedy F jest kontrakcją w pewnym otoczeniu p i ma punkt stały
+z twierdzenia Banacha o punkcie stałym.
+Czyli
 0 < rf'(p) < 2
 r pomiędzy 0 i 2/f'(p)
 

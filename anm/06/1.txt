@@ -6,17 +6,17 @@ T_{k+2}(x) = 2xT_{k+1}(x) - T_k(x)
 Niech B_{n+2} = B_{n+1} = 0, B_k = 2xB_{k+1} - B_{k+2} + c_k
 
 1/2c_0T_0(x) + c_1T_1(x) + c_2T_2(x) + ... c_nT_n(x) + 1/2c_0 =
-\sum_{k=0}^n c_k T_k(x)
-= \sum_{k=0}^n (B_k - 2xB_{k+1} + B_{k+2}) T_k(x)
-= \sum_{k=0}^n B_kT_k(x)
-  - \sum_{k=0}^n 2xB_{k+1}T_k(x)
-  + \sum_{k=0}^n B_{k+2}T_k(x)
+∑_{k=0}^n c_k T_k(x)
+= ∑_{k=0}^n (B_k - 2xB_{k+1} + B_{k+2}) T_k(x)
+= ∑_{k=0}^n B_kT_k(x)
+  - ∑_{k=0}^n 2xB_{k+1}T_k(x)
+  + ∑_{k=0}^n B_{k+2}T_k(x)
 = B_0T_0(x) + B_1T_1(x) - 2xB_1T_0(x)
-  + \sum_{k=0}^n B_{k+2}T_{k+2}(x)
-  - \sum_{k=0}^n 2xB_{k+2}T_{k+1}(x)
-  + \sum_{k=0}^n B_{k+2}T_k(x)
+  + ∑_{k=0}^n B_{k+2}T_{k+2}(x)
+  - ∑_{k=0}^n 2xB_{k+2}T_{k+1}(x)
+  + ∑_{k=0}^n B_{k+2}T_k(x)
 = B_0T_0(x) + B_1T_1(x) - 2xB_1T_0(x)
-  + \sum_{k=0}^n B_{k+2}(T_{k+2}(x) - 2xT_{k+1}(x) + T_k(x))
+  + ∑_{k=0}^n B_{k+2}(T_{k+2}(x) - 2xT_{k+1}(x) + T_k(x))
 = B_0 + B_1x - 2xB_1
 = 2xB_1 - B_2 + c_0 + B_1x - 2xB_1
 = - B_2 + c_0 + B_1x

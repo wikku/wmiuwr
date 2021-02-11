@@ -1,10 +1,10 @@
 Niech f będzie funkcją ciągłą na odcinku [a,b],
-a p ∈ Π_n ma znaki na przemian dodatnie i ujemne w x_0, …, x_{n+1}
+a p ∈ ∏_n ma znaki na przemian dodatnie i ujemne w x_0, …, x_{n+1}
 
 Nie wprost:
-istnieje w ∈ Π_n taki, że
+istnieje w ∈ ∏_n taki, że
 
-∀x ϵ [a,b]  min |f(x_j) - p(x_j)| > |f(x) - w(x)|
+∀x ∈ [a,b]  min |f(x_j) - p(x_j)| > |f(x) - w(x)|
 
 
 Niech d(x) = p(x) - w(x), jest to wielomian stopnia ≤ n

@@ -1,19 +1,19 @@
-Załóżmy, że |a_j| <= u dla j = 1,2,...,n oraz że nu < 0.01.
+Załóżmy, że |a_j| ≤ u dla j = 1,2,...,n oraz że nu < 0.01.
 Wykazać, że zachodzi równość
 
-P = \Pi_{j=1}^n (1+a_j) = 1+\eta_n, gdzie |\eta_n| <= 1.01nu
+P = ∏_{j=1}^n (1+a_j) = 1+η_n, gdzie |η_n| ≤ 1.01nu
 
 
-P <= (1+u)^n =
-	\sum_{k=0}^\infty \binom{n-k}{k}u^k =
-	\sum_{k=0}^\infty n!/((n-k)!k!)u^k <=
-	\sum_{k=0}^\infty n^k/k!u^k =
-	1 + nu + \sum_{k=2}^\infty n^k/k!u^k =
-	1 + nu + nu\sum_{k=2}^\infty n^{k-1}/k!u^{k-1} =
-	1 + nu + nu\sum_{k=2}^\infty n^{k-1}/k!u^{k-1} =
-	1 + nu + nu\sum_{k=2}^\infty n^{k-1}/k!u^{k-1} <
-	1 + nu + nu*0.01 = 1 + 1.01nu
+P ≤ (1+u)^n
+  = ∑_{k=0}^∞ \binom{n-k}{k}u^k
+  = ∑_{k=0}^∞ n!/((n-k)!k!)u^k
+  ≤ ∑_{k=0}^∞ n^k/k!u^k
+  = 1 + nu + ∑_{k=2}^∞ n^k/k!u^k
+  = 1 + nu + nu*∑_{k=2}^∞ n^{k-1}/k!u^{k-1}
+  = 1 + nu + nu*∑_{k=2}^∞ n^{k-1}/k!u^{k-1}
+  = 1 + nu + nu*∑_{k=2}^∞ n^{k-1}/k!u^{k-1}
+  < 1 + nu + nu*0.01 = 1 + 1.01nu
 
 
 Bernoulli
-P >= (1-u)^n >= 1-nu >= 1-1.01nu
+P ≥ (1-u)^n ≥ 1-nu ≥ 1-1.01nu
