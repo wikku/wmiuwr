@@ -1,0 +1,133 @@
+effect Reader X =
+  { ask : Unit => Option X
+  }
+
+let hReadString str c =
+  handle c () with
+  | ask () => fn pos =>
+    if pos >= String.length str then
+      resume None pos
+    else
+      resume (Some (String.get pos str)) (pos+1)
+  | return  x => fn _ => x
+  end 0
+
+data rec BF =
+| MoveR
+| MoveL
+| Inc
+| Dec
+| Output
+| Input
+| While of List BF
+
+let parse str =
+  let rec parse () =
+    match ask () with
+    | None   => []
+    | Some c =>
+      if   Char.equal c '>' then MoveR  :: parse ()
+      elif Char.equal c '<' then MoveL  :: parse ()
+      elif Char.equal c '+' then Inc    :: parse ()
+      elif Char.equal c '-' then Dec    :: parse ()
+      elif Char.equal c '.' then Output :: parse ()
+      elif Char.equal c ',' then Input  :: parse ()
+      elif Char.equal c '[' then
+        begin let body = parse () in
+          While body :: parse ()
+        end
+      elif Char.equal c ']' then []
+      else parse ()
+    end
+  in
+  handle parse () with hReadString str
+
+(** Odczytanie pojedynczego znaku ze standardowego wejścia *)
+let tryReadChar () =
+  let str = input stdin 1 in
+  if String.length str = 1 then
+    Some (String.get 0 str)
+  else None
+
+(** Wypisanie pojedynczego znaku na standardowe wyjście *)
+let printChar c =
+  outputString stdout (String.repeat 1 c)
+
+(* Do konwersji pomiędzy typami Char i Int możesz użyć funkcji
+* Char.chr oraz Char.code *)
+
+let printStr = outputString stdout
+
+(* let _ = printStr "Hello, world!" *)
+(* let _ = List.foldl (fn _ => printChar) () ['H', 'e'] *)
+
+effect Writer X =
+  { tell : X => Unit
+  }
+
+effect BFTape =
+  { tapeGet : Unit => Int
+  ; tapePut : Int => Unit
+  ; moveLeft : Unit => Unit
+  ; moveRight : Unit => Unit
+  }
+
+let tapeModify f = tapePut (f (tapeGet ()))
+
+let rec intBF inst = match inst with
+  | MoveR     => moveRight ()
+  | MoveL     => moveLeft ()
+  | Inc       => tapeModify ((+) 1)
+  | Dec       => tapeModify ((-) 1)
+  | Output    => tell (Char.chr (tapeGet ()))
+  | Input     =>
+    match ask () with
+      | Some c => tapePut (Char.code c)
+      | None   => ()
+    end
+  | While bfs =>
+    if tapeGet () <> 0
+    then (List.iter intBF bfs; intBF (While bfs))
+  end
+
+let intBFs (* : List BF -> [Reader Char, Writer Char, BFTape] *)
+  = List.iter intBF
+
+data rec Stream X = (:::) of X, (Unit -> Stream X)
+
+let rec repeat x = x ::: (fn () => repeat x)
+
+let thunk x = fn () => x
+
+
+let runBFs bfs =
+  handle
+    handle
+      handle intBFs bfs with
+      | ask () => resume (tryReadChar ())
+      end
+      with
+      | tell x => printChar x; resume ()
+    end
+  with
+  | tapeGet () => fn (l, x, r) => resume x (l, x, r)
+  | tapePut x => fn (l, _, r) => resume () (l, x, r)
+  | moveLeft () =>
+    fn (l:::ls, m, rs) => resume () (ls (), l, m:::thunk rs)
+  | moveRight () =>
+    fn (ls, m, r:::rs) => resume () (m:::thunk ls, r, rs ())
+  | return x => fn _ => x
+  end (repeat 0, 0, repeat 0)
+
+let runSource str = runBFs (parse str)
+
+let input1 = String.repeat 65 '+' ++ ".+."
+let _ = runSource input1
+(* let _ = run ",.,+." *)
+(* let _ = run "+.[-],." *)
+let input2 = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."
+(* let _ = run input2 *)
+
+(*
+  vim: et ft=helium
+*)
