@@ -20,3 +20,10 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * Analiza numeryczna (M)
 * Historia filozofii
 * Programowanie funkcyjne
+
+## Semestr letni 2020/2021
+* Algebra 2 R
+* Algorytmy i struktury danych (L)
+* Funkcje analityczne R
+* Równania różniczkowe 1 R
+* Seminarium: Logiki nieklasyczne: teoria i zastosowania
