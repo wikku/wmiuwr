@@ -1,0 +1,374 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{AISD lista 0}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{0/3}
+
+\begin{algorithm}
+	\begin{algorithmic}
+		\Procedure{BubbleSort}{$T[1..n]$}
+			\Repeat
+				\State \textit{swapped} $←$ \textit{false}
+				\For{$i$ $←$ $2$ \textbf{to} $n$}
+					\If{$T[i-1] > T[i]$}
+						\State \textit{swapped} $←$ \textit{true}
+						\State $T[i-1]$ $\leftrightarrow$ $T[i]$
+					\EndIf
+				\EndFor
+				\Until{\textbf{not} \textit{swapped}}
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+Idea algorytmu: przechodzimy od lewej po tablicy i jeśli sąsiednie elementy są
+w złej kolejności, przestawiamy je.  Takie przejścia powtarzamy, aż tablica
+będzie posortowana (nie będziemy musieli żadnej pary przestawić).
+
+Algorytm zużywa $O(1)$ dodatkowej pamięci,
+tak samo jak \textsc{SelectSort} i \textsc{InsertSort}.
+
+Kolejność dwóch wybranych elementów zmienia się w trakcie algorytmu wtedy i
+tylko wtedy, gdy element po lewej jest większy od elementu po prawej.
+W szczególności algorytm nie zmienia względnej kolejności elementów równych,
+czyli jest stabilny.
+
+Gdy początkowo tablica jest posortowana rosnąco, to algorytm jej nie rusza
+i zatrzymuje się po jednym przejściu, więc wykonuje się w czasie $Θ(n)$.
+
+Zauważmy, że po $i$-tej iteracji zewnętrznej pętli $i$ największych elementów
+jest na właściwym miejscu.
+Stąd możemy wywnioskować, że tych iteracji będzie co najwyżej $n$.
+Tak się dzieje w przypadku, gdy początkowo tablica jest posortowana malejąco.
+Jedna iteracja pętli zewnętrznej wykonuje się w $Θ(n)$, więc w najgorszym
+przypadku algorytm wykonuje się w czasie $Θ(n^2)$.
+
+\section*{0/4}
+Wartość obliczaną przez algorytm mnożenia rosyjskich chłopów dla liczb
+$a$ i $b$
+możemy zapisać
+$$f(a,b) =
+\begin{cases}
+	0 & \text{ jeśli }a = 0 \\
+	(a \bmod 2)b + f(\lfloor\frac{a}{2}\rfloor, 2b) & \text{ jeśli }a ≠ 0
+\end{cases}
+$$
+Tezę $f(a,b) = ab$ możemy udowodnić poprzez indukcję względem $a$.
+Przypadek bazowy $f(0,b) = 0 = 0b$ jest oczywiście prawdziwy.
+Jeśli teza jest prawdziwa dla lewych argumentów mniejszych od $a>0$,
+to w szczególności zachodzi równość $f(\lfloor\frac{a}{2}\rfloor, 2b) = \lfloor\frac{a}{2}\rfloor 2b.$
+Zauważmy, że wtedy
+\begin{align*}
+ab
+&= \left(\frac{a}{2}\right)2b
+= \left(\left\lfloor\frac{a}{2}\right\rfloor + \left\{\frac{a}{2}\right\}\right)2b
+= \left\lfloor\frac{a}{2}\right\rfloor2b + \left\{\frac{a}{2}\right\}2b \\
+&= f\left(\left\lfloor\frac{a}{2}\right\rfloor,2b\right) + \left(\frac{a \bmod 2}{2}\right)2b
+= f\left(\left\lfloor\frac{a}{2}\right\rfloor,2b\right) + (a \bmod 2)b,
+\end{align*}
+co kończy dowód.
+
+Przy jednorodnym kryterium kosztów, zakładamy, że operacje arytmetyczne i
+bitowe zajmują czas $O(1)$ i w każdej z
+$\log_2 n$ iteracji wykonujemy ich dwie lub trzy, więc złożoność czasowa to
+$O(\log_2 n)$.
+W pamięci przechowujemy tylko dwie liczby, więc złożoność pamięciowa to $O(1)$.
+
+W każdej iteracji wykonujemy operacje przesunięcia bitowego i dodawania na
+liczbach niewiększych niż $nm$, co przy logarytmicznym kryterium kosztów ma
+złożoność czasową $O(\log_2 nm)$.
+Zatem w tym przypadku złożoność czasowa algorytmu wynosi
+$O(\log_2 n \log_2 nm)$.
+Na przechowywanie liczb niewiększych niż $nm$ potrzebujemy $\log_2 nm$ bitów
+pamięci, więc złożoność pamięciowa to $O(\log_2 nm)$.
+
+\section*{0/5}
+
+Jeśli $x_n = a_k x_{n-1} + a_{k-1} x_{n-2} + … + a_1 x_{n-k}$, to
+\begin{align*}
+\begin{pmatrix}
+	x_{n-k-1} \\
+	x_{n-k-2} \\
+	\vdots \\
+	x_{n}
+\end{pmatrix}
+=
+\begin{pmatrix}
+	0   &  1      & 0 & 0 \\
+	0   &  0  & \ddots & 0 \\
+	0   &  0  & \dots & 1 \\
+	a_1 & a_2 & \dots & a_k
+\end{pmatrix}
+\begin{pmatrix}
+	x_{n-k} \\
+	x_{n-k} \\
+	\vdots \\
+	x_{n-1}
+\end{pmatrix}
+=
+A
+\begin{pmatrix}
+	x_{n-k} \\
+	x_{n-k} \\
+	\vdots \\
+	x_{n-1}
+\end{pmatrix}.
+\end{align*}
+
+
+Jeśli $x_n = a_k x_{n-1} + a_{k-1} x_{n-2} + … + a_1 x_{n-k} + w_0n^0 + w_1n^1 + … + w_mn^m$, to
+\begin{align*}
+\begin{pmatrix}
+	x_{n-k-1} \\
+	x_{n-k-2} \\
+	\vdots \\
+	x_{n} \\
+	(n+1)^0 \\
+	(n+1)^1\\
+	\vdots \\
+	(n+1)^m
+\end{pmatrix}
+=
+\begin{pmatrix}
+	A & W \\
+	0 & P
+\end{pmatrix}
+\begin{pmatrix}
+	x_{n-k} \\
+	x_{n-k} \\
+	\vdots \\
+	x_{n-1} \\
+	n^0 \\
+	n^1 \\
+	\vdots \\
+	n^m
+\end{pmatrix},
+\end{align*}
+gdzie
+$$
+W =
+\begin{pmatrix}
+	0 & 0 & 0 & 0 \\
+	\vdots & \vdots & \vdots & \vdots \\
+	w_0 & w_1 & \dots & w_m
+\end{pmatrix},$$
+a indeksując od zera $P_{ij} = \binom{i}{j}$
+(korzystamy ze wzoru dwumianowego Newtona).
+
+Teraz $n$-ty wyraz ciągu możemy obliczyć podnosząc macierz do potęgi i
+obliczając odpowiedni wiersz iloczynu z wyrazami początkowymi.
+
+
+\section*{0/6}
+Zauważmy, że $x$ (ostatni element,
+który został w $A$) jest równy wartości
+pewnego ponawiasowania wyrażenia
+$$a_1 - a_2 - … - a_n, $$
+gdzie $(a_n)$ to pewne wyliczenie elementów $A$.
+Czyli $x = ∑_{a∈A} (-1)^{σ_a} a$ dla pewnych $σ_a ∈ \{ 0, 1 \}$, zatem
+$$x \bmod 2 = ∑_{a∈A} (-1)^{σ_a} a \bmod 2 = ∑_{a∈A} a \bmod 2 = \bigoplus_{a∈A} (a \bmod 2).$$
+
+Najoszczędniejszy algorytm obliczania $x \bmod 2$ trzyma jeden bit pamięci
+zainicjalizowany $0$ i XORuje go z bitami parzystości liczb na wejściu.
+
+\section*{0/7}
+Najpierw z wejścia w postaci listy krawędzi \textit{rodzic}→\textit{dziecko}
+musimy odczytać, który wierzchołek jest korzeniem.
+Możemy to zrobić tworząc tablicę przypisującą każdemu wierzchołkowi wartość
+logiczną mówiącą, czy ma pewnego ojca.
+Wtedy korzeń to jedyny wierzchołek, który nie ma ojca.
+
+Zbudujmy tablicę trzymającą dla każdego wierzchołka $u_i$ listę wierzchołków
+$v_i$, których obecność na ścieżce z $u_i$ do korzenia mamy sprawdzić.
+
+Zbudujmy dla każdego wierzchołka listę jego synów,
+aby móc wydajnie przeszukiwać drzewo w głąb.
+Przy przeszukiwaniu drzewa będziemy w tablicy trzymać dla każdego wierzchołka
+wartość logiczną mówiącą, czy jest na obecnej ścieżce (na stosie wywołań DFSa).
+
+Właściwe rozwiązanie problemu teraz polega na tym, że podczas przeszukiwania
+drzewa (rozpoczętego w korzeniu),
+odwiedzając każdy wierzchołek $u_i$, dla każdego z odpowiadających mu $v_j$
+odczytujemy bezpośrednio z tablicy odpowiedź,
+czy $v_j$ jest na ścieżce z korzenia do $u_i$.
+
+
+\section*{0/8}
+Obliczenia możemy wykonywać w pierścieniu $ℤ[x]/(x^3, m)$.
+$$ ((ax^2 + bx + c) - 2)^2 = (2(c-2)a+b^2)x^2 + 2(c-2)bx + (c-2)^2$$
+
+Problem możemy sprowadzić do obliczenia $n$-tej iteracji funkcji
+$$Φ\begin{pmatrix}a \\ b \\ c\end{pmatrix}
+= \begin{pmatrix}2(c-2)a + b^2 \\ 2(c-2)b \\ (c-2)^2\end{pmatrix}
+$$
+na argumencie $x_0 = \begin{psmallmatrix}0 \\ 1 \\ 0\end{psmallmatrix}$
+(odpowiadającym wielomianowi $x$).
+
+Zauważmy, że trzecia współrzędna $Φ^n(x_0)$ dla $n>0$ będzie zawsze równa $4$,
+a co za tym idzie, druga współrzędna będzie czterokrotnością drugiej
+współrzędnej argumentu.
+Druga współrzędna $Φ(x_0)$ to $-4$, więc druga współrzędna $Φ^n(x_0)$ to $-4^n$.
+Zatem problem się upraszcza do obliczenia $a_n = φ^n(0)$, gdzie
+$$φ(a)
+= 4a + ((-4)^n)^2 = 4a + 16^n.
+$$
+
+Obliczanie tych iteracji możemy zapisać w postaci macierzowej jako
+$$
+\begin{pmatrix}
+	a_n \\
+	16^n
+\end{pmatrix}
+=
+\begin{pmatrix}
+	4 & 1 \\
+	0 & 16
+\end{pmatrix}^n
+\begin{pmatrix}
+	a_0 \\
+	16^0
+\end{pmatrix}
+=
+\begin{pmatrix}
+	4 & 1 \\
+	0 & 16
+\end{pmatrix}^n
+\begin{pmatrix}
+	0 \\
+	1
+\end{pmatrix},
+$$
+czyli wystarczy obliczyć lewy górny róg $n$-tej potęgi macierzy.
+
+\end{document}

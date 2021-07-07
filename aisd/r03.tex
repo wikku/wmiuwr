@@ -1,0 +1,219 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{AISD}
+\author{Wiktor Kuchta}
+%\date{}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{2/2}
+Sortujemy przedziały rosnąco według prawego końca.
+Wybieramy zachłannie pierwszy w tym porządku przedział,
+który jeszcze nie przecina poprzednio wybranych.
+
+Niech $((p_{i_1}, k_{i_1}), …, (p_{i_l}, k_{i_l}))$ to wyjście
+algorytmu, a $((p_{j_1}, k_{j_1}), …, (p_{j_k}, k_{j_k}))$ to jakieś
+inne nieprzecinające się odcinki.
+
+Pokażemy, że dla każdego $m≤k$
+przedział $(p_{i_m}, k_{i_m})$ jest w rozwiązaniu i $k_{i_m} ≤ b_{j_m}$.
+
+Dla $m=1$ oczywiste, bo na początku zawsze wybieramy przedział z najwcześniejszym końcem.
+
+Jeśli $m>1$ to najmniejszy kontrprzykład, to
+przedział $i_m$ musi istnieć (z własności dla poprzednich możemy wybrać kolejny).
+Wtedy
+$k_{i_{m-1}} ≤ k_{j_{m-1}} ≤ p_{j_m}$ i $k_{i_m} > k_{j_m}$.
+Ale wtedy przedział $j_m$ zostałby wybrany przez algorytm, sprzeczność.
+
+\section*{2/3}
+Pokażemy, że iterowanie funkcji
+$$f\left(\frac{a}{b}\right) = \frac{a}{b} - \frac{1}{n} = \frac{na-b}{nb},
+\+ \text{gdzie }n = \left\lceil\frac{b}{a}\right\rceil$$
+da nam kiedyś wartość $0$.
+
+Dla $\frac{b}{a}$ naturalnego $f\left(\frac{a}{b}\right) = 0$.
+W przeciwnym wypadku mamy
+\begin{align*}
+	\left\lfloor \frac{b}{a} \right\rfloor a - b &< 0, \\
+	(n-1)a - b &< 0, \\
+	na - b &< a,
+\end{align*}
+więc licznik $f\left(\frac{a}{b}\right)$ jest mniejszy od $a$.
+Zatem tezę można udowodnić prostą indukcją względem licznika.
+
+Teraz wystarczy pokazać, że odejmowane w kolejnych iteracjach
+ułamki są różne.
+
+Zauważmy, że
+$$
+\left\lceil \frac{nb}{na-b} \right\rceil
+≥ \left\lceil \frac{nb}{a} \right\rceil
+= n \left\lceil \frac{b}{a} \right\rceil = n^2.
+$$
+Mamy założenie $a≤b$.
+Jeśli $a=b$, to $f(\frac{a}{b}) = 0$.
+W przeciwnym wypadku mamy $n=\left\lceil \frac{b}{a} \right\rceil > 1$,
+więc z powyższej nierówności mianowniki ułamków odejmowanych w kolejnych
+iteracjach będą coraz większe.
+
+Zachłanny algorytm odejmowania największej możliwej odwrotności
+nie jest optymalny, bo wyliczy
+$\frac{9}{20} = \frac{1}{3} + \frac{1}{9} + \frac{1}{180}$,
+ale można krócej $\frac{9}{20} = \frac{1}{4} + \frac{1}{5}$.
+
+\section*{2/4}
+Niech warstwa $i$ to liście w drzewie pozostałym po usunięciu warstw $1, …, i-1$.
+
+Rozwiązaniem maksymalnym jest pokolorowanie pierwszych $k/2$ warstw i
+co najwyżej jednego innego wierzchołka, jeśli $k$ jest nieparzyste.
+Pokażemy, że możemy do niego sprowadzić każde rozwiązanie optymalne.
+
+Weźmy optymalne pokolorowanie drzewa.
+Pokażemy, że musi ono mieć pokolorowane wierzchołki.
+Wtedy problem się redukuje do grafu z usuniętymi liściami i parametru $k ↦ k-2$.
+
+\section*{2/6}
+Jeśli $e$ nie jest maksymalnej wagi na pewnym cyklu, to należy do pewnego MST.
+
+Usuńmy $e=(v,w)$ i wszystkie krawędzie o wadze większej niż $e$ z grafu.
+Jeśli $w$ jest nieosiągalny z $v$, to albo graf się rozspójnił, albo $e$ nie jest
+maksymalny na żadnym cyklu, więc w obu przypadkach $e$ należy do pewnego MST.
+
+Jeśli $w$ jest osiągalny z $v$, to $e$ jest maksymalny na pewnym cyklu,
+więc nie należy do MST.
+
+
+
+\end{document}

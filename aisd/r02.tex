@@ -1,0 +1,249 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{AISD lista 2}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{1/4}
+Droga $u=u_1, u_2, …, u_{k-1}, u_k=v$ do $v$
+jest sensowna wtedy i tylko wtedy,
+gdy $u_2, …, u_k$ jest sensowna i najkrótsza
+ścieżka z $u_2$ do $v$ jest krótsza niż najkrótsza ścieżka z $u_1$ do $v$.
+
+Długości najkrótszych ścieżek z $v$ oblicza algorytm Dijkstry.
+
+Jest jedna sensowna ścieżka z $v$ do $v$, a
+liczba sensownych ścieżek z $u≠v$ do $v$ jest sumą liczby sensownych ścieżek do $v$
+z sąsiadów $u$ bliższych $v$.
+Aby to efektywnie obliczyć, możemy zmodyfikować algorytm Dijkstry.
+
+\begin{algorithm}
+	\begin{algorithmic}
+		\Procedure{Paths}{$G$, $v$, $u$}
+			\For{$u$ \textbf{in} $G$}
+				\State \textit{set-dist}($v$, $∞$)
+				\State \textit{prev}[$v$] = \textbf{undefined}
+				\State \text{dodaj $v$ do kolejki wierzchołków $Q$}
+			\EndFor
+			\State \textit{set-dist}($v$, $0$)
+			\State \textit{cnt}[$v$] = 1
+			\While {$Q$ \textbf{not empty}}
+				\State $u$ $←$ \textit{pop-min-dist}($Q$)
+				\For{$n$ \textbf{in} \textit{neighbors}($u$)}
+					\State \textit{alt} $←$ \textit{dist}($u$) + $c(u,n)$
+					\If {\textit{alt} $<$ \textit{dist}($n$)}
+						\State \textit{set-dist}($n$, \textit{alt})
+						\State \textit{prev}[$n$] $←$ $u$
+					\ElsIf {\textit{dist}($n$) $<$ \textit{dist}($u$)}
+						\State \textit{cnt}[$u$] $←$ \textit{cnt}[$u$] $+$ \textit{cnt}{$n$}
+					\EndIf
+				\EndFor
+			\EndWhile
+			\State \Return \textit{cnt}[$u$]
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\newpage
+\section*{1/5}
+\begin{algorithm}
+	\begin{algorithmic}
+		\State $L$ $←$ \textit{topological-sort}($G$)
+		\State \textit{farthest} $←$ \textit{first}($L$)
+		\For {$v$ \textbf{in} $L$}
+			%\State \textit{prev} $←$ sąsiad wchodządzy z największym $length$ 
+			\State \textit{prev}[$v$] = null
+			\State \textit{length}[$v$] = 0
+			\For {$(u,v)$ \textbf{in} \textit{incoming-edges}($v$)}
+			\If {\textit{prev} \textbf{is} null \textbf{or} \textit{length}[$u$] $>$ \textit{length}[$prev$]}
+				\State \textit{prev} $←$ $u$
+			\EndIf
+			\EndFor
+			\If {\textit{prev} \textbf{is not} null}
+				\State \textit{length}[$v$] $←$ \textit{length}[$prev$] + 1
+				\If {\textit{length}[\textit{farthest}] $<$ \textit{length}[$v$]}
+					\State \textit{farthest} $←$ $v$
+				\EndIf
+			\EndIf
+		\EndFor
+		\State \textit{result} $←$ [\textit{farthest}]
+		\While {$p=$ \textit{prev}[\textit{last}(\textit{result})] \textbf{is not} null}
+			\State \textit{push-back}(\textit{result}, $p$)
+		\EndWhile
+		\State \Return \textit{reverse}(\textit{result})
+	\end{algorithmic}
+\end{algorithm}
+
+\section*{1/6}
+Problem to znalezienie mocy maksymalnego matchingu na grafie
+liczb $a_i$, gdzie mamy krawędź, jeśli jedna liczba jest co najmniej dwa razy większa od drugiej.
+
+Jeśli mamy matching mocy $k$,
+to możemy utworzyć matching mocy $k$ taki,
+że połączone są jedynie pierwsze $k$ i ostatnie $k$ liczb ciągu:
+Dopóki tak nie jest, to krawędź matchingu o końcu spoza tych końcówek ciągu możemy przepiąć do wolnego wierzchołka na odpowiednim końcu.
+
+Jeśli mamy matching takiej postaci, to dalej
+możemy poprzepinać go tak, aby krawędzie były postaci
+$(a_i, a_{n-k+i})$.
+Zatem mocy największego matchingu możemy szukać sprawdzając
+tylko matchingi takiej postaci.
+
+Możemy to zrobić zaczynając z (być może nieprawidłowym)
+takim matchingiem mocy $k=n/2$.
+Dla $i$ od $1$ do $k$, dopóki $i$-ta leksykograficznie krawędź
+matchingu jest niepoprawna (prawy koniec nie jest dwa razy większy od lewego),
+dekrementujemy $k$ o $1$, przepinając krawędzie.
+
+\section*{1/7}
+Ustalmy numerację wierzchołków $V$ taką, że kończy się ona na
+$v_j, v_{j-1}, …, v_1$.
+
+Algorytm Warshalla-Floyda w ${(n-j)}$-tej iteracji obliczy długości
+najkrótszych ścieżek między wszystkimi parami wierzchołków o numerach $≤ n-j$,
+a więc między wszystkimi wierzchołkami pozostałymi w $G$ po usunięciu
+wierzchołków $v_1, …, v_j$.
+Aby obliczyć żądane sumy $D_j$,
+po ${(n-j)}$-tej iteracji sumujemy odpowiedni fragment
+tablicy długości najkrótszych ścieżek.
+
+W grafie mamy ważone wierzchołki, więc algorytm należy jeszcze zmodyfikować tak,
+że \textit{dist}[$u$][$v$] to waga ścieżki od $u$ do $v$,
+\textit{dist}[$v$][$v$] $= c(v)$ i obliczając wagę połączonych ścieżek
+odejmujemy wagę wierzchołka pośredniego, aby go nie policzyć dwukrotnie.
+
+
+\end{document}

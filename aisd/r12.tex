@@ -1,0 +1,292 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+\section*{6/1}
+
+\begin{algorithm}
+	\begin{algorithmic}
+
+	\end{algorithmic}
+\end{algorithm}
+\fi
+
+
+\section*{6/6}
+Zauważmy, że każdy ciąg operacji rotacji jest odwracalny,
+zatem wystarczy pokazać, że możemy zmienić kształt każdego drzewa BST
+w ścieżkę (pochyloną w prawo).
+
+Tezę pokażemy indukcją względem liczby wierzchołków.
+Drzewa o $<2$ wierzchołkach już są takimi ścieżkami.
+
+Weźmy drzewo o $≥2$ wierzchołkach.
+Z tezy indukcyjnej jego lewe poddrzewo $L$ możemy
+zmienić w ścieżkę i korzystając z rotacji otrzymać drzewo o pustym lewym
+poddrzewie.
+Teraz korzystając z założenia indukcyjnego jego prawe poddrzewo zamieniamy
+w ścieżkę.
+
+\newpage
+\section*{6/7}
+Nie jest oczywiste, jak interpretować \textit{split} jako operacje modyfikującą
+drzewo w miejscu, zatem zaimplementujemy trwałe drzewo AVL z taką operacją.
+\begin{verbatim}
+(*
+  node(l, v, r) - konstruktor, który obliczy wysokość itp.
+  insert(t, v)  - drzewo t ze wstawionym v
+*)
+
+split(t, k) =
+  case t of
+  | Empty         => (Empty, Empty)
+  | Node(l, v, r) =>
+    case compare(k, v) of
+    | LESS    => let (ll, lr) = split(l, k) in (ll, join(lr, v, r))
+    | EQUAL   => (l, r)
+    | GREATER => let (rl, rr) = split(r, k) in (join(l, v, rl), rr)
+
+join(l, v, r) =
+  if height(l) > height(r) + 1 then join_right(l, v, r) else
+  if height(r) > height(l) + 1 then join_left(l, v, r) else
+  node(l, v, r)
+
+(* height(node(ll, lv, lr)) > height(r) + 1 *)
+join_right((ll, lv, lr), v, r) =
+  if height(lr) <= height(r) + 1 then
+    let t' = node(lr, v, r) in
+    if height(t') <= height(ll) + 1
+      then node(ll, lv, t')
+      else rotate_left(node(ll, lv, rotate_right(t')))
+  else
+    let t' = join_right(lr, v, r) in
+    let t = node(ll, lv, t') in
+    if height(t') <= height(l) + 1 then t
+    else rotate_left(t)
+\end{verbatim}
+
+
+% lh ≥ rh  ?⇒?  wysokość lh-1 ≤ join(l, v, r) ≤ lh+1
+% raczej nieprawda, trzeba zrezygnować z bal i ręcznie balansować
+
+Koszt operacji \textit{join} to różnica między wysokościami drzew.
+
+\section*{6/8}
+Do implementacji struktury możemy użyć BST (np. AVL),
+w którym węzły dodatkowo spamiętują minimum, maksimum i mindiff w poddrzewie.
+
+W implementacji drzew AVL, kiedy konstruujemy nowy węzeł (nową wersję węzła),
+to potrzebujemy mieć tylko lewe poddrzewo, prawe poddrzewo i element,
+który ma być trzymany w tym węźle.
+Z tych informacji łatwo wyliczyć żądane wartości:
+\begin{align*}
+	&\mathrm{minval}(\textit{Empty}) &&= ∞ \\
+	&\mathrm{minval}(\textit{Node}(l, v, r)) &&= \min \{ \mathrm{minval}(l), v \} \\
+	&\mathrm{maxval}(\textit{Empty}) &&= -∞ \\
+	&\mathrm{maxval}(\textit{Node}(l, v, r)) &&= \max \{ v, \mathrm{maxval}(r) \} \\
+	&\mathrm{mindiff}(\textit{Empty}) &&= ∞ \\
+	&\mathrm{mindiff}(\textit{Node}(l, v, r)) &&=
+		\min \{
+			\mathrm{mindiff}(l),
+			v - \mathrm{maxval}(l),
+			\mathrm{minval}(r) - v,
+			\mathrm{mindiff}(r)
+		\}
+\end{align*}
+
+Operacje \textit{insert}, \textit{delete} pozostają bez zmian.
+Operacja \textit{mindiff} to po prostu odczytanie tej wartości w korzeniu.
+
+\section*{6/9}
+Nie potrzebujemy dwóch bitów informacji w \textit{każdym} węźle:
+Jeśli któryś z synów jest pusty, to współczynnik zrównoważenia łatwo wyliczyć.
+Tylko wezły z dwoma niepustymi synami potrzebują dwóch bitów informacji.
+
+Jeśli potrzebujemy mieć jednorodnej reprezentacji dla każdego węzła, to
+zauważmy, że te dwa bity dla węzła z dwoma niepustymi synami możemy ,,zepchnąć''
+do synów -- jeden bit do lewego, jeden bit do prawego.
+Wtedy każdy węzeł potrzebuje spamiętywać jeden dodatkowy bit.
+
+\section*{7/1}
+Chcemy zminimalizować oczekiwany koszt wykonywania operacji,
+a więc $∑_{i=1}^n p_i d_i$, gdzie $d_i$ to liczba wierzchołków odwiedzonych
+na ścieżce z korzenia BST do wierzchołka $i$.
+Inaczej mówiąc, minimalizujemy ważoną sumę długości ścieżek do liści drzewa.
+
+Niech $E_{i,j}$ oznacza optymalną sumę ważoną dla podproblemu
+$a_i,a_{i+1},…,a_j$ z wagami $p_i,p_{i+1},…,p_j$.
+Mamy
+\begin{align*}
+	E_{i,i} &= p_i, & (1 ≤ i ≤ n)\\
+	E_{i,j} &= ∑_{k=i}^j p_k + \min_{i<r<j} (E_{i,r-1}+E_{r+1,j}), & (1 ≤ i < j ≤ n)
+\end{align*}
+co nam daje algorytm sześcienny.
+Aby odtworzyć drzewo, musimy dodatkowo spamiętywać, jaki $r$ został wybrany
+w każdym $E_{i,j}$.
+To nam daje węzeł drzewa i rekurencyjnie możemy odtworzyć jego poddrzewa.
+
+\section*{7/3}
+Rozważmy wstawienie $n$-elementów do $n$-elementowej tablicy haszującej.
+Niech
+$$X_j =
+\begin{cases}
+	1 \+ \text{ jeśli $j$-ty indeks w tablicy pozostał pusty,} \\
+	0 \+ \text{ w p. w.}
+\end{cases}$$
+Mamy $E(X_j) = (1- \frac{1}{n})^n$,
+bo każdy klucz musi trafić do indeksu różnego od $j$.
+Liczba oczekiwanych pustych kubełków to $X_1 + … + X_n$,
+a więc
+$$E(X_1 + … + X_n)
+= E(X_1) + … + E(X_n)
+= n\left(1 - \frac{1}{n}\right)^n → \frac{n}{e}.$$
+
+\end{document}

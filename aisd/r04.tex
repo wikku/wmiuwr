@@ -1,0 +1,300 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{microtype}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{AISD, zadanie 7 z listy 2}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+\section*{2/6}
+Jeśli $e$ nie jest maksymalnej wagi na żadnym cyklu, to należy do pewnego MST:
+
+Jeśli nie leży na żadnym cyklu, to musi należeć do MST.
+
+Załóżmy, że krawędź $e$ nie jest maksymalna na żadnym cyklu,
+ale leży na jakimś cyklu.
+Załóżmy nie wprost, że $e$ nie należy do MST.
+Wtedy możemy dodać krawedź $e$ do MST, tworząc cykl.
+Jest na nim krawędź o wadze większej niż $e$, zatem możemy
+stworzyć MST o mniejszym koszcie usuwająć ją a dodając $e$.
+Sprzeczność.
+
+Usuńmy $e=(v,w)$ i wszystkie krawędzie o wadze większej niż $e$ z grafu.
+Jeśli $w$ jest nieosiągalny z $v$, to albo graf się rozspójnił, albo $e$ nie jest
+maksymalny na żadnym cyklu, więc w obu przypadkach $e$ należy do pewnego MST.
+
+Jeśli $w$ jest osiągalny z $v$, to $e$ jest maksymalny na pewnym cyklu,
+więc nie należy do MST.
+\fi
+
+\subsubsection*{Sprowadzenie do wspólnego porządku wykonywania zadań przez $A$ i $B$}
+Weźmy optymalny układ zadań.
+Ponumerujmy zadania w ich kolejności wykonywania przez $B$.
+Jeśli $i < j$ i zadanie $j$ jest wykonywane bezpośrednio przed $i$ w $A$,
+to możemy zamienić ich kolejność wykonywania przez $A$
+(na osi czasu początek $i$ na początek $j$, koniec $j$ na koniec $i$),
+otrzymując inny optymalny układ zadań.
+Taka operacja zmniejsza liczbę inwersji, więc po skończonej ich liczbie
+maszyny $A$ i $B$ będą wykonywać zadania w tej samej kolejności.
+
+\subsubsection*{Czas nieaktywności maszyny $B$}
+Jeśli mamy kolejność wykonywania zadań $(1, 2, …, n)$,
+to $A$ może je wykonywać
+bez przerw --- każde najwcześniej, jak to możliwe.
+Maszyna $B$ niekoniecznie będzie mogła działać bez przerw.
+Niech $X_i$ to czas nieaktywności maszyny $B$ bezpośrednio
+przed wykonaniem zadania $i$.
+Zauważmy, że
+\begin{align*}
+	X_i &= \max \left\{ 0,\+  ∑_{k=1}^i a_k - ∑_{k=1}^{i-1} b_k - ∑_{k=1}^{i-1} X_k \right\}, \\
+	∑_{k=1}^i X_k &= \max \left\{ ∑_{k=1}^{i-1} X_k ,\+  ∑_{k=1}^i a_k - ∑_{k=1}^{i-1} b_k\right\}.
+\end{align*}
+Podwyrażenie $∑_{k=1}^i a_k - ∑_{k=1}^{i-1} b_k$ nazwijmy $K_i$,
+wtedy rozwijając rekurencję we wzorze na sumę $X_k$ otrzymujemy
+$$∑_{k=1}^n X_k = \max \{ K_1, K_2, …, K_n \}.$$
+Optymalne rozwiązanie minimalizuje powyższą wielkość.
+
+Zauważmy, że zamiana kolejności zadań $j$ i $j+1$
+może zmienić $K_u$ tylko dla $u ∈ \{j, j+1\}$,
+dając pewne nowe $K_j'$ i $K_{j+1}'$.
+Zatem sumaryczny czas wykonywania po takiej zamianie może się zwiększyć tylko, gdy
+\begin{align*}
+0 >& \max \{ K_j, K_{j+1} \} - \max \{ K_j', K_{j+1}' \} \\
+	=& \left(\max \{ K_j, K_{j+1} \} - ∑_{i=1}^{j+1} a_i + ∑_{i=1}^{j-1} b_i) \right)
+	- \left(\max \{ K_j', K_{j+1}' \} - ∑_{i=1}^{j+1} a_i + ∑_{i=1}^{j-1} b_i \right) \\
+=& \max \{ -a_{j+1}, -b_j \} - \max \{ -a_j, -b_{j+1} \}
+= \min \{ a_j, b_{j+1} \} - \min \{ a_{j+1}, b_j \}.
+\end{align*}
+
+\subsubsection*{Warunek na rozwiązanie optymalne}
+Twierdzimy, że jeśli
+porządek zadań $(1, 2, …, n)$
+spełnia
+\begin{equation}
+	\label{eq:1}
+	\min \{ a_i, b_j \} ≤ \min \{ a_j, b_i \},
+	\+
+	(1 ≤ i < j ≤ n) \+
+\end{equation}
+to jest optymalny.
+Ten porządek będzie można otrzymać podobnie jak wcześniej z dowolnego innego
+ciągu zadań bez utraty czasu:
+zamieniając sąsiednie zadania tworzące inwersję,
+zmniejszając liczbę inwersji.
+Dokładniej,
+jeśli $i<j$ i w jakimś porządku mamy zadanie $j$ bezpośrednio przed $i$,
+to po ich zamianie sumaryczny czas może się zwiększyć tylko,
+jeśli $\min \{ a_j, b_i \} - \min \{ a_i, b_j \} < 0$.
+Ale to przeczy $\eqref{eq:1}$.
+
+\iffalse
+Pokażemy, że ta relacja jest przechodnia.
+Załóżmy, że
+$\min \{ a_1, b_2 \} ≤ \min \{ a_2, b_1 \}$ i
+$\min \{ a_1, b_2 \} ≤ \min \{ a_2, b_1 \}$.
+\begin{enumerate}
+	\item Jeśli $a_1 ≤ b_2, a_2, b_1$ i $a_2 ≤ b_3, a_3, b_2$, \\
+		to $a_1 ≤ a_2 ≤ a_3$ i $a_1 ≤ b_1$, więc $a_1 ≤ \min \{a_3, b_1\}$.
+	\item Jeśli $b_2 ≤ a_1, a_2, b_1$ i $b_3 ≤ a_2, a_3, b_2$, \\
+		to $b_3 ≤ b_2 ≤ b_1$ i $b_3 ≤ a_3$, więc $b_3 ≤ \min \{a_3, b_1\}$.
+	\item Jeśli $a_1 ≤ b_2, a_2, b_1$ i $b_3 ≤ a_2, a_3, b_2$, \\
+		to $a_1 ≤ b_1$ i $b_3 ≤ a_3$,
+		więc $\min \{a_1, b_3\} ≤ \min \{a_3, b_1 \}$.
+	\item Jeśli $b_2 ≤ a_1, a_2, b_1$ i $a_2 ≤ b_3, a_3, b_2$, to
+		$a_2 = b_2$.
+		Zadania $1$ i $2$ oraz $2$ i $3$ są równoważne w rozpatrywanym porządku,
+		ale wystarczy, aby $1$ było przed $3$ w porządku optymalnym, aby
+		można było do niego sprowadzić każdy inny porządek.
+\end{enumerate}
+\fi
+
+\subsubsection*{Algorytm zachłanny rozwiązujący problem}
+Zbudujmy listę $n$-elementową z wolnymi polami.
+Będziemy kolejno wpisywać numer zadania na pierwsze lub ostatnie wolne pole.
+
+Weźmy najkrótszy ze wszystkich czasów zadań.
+Jeśli jest on dla maszyny $A$,
+to dodajmy odpowiadające mu zadanie na pierwsze wolne pole i zapomnijmy o tym
+zadaniu.
+Jeśli jest on dla maszyny $B$,
+to dodajmy to zadanie na ostatnie wolne pole i zapomnijmy o tym zadaniu.
+Powtarzamy to, aż skończą się zadania.
+
+Jeśli najkrótszy czas to $a_i$, to zadanie $i$ wpisujemy na pierwsze wolne
+pole, przed każdym później wpisanym zadaniem $j$ i spełnione będzie
+$\min \{a_i, b_j \} ≤ \min \{ a_j, b_i \}$.
+To samo zachodzi, gdy najkrótszy czas to
+$b_j$ i zadanie $j$ wpisujemy na ostatnie pole,
+po każdym poźniej wpisanym zadaniu $i$.
+Zatem algorytm wpisuje każde
+zadanie w dobrej kolejności względem zadań wpisanych później.  W każdej parze
+zadań któreś z nich było dodane wcześniej, więc zachodzi $\eqref{eq:1}$ i
+porządek zwrócony przez algorytm jest optymalny.
+
+Praktyczna implementacja może korzystać z dwóch posortowanych rosnąco list
+czasów zadań $A$ i $B$, gdzie każdy czas posiada informacje, jakiemu zadaniu
+odpowiada.  Przechodzimy po tych listach podobnie jak w procedurze
+\textit{merge}, wybierając mniejszą z głów dwóch list, ale musimy też sprawdzać
+(spamiętując w jakiejś tablicy), czy któreś zadanie już wcześniej wpisaliśmy do
+tablicy wynikowej i powinniśmy pominąć.  Wpisywanie do tablicy wynikowej
+oczywiście wymaga trzymania dwóch wskaźników, do pierwszego i ostatniego
+wolnego w niej miejsca.
+
+Jeśli otrzymujemy czasy zadań w kolejności rosnącej to złożoność czasowa
+i pamięciowa to $Θ(n)$, w przeciwnym wypadku musimy na początku te czasy sami
+posortować w
+czasie $O(n \lg n)$.
+
+\begin{thebibliography}{1}
+	\bibitem{johnson}
+	S. M. Johnson
+		\textit{Optimal two- and three-stage production schedules with setup times included}
+\end{thebibliography}
+
+
+\iffalse
+\section*{2/8}
+Zestaw monet, dla których zachłanne wydawanie reszty jest optymalne,
+nazywamy kanonicznym.
+Zakładamy, że zestawy monet są podawane w kolejności rosnącej.
+
+Wystarczy sprawdzić, czy algorythm zachłanny jest poprawny dla kwot
+$b$ i $\lceil \frac{c}{b} \rceil b$.
+
+Zestaw $M=(1, a, b)$ jest kanoniczny $⇔$ $0 < r <a-q$, gdzie $b = qa + r$, $0 < r < b$.
+\fi
+
+\end{document}

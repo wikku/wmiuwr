@@ -1,0 +1,229 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+
+To jest nieoptymalne, możemy w pewnym zakresie zamieniać kolejność ruchów pionków.
+Dlatego np. możemy stwierdzić, że pozycją przed $i,i$ była na pewno $i-1,i$.
+
+\section*{4/5}
+
+Oznaczmy przez $D[i][j]$ najmniejszą odległość, którą muszą przejść
+pionki, aby dojść z $v_1$ do $v_i$, $v_j$ odwiedzając każdy wierzchołek
+$v_k$ z $k ≤ \max \{ i, j \}$.
+
+Wystarczy rozpatrywać $i ≤ j$, bo sytuacja jest symetryczna dla obu pionków.
+
+Dla $1 < i < j$ mamy
+\begin{align*}
+	D[1][1] &= 0 \\
+	D[1][i] &= D[1][i-1] + c(i-1, i) \\
+	D[i][i] &= \min \{ D[k][i] + c(k,i) ∶ 1 ≤ k < i \} \\
+	D[i][j] &= \min \{ D[i][j-1] + c(j-1, j), \min \{ D[k][j] + c(k,i) ∶ 1 ≤ k < i \}
+\end{align*}
+Aby odtworzyć optymalną scieżkę, trzymamy analogiczną tablicę $P[i][j]$,
+w której zapisujemy, skąd pochodzi wynik (minimum) dla $D[i][j]$.
+
+Odpowiedź odtwarzamy odwiedzając odpowiednio pola wskazywane w $P$, zaczynając
+od $P[n][n]$.
+
+\section*{4/7}
+Niech $A_k = ∑_{i=1}^n a_i$.
+
+Niech $D[i][j][k]$ oznacza, czy można $\{ a_1, …, a_k \}$
+podzielić na podzbiory o sumach $i$, $j$, $A_k-i-j$.
+Wtedy odpowiedź to $D[A_n/3][A_n/3][n]$.
+
+Mamy $D[0][0][0] = \text{T}$ i jeśli
+$D[i][j][k-1] = \text{T}$, to $D[i+a_k][j][k] = D[i][j+a_k][k] = \text{T}$.
+
+Nie trzeba trzymać tablicy trzywymiarowej, tylko
+wystarczy w pętli modyfikować jednowymiarową $D[i][j]$, tak
+aby po $k$-tej iteracji była równa $D[i][j][k]$.
+Można to robić w miejscu, ale musimy uważać, aby
+w jednej iteracji nie ,,dodać liczby wielokrotnie''.
+W tym celu należy iterować się po $i$ oraz $j$
+rosnąco, jeśli $a_k < 0$ i malejąco, jeśli $a_k > 0$.
+
+Taka tablica $D$ powinna mieć zakres indeksów $[-C,C]×[-C,C]$,
+więc złożoność pamięciowa to $O(C^2n^2)$.
+Złożoność czasowa to $O(C^2n^3)$.
+\fi
+
+\section*{4/9}
+Minimalnym podziałem wielokąta wypukłego nazywamy podział przekątnymi na
+trójkąty z najkrótszą najdłuższą przekątną.
+
+Oznaczmy $D[l][i]$ długość najdłuższej przekątnej w minimalnym podziale
+wielokąta wypukłego
+o wierzchołkach $v_i, v_{i+1}, …, v_{i+l}$ (utożsamiamy $v_{n+k}$ z $v_k$).
+Wtedy odpowiedź to $D[n-1][i]$ (dla dowolnego $i$).
+
+%Mamy $D[i][i+2] = |v_i - v_{i+2}|$.
+
+Dla $l ≥ 3$ w podziale wielokąta wypukłego $v_i, …, v_{i+l}$ bok
+$v_iv_{i+l}$ jest bokiem pewnego trójkąta tego podziału.
+Niech trzeci wierzchołek tego trójkąta to $v_{i+k}$, mamy
+$0 < k < l$.
+Figury wypukłe $v_i, …, v_{i+k}$ i $v_{i+k}, …, v_{i+l}$.
+mają nie więcej niż $l$ wierzchołków,
+a długość najdłuższej przekątnej w tym podziale to maksimum
+z tej długości najdłuższej przekątnej w podziałach tych podfigur
+i jeszcze przekątnych, które należą do trójkąta $v_iv_{i+k}v_{i+l}$.
+\begin{align*}
+	D[l][i] = \min \{
+	&\max \{ |v_{i+1}v_{i+l}|, D[l-1][i+1] \}, \\
+	&…, \\
+	&\max \{ |v_{i+k}v_i|, |v_{i+k}v_{i+l}|, D[k][i], D[l-k][i+k] \} \\
+	&…, \\
+	&\max \{ |v_{i}v_{i+l-1}|, D[l-1][i] \}
+\}
+\end{align*}
+
+\end{document}

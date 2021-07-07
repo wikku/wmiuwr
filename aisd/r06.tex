@@ -1,0 +1,242 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+\section*{3/1}
+\begin{algorithm}
+	\begin{algorithmic}
+		\Procedure{Gcd}{$a$, $b$}
+			\Procedure{Iter}{$a$, $b$, $m$}
+			\If{$a > b$}
+				\State \Return \textsc{Iter}($b$, $a$, $m$)
+			\ElsIf{$a = 0$}% \textbf{or} $|a| = |b|$}
+				\State \Return $mb$
+			\ElsIf{even $a$ \textbf{and} even $b$}
+				\State \Return \textsc{Iter}($a/2$, $b/2$, $2m$)
+			\ElsIf{even $a$ \textbf{and} odd $b$}
+				\State \Return \textsc{Iter}($a/2$, $b$, $m$)
+			\ElsIf{odd $a$ \textbf{and} even $b$}
+				\State \Return \textsc{Iter}($a$, $b/2$, $m$)
+			\ElsIf{odd $a$ \textbf{and} odd $b$}
+				\State \Return \textsc{Iter}($a$, $(b-a)/2$, $m$)
+			\EndIf
+			\EndProcedure
+			\State \Return \textsc{Iter}($a$, $b$, $1$)
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+W każdym wywołaniu (poza zamianą argumentów), jeden z argumentów
+jest co najmniej dwa razy mniejszy niż wcześniej.
+Zatem algorytm wykonuje $O(\lg a + \lg b)$ wykonań rekurencyjnych.
+
+Przy jednorodnym kryterium kosztów operacje w każdym wywołaniu zajmują
+$O(1)$ czasu, a przy logarytmicznym $O(\lg a + \lg b)$.
+
+Zakładając optymalizację wywołań ogonowych,
+przy jednorodnym kryterium kosztów algorytm potrzebuje $O(1)$ pamięci,
+a przy logarytmicznym $O(\lg a + \lg b)$.
+Trzymanie akumulatora $m$ nie zwiększa zużycia pamięci, bo początkowo
+zajmuje $1$ bit, a zwiększamy liczbę zajmowanych bitów o $1$ kiedy zmniejszamy
+liczbę bitów zajmowanych przez $a$ i $b$ o $1$.
+
+Algorytm Euklidesa ma takie samy koszty każdej iteracji i potrzebuje tyle samo pamięci,
+ale wykonuje tylko $O(\lg\min\{a, b\})$ iteracji.
+
+\section*{3/3}
+Mamy dwie otoczki wypukłe rozdzielone pionową kreską.
+Musimy znaleźć górną i dolną prostą styczną do obu otoczek.
+Takie proste styczne przechodzą przez wierzchołki otoczek, więc
+będziemy rozpatrywać odcinek łączący wierzchołki obu otoczek i
+zmieniać końce tego przecinka, aż odcinek będzie leżał na odpowiedniej prostej.
+
+Zajmiemy się górną styczną, dla dolnej jest symetrycznie.
+Zaczniemy z odcinkiem przechodzącym przez punkt najbardziej na prawo lewej otoczki
+i punkt najbardziej na lewo prawej otoczki.
+Aby sprawdzić, czy prosta, na której leży ten odcinek, przecina prawą figurę
+i powinniśmy jej prawy koniec przesunąć do wierzchołka wyżej, wystarczy
+sprawdzić czy te wierzchołki (obecny i potencjalny nowy koniec) prawej figury
+leżą po odpowiedniej stronie prostej.
+Symetrycznie dla lewej figury.
+
+Zatem będziemy przesuwać końce odcinka do góry, aż ta prosta nie będzie przecinać
+żadnej z figur.
+Wykonamy takich porównań i przesunięć co najwyżej tyle, ile jest wierzchołków
+na otoczkach.
+
+%\section*{3/5}
+
+\section*{3/7}
+Macierz Toeplitza jest stała na każdej przekątnej.
+Zatem możemy ją reprezentować przez wektor $2n-1$ liczb, które
+są wyrazami kolejnych przekątnych.
+
+W tej reprezentacji sumowanie macierzy to po prostu suma wektorów je
+reprezentujących.
+
+Zauważmy, że macierz Toeplitza rozmiaru parzystego możemy podzielić
+na 4 macierze blokowe tego samego rozmiaru, gdzie macierze na przekątnej są równe.
+Zatem iloczyn takiej macierzy i wektora $v = \begin{bsmallmatrix}v_1 \\ v_2\end{bsmallmatrix}$
+możemy zapisać jako
+$$Av
+= \begin{bmatrix}A_1 & A_2 \\ A_3 & A_1\end{bmatrix}\begin{bmatrix}v_1 \\ v_2\end{bmatrix}
+= \begin{bmatrix}A_1v_1 + A_2v_2 \\ A_3v_1 + A_1v_2\end{bmatrix}
+= \begin{bmatrix}A_1(v_1 + v_2) - (A_1 - A_2)v_2 \\ A_1(v_1 + v_2) - (A_1 - A_3) v_2\end{bmatrix}.$$
+
+Wyznaczmy złożoność $T(n)$ rekurencyjnego algorytmu, który korzysta z
+powyższej własności.
+Obliczanie $v_1 + v_2$, $A_1 - A_2$, $A_1 - A_3$ zajmuje $O(n)$ operacji.
+Każde z mnożeń macierzy przez wektor zajmuje $T(n/2)$ operacji.
+Następnie dodanie wektorów wynikowych zajmuje $O(n)$ operacji.
+Zatem otrzymujemy
+$$T(n) = 3T(n/2) + O(n) = O(n^{\lg_2 3}) ≈ O(n^{1.58}).$$
+
+Jeśli $n$ jest nieparzyste, to rozszerzamy powiększamy macierz i wektor o 1,
+tzn. rozszerzamy każdą przekątną macierzy o 1 i ustawiamy nowe przekątne na 0
+i dodajemy 0 na koniec wektora.
+Wtedy wynik ich iloczynu po zignorowaniu ostatniego wyrazu wektora to
+wynik mnożenia, który chcieliśmy.
+
+\section*{3/8}
+Niech liczba tablic $k ≤ 3$, $m_i$ to indeksy median $T_i$, gdzie $T_i$ ma rozmiar $n_i$.
+Weźmy $i$ takie, że $⌈\frac{n_i}{2}⌉$ najmniejsze.
+Mamy $∑_{i=1}^k ⌈\frac{n_i}{2}⌉$
+
+
+
+
+
+\end{document}
