@@ -1,0 +1,1085 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{Notatki (definicje, fakty) z Algebry 2R}
+\author{}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\alg}{alg}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\acl}{acl}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Norm}{N}
+\DeclareMathOperator{\End}{End}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Wykład01.pdf}
+
+% Def. 1.3
+Niech $S ⊃ R$ to rozszerzenie pierścieni, $\bar{a} ⊆ S^n$.
+Wtedy mówimy, że
+$$I(\bar{a}/R) = \{ g∈R[\bar{X}] ∶ g(\bar{a}) = 0 \} ◁ R[\bar{X}]$$
+to \textit{ideał $\bar{a}$ nad $R$}.
+Jeśli $I(\bar{a}/R) = (f_1, …, f_m)$, to mówimy,
+że $\bar{a}$ jest \textit{rozwiązaniem ogólnym} układu $f_1, …, f_m$.
+
+Niech $K ⊂ L_1, K ⊂ L_2$ to rozszerzenia ciał.
+Mówimy, że $L_1$ i $L_2$ są \textit{izomorficzne nad $K$},
+gdy istnieje izomorfizm między nimi,
+który jest identycznością na $K$.
+Notacja: $L_1 ≅_K L_2$.
+
+% Uwaga 1.5
+Załóżmy, że $K ⊂ L_1$ i $K ⊂ L_2$ to rozszerzenia ciał,
+$\bar{a}_1 ⊆ L_1$, $\bar{a}_2 ⊆ L_2$, $|\bar{a}_1| = |\bar{a}_2|$.
+Wówczas $I(\bar{a}_1/K) = I(\bar{a}_2/K)$ wtedy i tylko wtedy,
+gdy istnieje izomorfizm $f: K[\bar{a}_1] → K[\bar{a}_2]$
+przekształcający $\bar{a}_1$ na $\bar{a}_2$ i ustalający $K$.
+
+% Tw. 1.6
+Niech $I ◁ K[\bar{X}]$.
+Wtedy istnieje ciało $L ⊃ K$ oraz $\bar{a} = (a_1,…,a_n)⊂L$ takie,
+że $f(\bar{a}) = 0$ dla każdego $f∈I$.
+
+% Wn. 1.7
+Niech $f∈K[X]$ stopnia dodatniego.
+Wtedy istnieje rozszerzenie $K$, w którym $f$ ma pierwiastek.
+
+% Fakt 1.8.(1)
+Załóżmy, że $f∈K[X]$ nierozkładalny oraz dla $i=1,2$ mamy
+$L_i = K(a_i)$ i $f(a_i) = 0$ (w $L_i$).
+Wtedy $L_1 ≅_K L_2$.
+% Fakt 1.8.(2)
+Ogólniej: załóżmy, że $φ: K_1 \stackrel{≅}{→} K_2$, $f_i∈K_i[X]$,
+$φ(f_1) = f_2$ i $f_i$ nierozkładalny nad $K_i$,
+$L_1 = K_1(a_1)$, $L_2 = K_2(a_2)$,
+gdzie $a_i$ jest pierwiastkiem $f_i$.
+Wtedy istnieje $φ ⊆ ψ: L_1 \stackrel{≅}{→} L_2$ taki, że
+$ψ(a_1) = a_2$.
+
+Mówimy, że ciało $L ⊃ K$ jest \textit{ciałem rozkładu} wielomianu $f∈K[X]$ nad
+$K$,
+gdy $f$ rozkłada się w $L[X]$ na czynniki liniowe
+i $L=K(a_1,…,a_n)$, gdzie $a_i$ to wszystkie pierwiastki $f$ w $L$.
+
+% Wn. 2.1
+Jeśli $f∈K[X]$ ma stopień dodatni,
+to istnieje jedyne co do izomorfizmu nad $K$
+ciało rozkładu $f$ nad $K$.
+
+% Wn. 2.2 TODO
+
+\section*{Wykład02.pdf}
+Ciało $L$ jest \textit{algebraicznie domknięte},
+gdy każdy $f∈L[X]$ stopnia $>0$ ma pierwiastek w $L$.
+
+% (*) przed dowodem Tw. 2.3
+Każde ciało jest algebraicznie domknięte w pewnym jego rozszerzeniu.
+
+% Tw. 2.3
+Każde ciało $K$ zawiera się w pewnym ciele algebraicznie domkniętym.
+
+
+Mówimy, że ciało jest \textit{ciałem prostym}, gdy nie zawiera podciał właściwych.
+
+% Uwaga 3.1.(1)
+Każde ciało zawiera jedyne podciało proste.
+
+% Uwaga 3.1.(2)
+Z dokładnością do izomorfizmu,
+$ℚ$ i $ℤ_p$ (dla $p$ pierwszych) to wszystkie ciała proste.
+
+
+\begin{enumerate}
+	\item $a∈R$ jest \textit{pierwiastkiem z $1$} (stopnia $n>0$), gdy $a^n=1$
+	\item $μ_n(R) = \{ a∈R ∶ a^n=1 \} < R^*$
+	\item $μ(R) = \{ a∈R ∶ ∃n>0\+ a^n=1 \} = \bigcup_{n>0} μ_n(R) < R^*$
+	\item $a∈R$ jest \textit{pierwiastkiem pierwotnym (primitive) stopnia $n$ z jedynki},
+		gdy $n$ jest najmniejsze takie, że $a^n=1$.
+\end{enumerate}
+
+Oznaczamy $W_n(X) = X^n-1$.
+% Uwaga 3.3.(1)
+W ciele o charakterystyce $0$ ten wielomian ma tylko pierwiastki jednokrotne.
+W ciele o charakterystyce $p$ każdy pierwiastek tego wielomianu ma krotność
+$p^l$, gdzie $p^l$ to najwyższa potęga $p$ dzieląca $n$.
+
+% Tw. 3.4
+Załóżmy, że $G < μ(K)$ to grupa skończona rzędu $n$.
+Wtedy $G = μ_n(K)$, $G$ jest cykliczna i $p \nmid n$ (gdy $\Char K = p$).
+
+% Wn. 3.5
+Niech $a∈μ_n(K)$. Wtedy
+Jeśli $a$ jest pierwiastkiem pierwotnym stopnia $n$ z $1$, to
+$a$ generuje $μ_n(K)$.
+
+% Tw. 3.6
+Załóżmy, że $K$ jest ciałem skończonym i $p = \Char K$.
+Wtedy $|K|=p^n$ dla pewnego $n$.
+Dla każdego $n>0$ istnieje dokładnie jedno (co do izomorfizmu)
+ciało mocy $p^n$.
+
+\section*{Wykład03.pdf}
+% Def 4.1
+\begin{enumerate}
+	\item \textit{$a$ jest algebraiczny nad $K$},
+		gdy jest pierwiastkiem pewnego $f∈K[X]\setminus\{0\}$.
+	\item \textit{$a$ jest przestępny nad $K$}, gdy nie jest algebraiczny nad $K$.
+	\item Rozszerzenie $K⊂L$ jest \textit{algebraiczne},
+		gdy każdy $l∈L$ jest algebraiczny nad $K$.
+	\item Rozszerzenie $K⊂L$ jest \textit{przestępne}, gdy nie jest algebraiczne.
+	\item Liczba zespolona $z∈ℂ$ jest \textit{algebraiczna / przestępna},
+		gdy jest algebraiczna / przestępna nad $ℚ$.
+\end{enumerate}
+
+% Uwaga 4.2
+$a$ jest algebraiczny nad $K$ wtedy i tylko wtedy, gdy
+$I(a/K) ≠ \{0\}$.
+
+Niech $K⊂L$ to rozszerzenie ciał.
+\textit{Stopień rozszerzenia} $[L∶K]$ to wymiar $L$ jako przestrzeni liniowej nad $K$.
+
+% Uwaga 4.3
+Załóżmy, że $a ∈ L ⊃ K$.
+Wtedy następujące warunki są równoważne:
+\begin{enumerate}
+	\item $a$ algebraiczny nad $K$
+	\item $K[a] = K(a)$
+	\item $[K(a)∶K] < ∞$
+\end{enumerate}
+
+% Def 4.4
+Niech $K⊂L$ to rozszerzenie ciał, $a∈L$ jest algebraiczny nad $K$.
+Wtedy \textit{wielomianem minimalnym $a$ nad $K$} nazywamy moniczny wielomian
+generujący $I(a/K)$.
+Stopień tego wielomianu minimalnego nazywamy \textit{stopniem $a$ nad $K$}.
+
+% Uwaga 4.5
+Wielomian minimalny $f$ elementu $a$ jest wielomianem unormowanym
+minimalnego stopnia takim, że $f(a) = 0$.
+$\deg f = [K(a) ∶ K]$.
+
+% Fakt 4.6
+Niech $K⊂L⊂M$ to rozszerzenia ciał.
+Wtedy $[M∶K] = [M∶L][L∶K]$.
+
+% Wn. 4.7, Def 4.8
+$K_{alg}(L) = \{ a ∈ L ∶ a \text{ algebraiczny nad }K \}$
+nazywamy \textit{algebraicznym domknięciem ciała $K$ w ciele $L$}.
+Jest ono podciałem $L$ i nadciałem $K$.
+$K$ jest algebraicznie domknięte w $L$, gdy $K_{alg}(L) = K$.
+
+Algebraiczne domknięcie $K$ w ciele algebraicznie domkniętym
+nazywamy \textit{algebraicznym domknięciem},
+które oznaczamy $\hat{K}$ lub $K^{\alg}$.
+
+% wut ? to samo w Wykład04.pdf Def. 5.7
+
+% Wn. 5.1
+Załóżmy, że $K⊂L⊂M$ to rozszerzenia ciał.
+Wtedy $K⊂M$ jest algebraiczne wtedy i tylko wtedy, gdy
+$K⊂L$ i $L⊂M$ są algebraiczne.
+
+% Wn. 5.2
+$K_{\alg}(L)$ jest algebraicznie domknięte w $L$.
+
+\section*{Wykład04.pdf}
+\textit{Wielomiany cyklotomiczne}
+$$ F_m(x) =
+	∏_{\substack{1≤k≤m \\ \gcd(k,m) = 1}}
+		\left(x-e^{2πi\frac{k}{m}}\right)
+$$
+
+% Wn. 5.4
+$F_m(X)$ jest nierozkładalny w $ℚ[X]$ (równoważnie w $ℤ[X]$ z lematu Gaussa).
+
+% Wn 5.5
+Załóżmy, że $ε∈ℂ$ jest pierwiastkiem pierwotnym z $1$ stopnia $m$.
+Wtedy $[ℚ(ε)∶ℚ] = φ(m)$, bo $F_m$ jest wielomianem minimalnym $ε$ nad $ℚ$.
+
+% Lemat 5.6 (Liouville)
+(Lemat Liouville'a)
+Jeśli $a∈ℝ$ algebraiczna stopnia $N>1$ nad $ℚ$, to
+istnieje $C$ taka, że dla każdego $p/q∈ℚ$ mamy
+$$\abs{a-\frac{p}{q}} ≥ \frac{C}{q^n}.$$
+
+% Def. 5.7
+$L ⊃ K$ jest algebraicznym domknięciem ciała $K$, gdy
+$L$ jest algebraicznie domknięte i
+rozszerzenie $L ⊂ L$ jest algebraiczne nad $K$.
+Oznaczamy $L=\hat{K}=K^{alg}$.
+% Wn. 5.8
+% algebraiczne domknięcie ciała $K$
+$\hat{K}$ zawsze istnieje
+% Tw. 5.9
+i jest jedyne co do izomorfizmu nad $K$.
+
+% Wn. 5.10
+Jeśli $f: K \stackrel{≅}{→} L$,
+to istnieje $f⊆\hat{f}: \hat{K} \stackrel{≅}{→} \hat{L}$.
+
+% Wn. 5.11
+Jeśli rozszerzenie $K ⊂ L$ jest algebraiczne, to istnieje zanurzenie
+$L$ w $\hat{K}$ stałe na $K$.
+
+\textit{Grupa Galois rozszerzenia $K ⊂ L$} to
+$$G(L/K) = \{ f∈\Aut(L) ∶ f\mid_K=id_K \} < \Aut(L).$$
+$G(\hat{K}/K)$ jest \textit{absolutną grupą Galois ciała $K$}.
+
+% Uwaga 6.1 (jednorodność \hat{K})
+Jeśli $I(a/K) = I(b/K)$, to istnieje $f∈G(\hat{K}/K)$ taki,
+że $f(a) = b$.
+
+Rozszerzenie algebraiczne ciał $K ⊂ L$ jest \textit{normalne},
+gdy każdy homomorfizm z $L$ do $\hat{K}$,
+który jest identycznością na $K$, ma ten sam obraz. % FIXME?
+
+% Uwaga 6.2
+Rozszerzenie algebraiczne $K⊂L$ jest normalne wtedy i tylko wtedy,
+gdy dla każdego $f∈G(\hat{K}/K)$ mamy $f[L] = L$.
+
+% Wn.
+Jeśli $K⊆L_1⊆L$ i $K⊆L$ normalne, to $L_1⊆L$ też.
+
+% Tw. 6.3
+Rozszerzenie algebraiczne $K⊂L$ jest normalne wtedy i tylko wtedy,
+gdy wielomian minimalny każdego elementu $L$
+rozkłada się nad $L$ na czynniki liniowe.
+
+\section*{Wykład05.pdf}
+Rozszerzenie ciał $K⊆L$ jest \textit{skończone}, gdy $[L∶K]<∞$.
+
+%Tw.6.4
+Rozszerzenie skończone $L⊇K$ jest normalne
+$⇔$ $L$ jest ciałem rozkładu pewnego wielomianu $W∈K[X]$ nad $K$.
+
+\textit{Normalne domknięcie ciała $L$ w $\hat{K}$ nad $K$} to
+$$L_1 = \text{ciało generowane przez }\bigcup \{ f[L] ∶ f∈G(\hat{K}/K)\}.$$
+Rozszerzenie $K ⊆ L$ jest normalne.
+
+Gdy wielomian minimalny $a∈\hat{K}$ nad $K$,
+$W_a(X) ∈ K[X]$, ma w $\hat{K}$ tylko pierwiastki
+jednokrotne,
+to mówimy, że element $a$ jest \textit{rozdzielczy} nad $K$.
+
+Rozszerzenie algebraiczne $K⊂L$ jest \textit{rozdzielcze}, gdy
+każdy element $L$ jest rozdzielczy nad $K$.
+
+Wielomian $W(X)∈K[X]$ jest \textit{rozdzielczy}, gdy
+ma tylko pierwiastki jednokrotne w $\hat{K}$.
+
+% Uwaga 6.6
+Wielomian $W$ nierozkładalny jest
+nierozdzielczy wtedy i tylko wtedy, gdy
+$W$ i $W'$ są względnie pierwsze.
+
+W ciele o charakterystyce $0$ wszystkie wielomiany minimalne są rozdzielcze.
+W ciele $K$ o charakterystyce $p$ wielomiany nierozdzielcze należą do $K[X^p]$.
+
+Jeśli $K⊆L$ jest rozdzielcze i $K⊆L_1⊆L$, to $L_1 ⊆ L$ rozdzielcze.
+
+Rozszerzenie $K⊆L$ ciał skończonych jest rozdzielcze.
+
+Każde rozszerzenie algebraiczne ciała charakterystki $0$ jest rozdzielcze.
+
+% Lemat 6.7
+Zachodzi $\{f(a) ∶ f∈G(\hat{K}/K)\} ≤ \deg(a/K)$,
+a jeśli $a$ jest rozdzielczy nad $K$, to zachodzi równość.
+
+Element $a∈L$ nazywamy \textit{elementem pierwotnym rozszerzenia} $K⊆L$,
+gdy $L=K(a)$.
+
+% Tw. 6.8
+(Twierdzenia Abela o elemencie pierwotnym)
+Jeśli rozszerzenie $K⊂K(a_1,…,a_n)=L$ jest skończone i $a_i$ są
+rozdzielcze nad $K$, to istnieje $a^*∈L$ rozdzielczy nad $K$ taki,
+że $L=K(a^*)$.
+Inaczej, rozszerzenie skończone rozdzielcze jest proste.
+
+Element $a∈L$ nazywamy \textit{czysto nierozdzielczym (radykalnym)} nad $K$,
+gdy $W_a(X)∈K[X]$ ma tylko jeden pierwiastek w $\hat{K}$.
+
+Rozszerzenie $K⊆L$ nazywamy \textit{radykalnym (czysto nierozdzielczym)},
+gdy każdy $a∈L$ jest radykalny nad $K$.
+
+\section*{Wykład06.pdf}
+\textit{Rozdzielcze domknięcie $K$ w $L$} to
+$$\sep_L(K) = \{a∈L ∶ a \text{ rozdzielczy nad }K \}.$$
+
+\textit{Czysto nierozdzielcze (radykalne) domknięcie $K$ w $L$} to
+$$\rad_L(K) = \{a∈L ∶ a \text{ radykalny nad }K \}.$$
+
+% Wniosek 7.2
+Jeśli $K ⊆ L$ algebraiczne, to
+$$K ⊆ \sep_L(K), \rad_L(K) ⊆ L ⊆ \hat{K},
+\+ \sep_L(K) ∩ \rad_L(K) = K.$$
+
+\textit{Rozdzielcze domknięcie} $K$ to $\hat{K}^s = \sep_{\hat{K}}(K)$.
+
+\textit{Radykalne domknięcie} $K$ to $\hat{K}^r = \rad_{\hat{K}}(K)$.
+
+% Uwaga 7.3 (1)
+Gdy $K ⊆ L ⊆ \hat{K}$,
+to $\sep_L(K) = \hat{K}^s ∩ L, \+ \rad_L(K) = \hat{K}^r ∩ L$.
+
+% Uwaga 7.3 (2)
+Załóżmy, że $K ⊆ L ⊆ M ⊆ \hat{K}$. Wtedy
+$$K ⊆_{\rad} L ⊆_{\rad} M ⇔ K ⊆_{\rad} M.$$
+
+% Uwaga 7.3 (3)
+Gdy $\Char K = 0$,
+to $\sep_L(K) = K^{\alg}(L)$ i $\rad_L(K) = K$
+oraz $\hat{K}^s = \hat{K}$ i $\hat{K}^r = K$.
+
+% Fakt 7.4 TODO
+
+\textit{Stopień rozdzielczy ciała $L$ nad $K$} to $[L∶K]_s = [\sep_L(K)∶K]$.
+\textit{Stopień radykalny ciała $L$ nad $K$} to $[L∶K]_r = [L∶\sep_L(K)]$.
+
+% Uwaga 7.5 TODO
+
+% Uwaga 7.6 (?)
+Jeśli $\Char K = p > 0$ i $[L∶K]_r<∞$, to $[L∶K]_r$ jest potęgą $p$.
+
+% ---
+% Norma i ślad
+
+Jeśli $K ⊆ L$ to rozszerzenie skończone $a ∈ L$, to
+$f_a: L → L, f_a(x) = a·x$ jest przekształceniem $K$-liniowym.
+\textit{Normą} nazywamy $\Norm_{L/K}(a) = \det f_a$,
+a \textit{śladem} $\Tr_{L/K}(a) = \tr f_a$.
+
+% Fakt 8.1
+Niech $K ⊆ L$ to rozszerzenie skończone,
+$\{ f_1, …, f_k \} = \{ f ∈ \Hom(L, \hat{K}) ∶ f|_K = id \}$,
+$k=[L∶K]_s$, $a ∈ L$.
+Wtedy
+$$\Norm_{L/K}(a) = \left(∏_{i=1}^k f_i(a)\right)^{[L∶K]_r},
+\+\Tr_{L/K}(a) = [L∶K]_r ∑_{i=1}^k f_i(a).$$
+
+
+\section*{Wykład07.pdf}
+Rozszerzenie algebraiczne ciał $K ⊂ L$ jest
+\textit{rozszerzeniem Galois}, gdy
+$∀a∈L\setminus K\, ∃f∈G(L/K),\, f(a)≠a$.
+
+Niech $G<\Aut(L)$. Wtedy \textit{ciałem punktów stałych grupy $G$} nazywamy
+$$L^G = \{ a∈L ∶ ∀f∈G f(a)=a \} = \bigcup_{f∈G} Fix(f).$$
+
+Roszerzenie algebraiczne $K⊂L$
+jest Galois wtedy i tylko wtedy, gdy
+$K = L^{G(L/K)}.$
+
+% Przykład (1), (2), (3) todo
+
+% Tw. 8.2
+Niech $K⊂L$ to rozszerzenie algebraiczne.
+Jest ono Galois wtedy i tylko wtedy, gdy
+jest rozdzielcze i normalne.
+
+% Wniosek 8.3
+Niech $K ⊂ L ⊂ M ⊂ \hat{K}$.
+Jeśli $K ⊂ M$ Galois, to $L ⊂ M$ Galois.
+
+% Tw. 8.4 (Artin)
+Jeśli $G < \Aut(L)$ skończona, to $L^G ⊂ L$ Galois i $[L ∶ L^G] = |G|$.
+
+% Wniosek 8.5
+Jeśli $K ⊂ L$ to skończone rozszerzenie Galois,
+to $[L ∶ K] = \abs{G(L/K)}.$
+
+Niech $K⊂L$ to rozszerzenie algebraiczne,
+\begin{align*}
+	\mathcal{L} &= \{L' ∶ K ⊆ L' ⊆ L \}, & \mathcal{G} &= \{ H ∶ H < G(L/K) \}, \\
+	Γ : \mathcal{L} &\rightarrow \mathcal{G}, & Λ : \mathcal{G} &\rightarrow \mathcal{L}, \\
+	L' &\stackrel{Γ}{↦} G(L/L') < G(L/K), &  G &\stackrel{Λ}{↦} L^G ⊆ L.
+\end{align*} %
+% Podstawowe twierdzenie teorii Galois
+Jeśli $K⊂L$ jest rozszerzeniem skończonym, to $Γ$ i $Λ$ są wzajemnie odwrotne.
+
+% Wniosek 8.9
+Jeśli $K⊂L$ jest skończonym rozszerzeniem Galois, to
+dla $H<G(L/K)$
+$$H◁G(L/K) ⇔ K ⊂ L^H \text{ normalne Galois}.$$
+% FIXME nie wiem czy na pewno tak to rozumieć
+
+\section*{Wykład08.pdf}
+Załóżmy, że rozszerzenie $K⊂L$ jest skończone Galois.
+Mówimy, że jest ono \textit{abelowe / cykliczne}, gdy $G(L/K)$ jest
+\textit{abelowa / cykliczna}.
+
+% Tw. 9.3
+Załóżmy, że $K ⊂ L_1 ⊂ L$ to rozszerzenia ciał.
+Jeśli $K⊂L$ abelowe/cykliczne, to $K⊂L_1$ i $L_1⊂L$ też.
+
+% Tw. 9.4
+Załóżmy, że rozszerzenie $K⊂L$ cykliczne,
+$[L∶K]=n$, $ζ∈K$ to pierwiastek pierwotny z $1$ stopnia $n$.
+Wtedy $∃a∈K\+ L=K(\sqrt[n]{a})$.
+
+% Tw. 9.5
+(Tw. Dedekinda o liniowej niezależności charakterów)
+Załóżmy, że $α_1,…,α_n ∈ \Aut(L)$ i $(a_1,…,a_n)$
+to niezerowa krotka w $L^n$.
+Wtedy $∃c ∈ L\+ (∑_{i=1}^n a_i α_i)(c) ≠ 0$,
+tzn. $α_i$ są liniowo niezależne w przestrzeni $L^L$ nad $L$.
+% FIXME: L^L?
+
+Załóżmy, że $K⊂L$ to skończone rozszerzenie ciał.
+Mówimy, że jest ono \textit{rozwiązalne},
+gdy jest Galois i grupa $G(L/K)$ jest rozwiązalna.
+Mówimy, że jest ono \textit{przez pierwiastniki}, jeśli
+istnieje ciąg zstępujący
+$$L=L_0 ⊃ L_1 ⊃ … ⊃ L_k = K$$
+taki, że $L_i$ jest ciałem rozkładu nad $L_{i+1}$
+wielomianu
+\begin{align*}
+	X^{n_i}-b_i & \quad (\text{gdy }\Char K = p \nmid n_i)\\
+	\text{ lub }X^p-X-b_i & \quad (\text{gdy }\Char K = p),
+\end{align*}
+gdzie $b_i ∈ L_{i+1}$.
+
+% Tw. 9.6
+Załóżmy, że $K⊂L$ to rozszerzenie skończone ciał.
+Wtedy $K⊂L$ jest roszerzeniem przez pierwiastniki wtedy i tylko wtedy,
+gdy istnieje $L'$ takie, że $K ⊂ L'$ rozwiązalne.
+
+\section*{Wykład09.pdf}
+Rozszerzenie $K⊂L$ nazywamy \textit{przestępnym}, gdy
+istnieje $a∈L$ przestępny nad $K$ (tzn. $I(a/K) = \{ 0 \}$).
+
+Rozszerzenie $K⊂L$ nazywamy \textit{czysto przestępnym}, gdy
+każdy $a∈L∖K$ przestępny.
+
+% Uwaga 10.1
+Element $a$ jest przestępny nad $K$ wtedy i tylko wtedy, gdy
+$K(a) ≅ K(X)$.
+
+Niech $U = \hat{U}$ to ciało oraz $K ⊂ U$ to jego podciało,
+a $F ⊂ K$ to podciało proste.
+\textit{Operatorem domknięcia algebraicznego nad $K$} nazywamy
+$\acl_K: \mathcal{P}(U) → \mathcal{P}(U), \acl_K(A) = K(A)^{\alg}$.
+
+Zbiór $A ⊆ U$ jest \textit{algebraicznie domknięty nad $K$}, gdy $A = \acl_K(A)$.
+
+\begin{enumerate}
+	\item $\acl_K(∅) = \hat{K}$
+	\item $\acl_K(\acl_K(A)) = \acl_K(A)$
+	\item $\acl_K(A) = \bigcup_{A_0 ⊂_{\mathrm{fin}} A} \acl_K(A_0)$
+		(skończony charakter)
+	\item $a ∈ \acl_K(A∪\{b\})∖\acl_K(A) ⇒ b ∈ \acl_K(A∪\{a\})$
+		(własność wymiany)
+\end{enumerate}
+
+Zbiór $A ⊂ U$ jest \textit{algebraicznie niezależny nad $K$},
+gdy $∀a∈A\+a\not∈\acl_K(A∖\{a\})$.
+Równoważnie, dla dowolnych różnych $a_1,…,a_n ∈ A$ i niezerowego
+$W(X_1,…,X_n) ∈ K[\bar{X}]$ mamy $W(\bar{a}) ≠0$.
+
+Zbiór $A$ jest \textit{bazą przestępną zbioru $B⊂U$ nad $K$},
+gdy $A$ jest algebraicznie niezależny nad $K$ i $A⊆B⊆\acl_K(A)$.
+
+Moc (jakiejkolwiek) bazy przestępnej zbioru $B$ nad $K$
+nazywamy wymiarem przestępnym $B$ nad $K$ i oznaczamy
+$\tr \deg_K(B)$.
+
+% gdy ciało proste pomijamy je?? o co chodzi
+
+% Tw. 10.2
+Jeśli $A⊆B⊆U$ i $A$ jest algebraicznie niezależny nad $K$,
+to istnieje $A'$ taki, że $A ⊆ A' ⊆ B$ i $A'$ jest bazą przestępną
+$B$ nad $K$.
+
+Każde dwie bazy przestępne zbioru $B$ nad $K$ są równoliczne.
+
+% Przykład 1
+Zbiór $\{ X_i ∶ i ∈ I \} ⊆ K(\bar{X}) = U$ jest niezależny nad $K$
+i $\tr \deg_K(U) = |I|$.
+
+% Przykład
+Jeśli $K ⊂ L ⊂ U$ oraz $\{ a_i ∶ i ∈ I \}$ to baza przestępna $L/K$, to
+$$K(a_i ∶ i ∈ I) ≅ K(X_i ∶ i ∈ I),$$
+$$K \stackrel{\text{czysto przestępne}}{⊆}
+K(a_i ∶ i ∈ I) \stackrel{\text{algebraiczne}}{⊆} L.$$
+
+\section*{Wykład10.pdf}
+
+% Def. 10.3
+$(M, +, r)_{r ∈ R}$ to \textit{moduł} (domyślnie lewostronny) nad $R$, jeśli
+\begin{enumerate}
+	\item dla każdego $r$ mamy operację mnożenia elementu modułu przez skalar $r$ z lewej;
+	\item $(M,+)$ to grupa abelowa, jej zero $0$ nazywamy zerem modułu $M$;
+	\item $r(m_1+m_2) = rm_1 + rm_2$;
+	\item $(r_1+r_2)m = r_1m + r_2m$;
+	\item $r_1(r_2 m) = (r_1 r_2) m$ (zgodność); %?
+	\item $1m = m$
+\end{enumerate}
+Analogicznie możemy zdefiniować moduł prawostronny, z odpowiednio
+zmienionym aksjomatem zgodności.
+Jeśli $R$ przemienny, to te pojęcia są równoważne.
+
+% Przykład 1.
+Przestrzeń liniowa nad $K$ to $K$-moduł.
+
+% Przykład 2.
+Grupy abelowe to dokładnie $ℤ$-moduły.
+
+% Przykład 3.
+Grupa abelowa $G$ jest $\End(G)$-modułem,
+gdzie $\End(G)$ to jej pierścień endomorfizmów.
+
+% Przykład 4.
+Załóżmy, że $j: R → \End(G)$ to homomorfizm
+pierścieni z jednością.
+Wtedy $j$ wyznacza w $G$ strukturę $R$-modułu,
+gdzie $r · g = j(r)(g)$.
+Na odwrót, gdy $(G,+,r)$ to $R$-moduł, to
+możemy wziąć za $j$ mnożenie skalarne.
+
+% Przykład 5.
+Jeśli $R_1 ⊂ R$, to $R$ jest modułem nad $R_1$.
+
+% Przykład 6.
+Niech $j: R_1 → R$ to homomorfizm pierścieni z jednością.
+Wtedy $R$-moduł jest $R_1$-modułem z operacją mnożenia przez
+wartość $j$.
+
+% Przykład 7.
+Jeśli $I ⊆ R$ to ideał lewostronny,
+to $I$ jest $R$-modułem.
+
+% Def. 10.4
+Załóżmy, że $M$ to $R$-moduł.
+Mówimy, że $N ⊆ M$ jest $R$-podmodułem $M$, gdy
+jest podgrupą abelową z dodawaniem (więc $N$ jest niepusty)
+i zamknięty na mnożenie przez skalary.
+
+% Uwaga 10.5
+Załóżmy, że $M$ to $R$-moduł.
+Wtedy
+\begin{enumerate}
+	\item $0·m = 0$;
+	\item $r·0 = 0$;
+	\item $(-1)·m = -m$.
+\end{enumerate}
+
+% Uwaga 10.6
+Niech $M$ to $R$-moduł.
+Przekrój dowolnej niepustej rodziny podmodułów $M$
+jest podmodułem $M$.
+
+Mówimy, że $\{0\} ⊆ M$ to podmoduł zerowy.
+
+% Wniosek 10.6
+Jeśli $A ⊆ M$, to istnieje najmniejszy
+podmoduł $N ⊆ M$ zawierający $A$.
+Nazywamy go podmodułem generowanym przez $A$.
+
+Jeśli $N_1, N_2$ to podmoduły $M$, to $N_1 + N_2$ też.
+
+Produkt prosty $R$-modułów definiujemy podobnie jak dla przestrzeni liniowych
+i oznaczamy $M × N$.
+
+(Suma prosta wewnętrzna) % FIXME ???
+Mówimy, że $M = N_1 ⊕ … ⊕ N_k$, gdy $N_i$ są podmodułami $M$
+i każdy element $M$ się jednoznacznie zapisuje jako suma
+elementów $N_1$ (po jednym z każdego).
+
+Niech $h: M → N$ to homomorfizm $R$-modułów.
+Jeśli $N' ⊂ N$ jest podmodułem, to $h^{-1}[N'] ⊂ M$ też.
+Jeśli $M' ⊂ M$ jest podmodułem, to $h[M'] ⊂ N$ też.
+
+Niech $M' ⊂ M$ to podmoduł.
+Wtedy $M/M' = \{ x+M' ∶ x ∈ M \}$ nazywamy modułem ilorazowym
+(ze standardowymi operacjami).
+
+% Tw. 10.7
+(zasadnicze tw. o homomorfizmie $R$-modułów)
+% TODO
+
+% Tw. 10.8
+(tw. o faktoryzacji)
+% TODO
+
+Definiujemy $\Hom_R(M,N) = \{ h: M → N ∶ h \text{ to homomorfizm} \}$.
+
+% Def. 10.9
+$M$ jest $R$-modułem prostym, gdy $M ≠ \{ 0 \}$ i
+każdy jego podmoduł jest zerowy lub całym $M$.
+
+Pierścień endomorfizmów $R$-modułu $M$ zapisujemy $\End_R(M)$.
+
+% Lemat 10.10
+(Lemat Schura)
+Jeśli $M$ to $R$-moduł prosty, to $\End_R(M)$ to pierścień z dzieleniem.
+
+Załóżmy, że $M$ to $R$-moduł oraz $K = \End_R(M)$ to pierścień z dzieleniem
+(ciało nieprzemienne).
+Wtedy $M$ jest też $K$-modułem.
+% TODO
+
+\section*{Wykład11.pdf}
+Niech $M$ to $R$-moduł.
+Układ $(m_i ∶ i ∈ I) ⊆ M$ jest liniowo niezależny,
+gdy jego (skończona) kombinacja liniowa (ze współczynnikami z $R$) się zeruje
+dokładnie kiedy wszystkie współczynniki są zerami.
+
+Zbiór $S ⊆ M$ jest liniowo niezależny, gdy
+układ z niego utworzony (bez powtórzeń) jest liniowo niezależny.
+
+Zbiór $\mathcal{B} ⊆ M$ jest bazą $R$-modułu $M$, gdy
+$\mathcal{B}$ jest liniowo niezależny (nad $R$) i
+generuje $M$ jako $R$-moduł.
+
+% Przykład 1.
+Zbiory $\{ 0 \}, \{ m_0, m_0 \}$ są liniowo zależne.
+
+Rozpatrzmy $ℚ$ jako $ℤ$-moduł.
+Wtedy dowolna para jego elementów jest liniowo zależna.
+
+Moduł $ℚ$ nie ma bazy jako $ℤ$-moduł!
+
+(Abstrakcyjna) suma prosta (koprodukt) rodziny modułów $\{ M_i ∶ i ∈ I \}$
+to
+$$\coprod_{i ∈ I} M_i ≅
+\left\{ f ∈ ∏_{i∈I} M_i ∶ f(i) = 0 \text{ dla prawie wszystkich }i ∈ I \right\}.$$
+
+% Własność uniwersalności TODO
+
+
+% Uwaga 11.2 TODO
+
+% Def 11.3
+$M$ jest wolnym $R$-modułem, gdy $M$ ma bazę.
+
+% Przykłady
+$M$ jest wolnym $R$-modułem, z bazą $\{ 1 \}$.
+
+Jeśli $M_i$ to wolne $R$-moduły, to $\coprod_{i∈I} M_i$ jest wolnym $R$-modułem.
+
+% Uwaga 11.4
+Niech $A = \{ a_i ∶ i ∈ I \} ⊆ M$.
+Następujące warunki są równoważne:
+\begin{enumerate}
+	\item $A$ to baza $M$;
+	\item każdy element $M$ się jednoznacznie przedstawia jako kombinacja
+		$R$-liniowa $A$;
+	\item Każda funkcja z $A$ w $R$-moduł się rozszerza do homomorfizmu z $M$.
+
+\end{enumerate}
+
+% Uwaga 11.5
+Jeśli $A = \{ a_i ∶ i ∈ I \}$ to baza $M$,
+to $Ra_i$ jest podmodułem $M$ i $M = \bigoplus_{i∈I} R a_i$.
+
+Jeśli $A$ to zbiór, to istnieje $R$-moduł o bazie $A$
+(koprodukt izomorficznych kopii $R$ dla każdego elementu $A$).
+
+% Tw. 11.6
+Jeśli $R$ jest pierścieniem przemiennym,
+to każde dwie bazy $R$-modułu wolnego $M$ są równoliczne.
+
+% Uwaga 11.7
+Każdy $R$-moduł jest homomorficznym obrazem $R$-modułu wolnego.
+
+% Fakt 11.8
+Załóżmy, że $M,N$ to $R$-moduły, $N$ jest wolny i
+$f: M → N$ to epimorfizm.
+Wtedy $M ≅ \ker f ⊕ N$.
+Więcej: istnieje podmoduł $N' ⊆ M$ izomorficzny z $N$
+i $M = \ker f ⊕ N'$.
+
+% Def. 11.9
+Mówimy, że $R$-moduł $N$ jest \textit{projektywny}, gdy
+Dla każdego epimorfizmu $f: M → N$ mamy
+$M = \ker f ⊕ M'$ dla pewnego podmodułu $M' ⊂ M$.
+Mówimy, że $f$ rozszczepia się (\textit{splits}).
+
+Dualnie, mówimy, że $R$-moduł $M$ jest \textit{iniektywny}, gdy
+dla każdego monomorfizmu $g: M → N$ mamy
+$N = \im g ⊕ N'$ dla pewnego podmodułu $N' ⊂ N$.
+
+Jeśli $R$ to ciało, to każdy $R$-moduł jest iniektywny i projektywny.
+
+% Def. 11.10
+Niech $R$ to pierścien przemienny z jednością.
+Mówimy, że $R$-moduł jest \textit{cykliczny}, gdy jest generowany przez
+jeden element $a$ (równy $Ra$).
+
+% Uwaga 11.11
+$R$-moduł jest cykliczny, jeśli jest izomorficzny z pewnym
+ilorazem $R$.
+
+Niech $M$ to $R$-moduł.
+Wtedy
+\begin{enumerate}
+	\item dla $a ∈ M$ mówimy,
+		że $I_a = \{ r∈R ∶ ra = 0 \} ◁ R$ jest \textit{torsją elementu $a$};
+	\item mówimy, że $a∈M$ jest \textit{torsyjny}, gdy $I_a ≠ \{ 0 \}$
+		(w przeciwnym razie \textit{beztorsyjny});
+	\item mówimy, że $M$ jest \textit{torsyjny}, gdy każdy jego element jest torsyjny
+		(\textit{beztorsyjny}, gdy każdy niezerowy beztorsyjny);
+	\item zbiór $M_t = \{ a∈M ∶ a\text{ torsyjny} \}$
+		nazywamy \textit{częścią torsyjną modułu $M$}.
+\end{enumerate}
+
+% Uwaga 11.13
+Załóżmy, że $R$ jest dziedziną.
+Wtedy $M_t$ jest podmodułem $M$ i $M/M_t$ jest beztorsyjny.
+
+% Przykład
+Grupy abelowe torsyjne / beztorsyjne
+to dokładnie $ℤ$-moduły torsyjne / beztorsyjne.
+
+Załóżmy, że $R$ jest przemienny, $M,N$ to $R$-moduły,
+$f: M → N$ to epimorfizm,
+$M' = \ker f$, $N ≅ M/M'$.
+Wtedy jeśli $N, M'$ skończenie generowane, to $M$ skończnie generowany
+i jeśli $M$ skończenie generowany, to $N$ skończenie generowany.
+
+% Wniosek 11.15
+Załóżmy, że $R$ to pierścień przemienny.
+Wtedy noetherowskość $R$ jest równoważna temu,
+że podmoduły skończenie generowanego $R$-modułu są skończenie generowane.
+
+% Fakt 12.1 TODO
+
+% Def. 12.2
+Niech $X$ to $R$-moduł wolny o bazie $M_1 × M_2$ (jako zbiór).
+Niech $L ⊆ X$ to podmoduł generowany przez elementy ,,dające dwuliniowość''.
+% TODO
+Wtedy $f: M_1×M_2 → X/L$ jest $R$-$2$-linowe.
+Moduł $X/L$ nazywamy \textit{produktem tensorowym} $M_1$ i $M_2$ oraz
+oznaczamy $M_1 ⊗ M_2$.
+
+% TODO małe i duże \otimes ⊗ ?
+
+\section*{Wykład12.pdf}
+
+% Uwaga 12.3
+Niech $f: M_1 × M_2 → M_1 ⊗ M_2$ i $f(m_1,m_2) = m_1 ⊗ m_2$.
+Wtedy $f$ jest dwuliniowe (często oznaczane przez $⊗$)
+oraz dla każdego dwuliniowego homomorfizmu $g: M_1 × M_2 → N$
+istnieje jedyny homomorfizm $R$-liniowy $h: M_1 ⊗ M_2 → N$ taki,
+że $g = h ∘ f$ (warunek uniwersalności).
+Intuicyjnie, $f = ⊗$ to najogólniejsze odwzorowanie 2-liniowe z $M_1×M_2$
+w jakikolwiek $R$-moduł.
+
+% Uwaga 12.4
+Powyższy warunek wyznacza iloczyn tensorowy z dokładnością do izomorfizmu.
+
+\section*{Wykład13.pdf}
+% Przykład
+Mamy $R[X]⊗R[Y] ≅ R[X,Y]$ w tym sensie, że
+$W(X)⊗W(Y) = W(X)W(Y)$.
+
+% Wniosek.
+Jeśli $M_n$ to wolny $R$-moduł wymiaru $n$ o bazie $\{b_1,…,b_n\}$
+i analogicznie $M_n$ wymiaru $m$ o bazie $\{ c_1, …, c_m \}$,
+to $M_n ⊗ M_M$ jest wolnym $R$-modułem o bazie
+$\{ b_i ⊗ c_j ∶ 1 ≤ i ≤ n, 1 ≤ j ≤ m \}$.
+
+Iloczyn tensorowy jest co do izomorfizmu przemienny, łączny i ma element neutralny
+$R$ (jako $R$-moduł).
+
+% Uwaga 13.1.(1)
+Jeśli $A$ generuje $M$ i $B$ generuje $M$,
+to $A ⊗ B = \{ a⊗b ∶ a ∈ A, b ∈ B \}$
+generuje $M ⊗ N$.
+
+% Uwaga 13.1.(2); Def. 13.2
+Załóżmy, że $f: M → M'$, $g: N → N'$ są $R$-liniowe.
+Wtedy istnieje jedyne $h: M ⊗ N → M' ⊗ N'$ takie,
+że $h(m⊗n) = f(m)⊗g(n)$.
+Funkcję $h$ nazywamy iloczynem tensorowym $f$ i $g$.
+
+% Uwaga 13.3 TODO
+
+% Uwaga 13.4
+$$M ⊗ (\bigoplus_{i∈I} N_i) ≅ \bigoplus_{i∈I} (M⊗N_i)$$
+
+% Iloczyny zewnętrzne
+Niech $V$ to przestrzeń liniowa nad $K$.
+Oznaczmy $V^{⊗n} = V ⊗ … ⊗ V$.
+$σ∈S_n$ działa nad $V^{⊗n}$ (permutuje współrzędne w tensorach prostych).
+
+% Def. 13.5
+Niech $x ∈ V^{⊗n}$.
+Mówimy, że $x$ jest \textit{symetryczny},
+gdy dla każdego $σ∈S_n$ mamy $σ(x) = x$.
+Mówimy, że $x$ jest \textit{antysymetryczny},
+gdy dla każdego $σ∈S_n$ mamy $σ(x) = \sgn(σ) x$.
+
+Niech $Λ^nV$ to zbiór elementów antysymetrycznych
+a $S^nV$ to zbiór elementów symetrycznych $V^{⊗n}$.
+Jeśli charakterystyka ciała to zero, to są to podprzestrzenie.
+
+Mamy $V⊗V = Λ^2V ⊕ S^2 V$, bo
+$x = \frac{1}{2}(x + σ(x)) + \frac{1}{2}(x-σ(x))$.
+
+% Uwaga 13.6 TODO
+
+\section*{Wykład14.pdf}
+% Tw. 14.1
+Podmoduł modułu wolnego nad PID jest wolny niewiększego wymiaru.
+
+% Wn. 14.2
+Podmoduł PID-modułu skończenie generowanego jest skończenie generowany.
+
+% Tw. 14.3
+Załóżmy, że $M$ jest PID-modułem skończenie generowanym.
+Jeśli jest on beztorsyjny, to jest wolny.
+Więcej, rozkłada się on na sumę prostą części torsyjnej i jego
+pewnego podmodułu wolnego.
+
+% Def.
+Niech $R$ to PID,
+$p∈R$ jest nierozkładalny (a więc pierwszy),
+$M$ to $R$-moduł.
+Mówimy, że
+\begin{enumerate}
+	\item
+	$m ∈ M$ jest \textit{$p$-torsyjny},
+	gdy torsja $I_m = \{ r ∈ R ∶ rm = 0 \} = (p^k)$ % ideał
+	dla pewnego $k > 0$;
+	\item
+	zbiór elementów zerowych lub $p$-torsyjnych $M$
+	to \textit{$p$-prymarna składowa} $M$; %podmoduł
+	\item
+	$M$ jest \textit{$p$-prymarny}, gdy $M = M_p$.
+\end{enumerate}
+
+% Tw. 14.4
+Niech $R$ to PID i $M$ to $R$-moduł.
+Wtedy $M_p$ jest podmodułem $M_t$.
+Więcej, $M_t = ⊕_{i∈I} M_{p_i}$, gdzie $p_i$ to wszystkie elementy
+pierwsze $R$ z dokładnością do stowarzyszenia.
+
+% Uwaga.
+Jeśli $R$-moduł jest cykliczny $p$-prymarny, to jest izomorficzny
+z ilorazem $R/(p^k)$ dla pewnego $k$.
+
+% Tw. 14.5
+Skończenie generowany moduł $p$-prymarny
+jest sumą prostą modułów cyklicznych.
+
+% Wn. 14.6
+Załóżmy, że $M$ to skończenie generowany $R$-moduł $p$-prymarny.
+Wtedy $$M ≅ R/(p^{k_1}) ⊕ … ⊕ R/(p^{k_l})$$
+dla pewnych $1 ≤ k_1 ≤ … ≤ k_l$.
+Ponadto ciąg $(k_i)$ jest wyznaczony jednoznacznie.
+
+% Tw. 14.6 błąd w numeracji
+Niech $R$ to PID i $M$ to $R$-moduł
+skończenie generowany.
+Wtedy $M$ się rozkłada na sumę prostą podmodułów
+nierozkładalnych cyklicznych, wyznaczoną jednoznacznie.
+
+\section*{Wykład15.pdf}
+
+% Uwaga 15.1
+Załóżmy, że $V$ to przestrzeń liniowa nad $K$ skończonego wymiaru.
+Wtedy jest to skończenie generowany i torsyjny $K[X]$-moduł.
+Ponadto, $K[X]$ to PID, więc $V = ⊕_{p_i} V_{p_i}$ dla pewnych $p_i∈K[X]$
+i $$V_{p_i} ≅ K[X]/(f_i^{k_1}) ⊕ … ⊕ K[X]/(f_i^{k_l}) \quad (1≤k_1≤…≤k_l).$$
+
+% TODO ...
+
+% Wn. 15.2
+(Tw. Jordana)
+Załóżmy, że $V$ to przestrzeń liniowa skończonego wymiaru
+nad ciałem algebraicznie domkniętym $K$ i
+$ψ$ to endomorfizm liniowy $V$.
+Wtedy istnieje baza Jordana $B ⊆ V$ taka,
+że $m_B(ψ)$ ma postać Jordana.
+Rozmiary klatek macierzy są wyznaczone jednoznacznie.
+
+% Def. 15.3
+Załóżmy, że $R$ to pierścien przemienny z $1≠0$.
+$R$-algebra (przemienna)
+to $R$-moduł $S$ z dodatkowym mnożeniem $·: S × S → S$ takim,
+że $S$ tworzy z nim i dodawaniem modułowym pierścień (przemienny).
+Ponadto musi zachodzić zgodność
+$$r(s s') = (rs)s' = s(rs').$$
+
+% Przykłady
+Załóżmy, że $R$ to pierścien przemienny z $1≠0$.
+$R$ jest $ℤ$-algebrą.
+$R[X], R[X,Y]$ to $R$-algebry.
+Jeśli $R ⊂ S$ to podpierścień z jedynką,
+to $S$ jest $R$-algebrą.
+
+% Uwaga 15.4
+Jeśli $S$ jest $R$-algebrą z jednością 1,
+to $η: R → S$ dana przez $η(r) = r·1$
+jest homomorfizmem $R$-algebr.
+
+Gdy $R$ jest ciałem, to $η$ jest monomorfizmem
+i $R$ jest podciałem pierścienia $S$.
+
+Gdy $S$ to pierścień z jedynką i $R⊆S$ to podciało,
+to $S$ jest $R$-algebrą.
+
+Załóżmy, że $S$ to $R$-algebra z jedynką i $M$ to $R$-moduł.
+Wtedy $S ⊗_R M$ to $R$-moduł, lecz także $S$-moduł.
+Istnieje jedyna operacja mnożenia (na pierwszym argumencie tensora bazowego).
+
+% Przykład 1.
+Jeśli $G$ to $ℤ$-moduł, to $ℚ ⊗_Z G$ to $ℚ$-moduł.
+
+Jeśli $V$ to przestrzeń liniowa nad $ℝ$,
+to $ℂ ⊗_ℝ V$ to przestrzeń liniowa nad $ℂ$ (kompleksyfikacja $V$).
+
+% ---
+Jeśli $S_1, S_2$ to $R$-algebry z jedynką, to ich iloczyn tensorowy nad $R$ też.
+
+% Tw. 15.5
+(Nullstellensatz Hilberta)
+Niech $I ◁ K[\bar{X}]$ i $f ∈ K[\bar{X}]$ takie, że
+$Z_{\hat{K}}(I) ⊆ Z_{\hat{K}}(f)$, gdzie
+$ℤ_L(I)$ to zbiór wspólnych pierwiastków $I$.
+
+% Wn. 15.6
+Załóżmy, że $K$ to ciało algebraicznie domknięte takie, że
+układ równań wielomianowych $f_1(\bar{x}) = … = f_k(\bar{x}) = 0$,
+gdzie $f_i ∈ K[\bar{X}]$,
+nie ma rozwiązań w $K$.
+Wtedy $1 ∈ (f_1, …, f_k)$.
+$f_i ∈ K[\bar{X}]$.
+\end{document}

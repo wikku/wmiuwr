@@ -1,0 +1,205 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\Norm}{N}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{5/1D}
+Załóżmy, że $\Char(K) = p > 0$, $K ⊂ L$ jest rozszerzeniem algebraicznym ciał
+oraz $a∈L∖K$.
+
+W 4/5 pokazaliśmy, że
+wielomian nierozkładalny nierozdzielczy $f$ daje się
+zapisać jako $g(X^p)$.
+Wielomian $g$ też jest nierozkładalny, więc iterując ten proces
+możemy otrzymać $f(X) = h(X^{p^l})$,
+gdzie $h$ jest nierozkładalny rozdzielczy.
+
+Wielomian minimalny $W_a(X)$ jest równy $h(X^{p^l})$ dla pewnego
+$l>0$ i wielomianu $h$ rozdzielczego nierozkładalnego.
+Zatem $h(a^{p^l}) = W_a(a) = 0$.
+Wielomian minimalny $W_{a^{p^l}}$ dzieli $h$, więc $a^{p^l}$ rozdzielczy.
+
+\section*{5/3aD}
+Załóżmy, że $a ∈ L$ jest algebraiczny nad $K$, $L = K[a]$ i
+$W(X) = X^n + a_{n-1} X^{n-1} + … + a_1X + a_0$
+jest wielomianem minimalnym $a$ nad $K$.
+
+Przyjmujemy, że wielomian charakterystyczny
+macierzy $A$ to $φ_A(x) = \det (A - tI)$.
+Wtedy wyraz wolny tego wielomianu to $φ_A(0) = \det A$
+i jeśli $\deg φ_A = n$, to
+współczynnik przy $x^{n-1}$ to $(-1)^{n-1} \tr A$.
+
+Stopień $[K(a) ∶ K]$ wynosi $\deg W = n$,
+więc taki też jest stopień wielomianu charakterystycznego $φ_{f_a}$.
+Dla dowolnego wielomianu $P$ mamy
+$P(f_a)(x) = P(a)·x$,
+więc wielomian minimalny endomorfizmu $f_a$ nad $K$
+to dokładnie wielomian minimalny $a$ nad $K$.
+Wielomian minimalny $f_a$ nad $K$ dzieli $φ_{f_a}$,
+a skoro są tego samego stopnia,
+to $W = (-1)^n φ_{f_a}$.
+
+Zatem $\Tr_{L/K} = \tr f_a = (-1)^n(-1)^{n-1}a_{n-1} = -a_{n-1}$,
+$\Norm_{L/K} = \det f_a = (-1)^n a_0$.
+
+
+\section*{5/4aD}
+% Fr(x) = x^p
+% G(F(p^n)/F(p)) = automorfizmy F(p^n) stałe na F(p)
+Funkcja Frobeniusa $Fr$ należy do $G=G(F(p^n)/F(p))$, bo
+homomorfizmy ciał są stałe na podciałach prostych, w tym wypadku $F(p)$.
+Punkty stałe $Fr^k$ to dokładnie pierwiastki
+$X^{p^k}-X$, których jest co najwyżej $p^k$.
+Zatem $Fr^k$ może być identycznością na $F(p^n)$
+tylko dla $k≥n$, tzn. $\ord Fr ≥ n$.
+Z drugiej strony rząd elementu dzieli rząd grupy,
+który z tw. Artina szacujemy
+$|G| = [F(p^n) ∶ F(p^n)^G] ≤ [F(p^n) ∶ F(p)] = n$.
+Zatem $\ord Fr = n = |G|$ i $Fr$ jest generatorem.
+
+\end{document}

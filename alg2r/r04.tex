@@ -1,0 +1,243 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{Algebra 2R lista 3}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{1/5e}
+Niech $Φ: ℂ(X) → ℂ(X)$, $Φ(f) = f\left(\frac{X}{X-1}\right)$.
+Aby to była poprawna definicja, musimy pokazać, że $Φ$ jest określone na całej dziedzinie,
+tzn. $\frac{X}{X-1}$ nie jest pierwiastkiem żadnego niezerowego wielomianu $w∈ℂ[X]$.
+Funkcja $z ↦ \frac{z}{z-1}$ jest inwolucją, a zatem bijekcją $ℂ \setminus \{ 1 \}$.
+Zatem $w\left( \frac{X}{X-1} \right)$ ma dokładnie tyle samo różnych pierwiastków co $w$, być może poza $1$.
+To oznacza, że $w\left( \frac{X}{X-1} \right)$ jest zerem dokładnie wtedy, co $w$.
+
+Pokazaliśmy, że homomorfizm ewaluacji $φ_{\frac{X}{X-1}}: ℂ[X] → ℂ(X)$ jest różnowartościowy,
+zatem rozszerza się on do jedynego homomorfizmu z ciała ułamków $ℂ[X]$.
+Tym homomorfizmem jest dokładnie $Φ$.
+Powyższy argument z inwolucją pokazuje też, że $Φ(Φ(f)) = f$, zatem $Φ$ jest
+automorfizmem.
+
+Wiemy z 1/5d, że każdy $W ∈ ℚ[X_1, X_2]$ zerujący się w $(X^3, X^2)$
+jest podzielny przez $X_1^2 - X_2^3$.
+
+Weźmy wielomian $W ∈ ℚ[X_1, X_2]$ taki, że
+$W\left( \frac{X^3}{(X-1)^3}, \frac{X^2}{(X-1)^2} \right) = 0$.
+Wtedy skoro $Φ$ jest identycznością na $ℚ$, to mamy
+\begin{align*}
+Φ\left(W\left( \frac{X^3}{(X-1)^3}, \frac{X^2}{(X-1)^2} \right)\right)
+&= W\left( Φ\left(\frac{X^3}{(X-1)^3}\right), Φ\left(\frac{X^2}{(X-1)^2}\right) \right) \\
+&= W(X^3, X^2) = 0.
+\end{align*}
+Zatem $W$ jest podzielny przez $X_1^2 - X_2^3$.
+
+
+\section*{3/3aD}
+Załóżmy, że $K ⊃ F(p)$ jest skończonym rozszerzeniem ciała $F(p)$,
+charakterystyki $p$.
+Załóżmy, że $a ∈ K$ jest pierwiastkiem pierwotnym stopnia $m$ z jedynki.
+
+Pierwotnym pierwiastkom stopnia $m$ w $F(p^n)$ odpowiadają elementy rzędu $m$ w
+$F(p^n)^*$.
+Rząd elementu dzieli rząd grupy,
+zatem takie pierwiastki istnieją tylko jeśli $m$ dzieli $p^n-1$.
+
+Ustalmy najmniejsze $n$ takie, że $m \mid p^n-1$.
+Ciało $F(p)(a)$ musi być mocy co najmniej $p^n$,
+inaczej nie mogłoby ono zawierać pierwiastka pierwotnego stopnia $m$ z jedynki.
+
+Niech $g$ to generator $F(p^n)^*$.
+Niech $r = g^{\frac{p^n-1}{m}}$, wtedy
+$$
+\ord(r)
+=\ord\left(g^{\frac{p^n-1}{m}}\right)
+= \frac{\ord(g)}{\gcd\left(\frac{p^n-1}{m}, \ord(g)\right)}
+= \frac{p^n-1}{\gcd\left(\frac{p^n-1}{m}, p^n-1\right)}
+= \frac{p^n-1}{\frac{p^n-1}{m}}
+= m.
+$$
+Potęgi $r^0, r^1, …, r^{m-1}$ to wszystkie pierwiastki stopnia $m$ z jedynki,
+więc wśród ich jest $a$.
+Zatem $F(p^n) = F(p)(a)$.
+Stopień $a$ nad $F(p)$ to
+$[F(p^n) ∶ F(p)] = n$.
+
+\section*{3/4aD}
+Niech $x = \sqrt{2}+\sqrt{3}$.
+$$x^2 = 5 + 2\sqrt{6}$$
+$$x^2-5= 2\sqrt{6}$$
+$$x^4-10x^2+25=24$$
+$$x^4-10x^2+1=0$$
+Więc znaleźliśmy wielomian zerujący się w $\sqrt{2}+\sqrt{3}$.
+
+$ℚ(\sqrt{2}+\sqrt{3})$ jest podciałem $ℚ(\sqrt{2},\sqrt{3})$.
+Zauważmy, że
+$$\frac{1}{\sqrt{2}+\sqrt{3}} = \frac{\sqrt{2}-\sqrt{3}}{2-3}=\sqrt{3}-\sqrt{2},$$
+więc w $ℚ(\sqrt{2}+\sqrt{3})$ są $2\sqrt{3}$ i dalej $\sqrt{2}$.
+Zatem mamy też zawieranie w drugą stronę $ℚ(\sqrt{2},\sqrt{3})⊆ℚ(\sqrt{2}+\sqrt{3})$.
+
+Wiemy z dowodu 1/8, że $[ℚ(\sqrt{2}, \sqrt{3}) ∶ ℚ] = 4$.
+Wielomian $x^4-10x^2+1$ jest unormowany stopnia $4$, zatem jest minimalny dla $x$ nad $ℚ$.
+
+\section*{3/5D}
+%Jeśli $a∈ℝ$ algebraiczna stopnia $n>1$ (nad $ℚ$),
+%to $∃C>0 ∀r=p/q∈ℚ$
+%\abs{a-p/q}≥C/qⁿ$
+
+Liczba
+$$a = ∑_{k=1}^∞ 2^{-k!}$$
+ma w zapis dwójkowy taki, że $n$-ta cyfra po przecinku
+jest jedynką dokładnie kiedy $n$ jest silnią pewnej liczby.
+
+Załóżmy, że $a$ algebraiczna stopnia $d$.
+Weźmy $C>0$.
+Niech $q_n = 2^{n!}$.
+Dla pewnego $m$ mamy $q_m^{-m} < C q_m^{-d}$.
+Niech $p = q_m ∑_{k=1}^m 2^{-k!}$.
+Wtedy
+$$
+a - \frac{p}{q_m}
+= a - ∑_{k=1}^m \frac{1}{2^{k!}}
+= ∑_{k=m+1}^∞ \frac{1}{2^{k!}}
+< \frac{1}{q_m^m},$$
+bo $q_m^{-m}=2^{-m!m}$ ma w zapisie binarnym jedynkę na $(m!m)$-tym miejscu
+po przecinku,
+a ostatnia suma ma pierwszą jedynkę dopiero na $(m+1)!$-tym miejscu po
+przecinku.
+Otrzymujemy sprzeczność z lematem Liouville'a, zatem $a$ nie jest algebraiczna.
+
+\end{document}

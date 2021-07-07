@@ -1,0 +1,223 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+%\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\setcounter{secnumdepth}{0}
+
+\title{Algebra 2R na 05.03}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\to\else\textrightarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{1/1D}
+Weźmy $z ∈ ℂ \setminus ℝ$.
+Skoro $z$ nie leży na prostej rzeczywistej, to $\arg z ≠ \arg z^2$.
+To oznacza, że $z$ i $z^2$ traktowane w naturalny sposób jako wektory w
+przestrzeni liniowej $ℝ^2$ nad $ℝ$ są liniowo niezależne i rozpinają całą
+przestrzeń.
+Ten naturalny izomorfizm między $ℂ$ i $ℝ^2$ zachowuje mnożenie przez skalary
+rzeczywiste, więc wracając do $ℂ$ otrzymujemy, że każdą liczbę zespoloną
+da się zapisać w postaci $xz + yz^2$ dla pewnych $x,y ∈ ℝ$.
+
+Wszystkie liczby powyższej postaci $xz + yz^2$ są generowane przez $z$ nad $ℝ$,
+tzn. należą do $ℝ[z]$.
+Z zamkniętości ciała $ℂ$ na dodawanie i mnożenie mamy też $ℝ[z] ⊆ ℂ$,
+więc otrzymujemy $ℝ[z] = ℂ$.
+
+\section*{1/3}
+Załóżmy, że $K ⊂ L$ jest rozszerzeniem ciał oraz $f_1, …, f_m ∈ K[X_1, …, X_n]$
+są stopnia $1$, czyli mają postać
+$$f_i = a_{i1}X_1 + … + a_{in}X_n - b_{i}, \quad \text{gdzie }a_{ij}, b_i ∈ K.$$
+
+\subsection*{(a)D}
+Problem rozwiązania układu $f_1 = … = f_m = 0$ możemy przedstawić jako
+$$
+\begin{bmatrix}
+	a_{11} & \dots  & a_{1n} \\
+	\vdots & \ddots & \vdots \\
+	a_{m1} & \dots  & a_{mn}
+\end{bmatrix}
+\begin{bmatrix}
+	x_{1} \\
+	\vdots \\
+	x_{n} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+	b_{1} \\
+	\vdots \\
+	b_{n} \\
+\end{bmatrix}.
+$$
+Korzystając z algorytmu eliminacji Gaussa macierz rozszerzoną
+$\begin{bmatrix}A \big\vert b\end{bmatrix}$
+możemy sprowadzić do postaci schodkowej,
+która opisuje układ równań równoważny początkowemu.
+Z postaci schodkowej można bezpośrednio odczytać, czy układ jest niesprzeczny
+(nie ma wiersza postaci $[\, 0 \+ … \+ 0 \, \vert \, b \,]$, gdzie $b ≠ 0$) i
+jakie ma wtedy zmienne swobodne (być może ich nie ma).
+
+Jeśli układ ma rozwiązanie w $L$, to ten układ jest niesprzeczny.
+Możemy otrzymać inne rozwiązanie przypisując zmiennym swobodnym elementy z $K$.
+Współczynniki macierzy także są w $K$,
+a korzystając z nich i wartości zmiennych swobodnych się oblicza wartości
+pozostałych zmiennych,
+które więc też będą w $K$.
+
+\subsection*{(b)}
+Dla układu sprzecznego oczywiście nie ma rozwiązania ogólnego.
+
+Dla układu niesprzecznego to też nie musi być prawda, np.
+rozważmy równanie $X_1 - X_2 = 0$.
+Weźmy pewne jego rozwiązanie $(x, x)$.
+Wtedy $X_1 - x$ jest wielomianem, który się zeruje w $(x,x)$, ale
+nie jest w ideale $(X_1 - X_2)$, więc to rozwiązanie nie jest ogólne.
+
+\iffalse
+\section*{1/6D}
+Załóżmy, że $f ∈ K[X]$ jest nierozkładalny stopnia $n > 0$,
+$\Char K = 0$, $L$ jest ciałem rozkładu wielomianu $f$ nad $K$.
+
+Ciało $L$ możemy utożsamiać z $K[X] / (f)$.
+Zatem jego elementy są postaci
+$$∑_{k=0}^{n-1} c_k α^k,$$
+gdzie $c_k ∈ K$, a $α = X + f$ to pierwiastek $f$.
+
+Ciało $L$ jest nieskończone,
+więc zawiera podciało izomorficzne z $ℚ$ zachowywane przez automorfizmy.
+\fi
+
+\section*{1/5aD}
+Z definicji rozwiązania ogólnego wiemy, że $(1,1)$ jest rozwiązaniem
+ogólnym $X_1^2 - X_2^3$ nad $ℚ$ wtedy i tylko wtedy, gdy
+$$\left\{ g ∈ ℚ[X_1, X_2] ∶ g(1, 1) = 0 \right\} = ℚ[X_1, X_2](X_1^2 - X_2^3).$$
+Ta równość nie zachodzi, bo $X_1 - X_2$ należy do lewego zbioru,
+ale nie do prawego.
+
+
+
+
+
+
+
+
+\end{document}

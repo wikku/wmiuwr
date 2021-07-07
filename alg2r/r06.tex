@@ -1,0 +1,237 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\rad}{rad}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+\section*{4/6}
+Załóżmy, że $\Char(K) = p > 0$ oraz $W(X) ∈ K[X]$ jest nierozkładalny
+i nierozdzielczy.
+
+Wielomian $W$ ma pewien pierwiastek wielokrotny $a∈\hat{K}$.
+Wielomian minimalny $a$ nad $K$ dzieli $W$, ale skoro $W$ jest
+nierozdzielczy, to jest równy $W$.
+Skoro $a$ jest pierwiastkiem wielokrotnym, to $W'(a) = 0$.
+Wielomian $W'$ jest stopnia niższego niż wielomian minimalny $W$,
+więc $W=0$.
+Jeśli $W(X) = ∑_{i=0}^n k_i X^i$, to $W'(X) = ∑_{i=1}^{n-1} i k_i X^{i-1}$.
+Zatem dla każdego $i$ mamy $ik_i = 0$, więc $k_i = 0$ lub $i$ dzieli $p$.
+Wynika stąd, że $W∈K[X^p]$.
+
+\section*{4/7}
+Załóżmy, że $\Char(K) = p > 0$.
+
+% W_a ma pierwiastki jednokrotne
+% Mamy K(a^p) ⊆ K(a)
+Załóżmy, że $K(a^p) \subsetneq K(a)$.
+Wtedy $x^p-a^p=(x-a)^p$ jest nierozkładalny nad
+$K(a^p)$, bo jego czynniki są postaci $(x-a)^k$,
+co da się wyrazić w $K(a^p)$ tylko dla $k=p$.
+Zatem jest to wielomian minimalny $a$ nad $K(a^p)$
+i $a$ jest nierozdzielczy nad $K(a^p)$, więc też nad $K$.
+
+Kontraponując, jeśli $a∈\hat{K}$ jest rozdzielczy nad $K$,
+to $K(a) = K(a^p)$.
+
+% W_a/K należy do K(a^p)[X] i jest podzielny przez W_a/K(a^p)
+
+%Cel: a nierozdzielczy nad K
+
+\section*{4/8}
+\iffalse
+Załóżmy, że $\Char(K) = p > 0$.
+Udowodnimy indukcyjnie,
+że stopień elementu $a$ radykalnego nad $K$
+równa się $\min \{p^n ∶ a^{p^n} ∈ K \}$.
+
+Jeśli stopień elementu radykalnego $a$ nad $K$
+to $1 = p^0$, to $W_a(x) = x-a$ należy do $K[X]$,
+więc $a$ należy do $K$.
+
+Jeśli stopień elementu radykalnego $a$ nad $K$
+to $n > 1$, to $W_a(x) = (x-a)^n$ należy do $K[X]$.
+Ten element jest także pierwiastkiem $W'_a(X) = n(X-a)^{n-1}$,
+więc z minimalności $p$ dzieli $n=p n_1$.
+Skoro $W_a(X) = (X^p-a^p)^{n_1}$ należy do $K[X]$,
+to $(X-a^p)^{n_1}$ także i ma on pierwiastek $a^p$.
+Wielomian minimalny $a^p$ nad $K$ dzieli ten wielomian,
+więc $a$ jest radykalny i stopnia $\deg(a^p/K) ≤ n_1 < n$.
+Z założenia indukcyjnego ten stopień to 
+
+\fi
+% Wykład05.pdf 7.1.3
+Wiemy z wykładu, że jeśli $a$ jest radykalny nad ciałem charakterystyki $p>0$, to
+istnieje najmniejsze $n$ takie, że $a^{p^n}$ należy do tego ciała.
+
+Stopień $a$ nad $K$ wynosi co najwyżej $p^n$, bo
+$X^{p^n}-a^{p^n} ∈ K[X]$.
+
+Skoro $\sep_{K(a)}(K) \cap \rad_{K(a)}(K) = K$ i $\rad_{K(a)}(K) = K(a)$, to $\sep_{K(a)}(K) = K$.
+
+% Wykład06.pdf ≈Uwaga 7.6
+Wiemy z wykładu, że skoro $[K(a) ∶ K] < ∞$, to
+$[K(A) ∶ \sep_{K(a)}(K)] = [K(a) ∶ K]$ wynosi $p^k$ dla pewnego $k$.
+Z radykalności, $W_a(X) = (X-a)^{p^k} = X^{p^k} - a^{p^k} ∈ K[X]$,
+więc $a^{p^k} ∈ K$ i $k=n$.
+Zatem $\deg(a/K) = p^n$.
+
+Jeśli rozszerzenie $K⊂L$ jest skończone radykalne,
+to $L=K(a_1,…,a_l)$ dla pewnych $a_i$.
+Możemy $L$ otrzymać jako ciąg rozszerzeń $K$ o jeden element radykalny:
+$$L=K(a_1,…,a_l) ⊃ K(a_1,…,a_{l-1}) ⊃ … ⊃ K(a_1) ⊃ K,$$
+gdzie wszystkie stopnie są potęgą $p$, więc się mnożą do potęgi $p$ równej $[L ∶ K]$.
+
+
+\iffalse
+\section*{4/11}
+Załóżmy, że liczby $m,n>1$ są względnie pierwsze
+i $ζ_n, ζ_m ∈ ℂ$ to pierwiastki pierwotne z $1$ stopni $n,m$ odpowiednio.
+
+Bez straty ogólności załóżmy, że $ζ_i = e^{2πi\frac{1}{n}}.$
+Zauważmy, że $ζ_n = ζ_{nm}^{m}, ζ_m = ζ_{nm}^{n}$,
+więc z względnej pierwszości $n$ i $m$, dla pewnych $x,y∈ℤ$
+mamy $ζ_n^x ζ_m^y = ζ_{nm}^{mx+ny} = ζ_{nm}^{1}$.
+Zatem $ℚ(ζ_n,ζ_m) = ℚ(ζ_{nm})$.
+
+$[ℚ(ζ_k) ∶ ℚ] = φ(k)$.
+
+$φ(nm) = [ℚ(ζ_{nm}) ∶ ℚ] ≤ [ℚ(ζ_n) ∶ ℚ][ℚ(ζ_m) ∶ ℚ] = φ(n)φ(m)
+\fi
+
+
+\end{document}

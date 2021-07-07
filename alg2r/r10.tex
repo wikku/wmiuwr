@@ -1,0 +1,210 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{6/2c}
+\subsection*{(i)}
+Niech $K = ℚ$ i $L$ jest ciałem rozkładu wielomianu $X^4-2$ nad $K$.
+Ten wielomian możemy rozłożyć na
+$$X^4-2 = (X-\sqrt[4]{2})(X-i\sqrt[4]{2})(X+\sqrt[4]{2})(X+i\sqrt[4]{2}),$$
+więc $L = ℚ(i, \sqrt[4]{2})$.
+
+Niech $a = (2+i)\sqrt[4]{2}$.
+Wtedy $a^2 = (3+4i)\sqrt{2}$ i $a^4 = -14+48i$,
+więc $i = \frac{a^4+14}{48}$ i $\sqrt[4]{2} = \frac{a}{2+i}$.
+Zatem $ℚ(i, \sqrt[4]{2}) = ℚ((2+i)\sqrt[4]{2})$.
+
+% (1+i)^2=2i
+% 2i = (e^{iπ/8}\sqrt[4]{2})^4
+
+\iffalse
+% ζ = e^{iπ/4} = (1+i)2^{-1/2}
+% a = ζ2^{1/8}
+% a^2 = i2^{1/4}
+% 
+% ---
+% r = 2^{1/4}
+% a = pr + qi
+% ---
+% a = (1+i)r
+% a^2 = \sqrt{2}\sqrt{2}i = 2i
+% a/(1+i) = r
+
+\fi
+\subsection*{(ii)}
+
+Niech $K=ℚ(i)$ i $L$ jest ciałem rozkładu wielomianu $X^4-2$ nad $K$,
+czyli $L = ℚ(i)(\sqrt[4]{2})$.
+
+\iffalse
+\section*{6/4}
+\subsection*{(b)}
+$K=ℚ$ i $L=ℚ(\sqrt[4]{2}, i)$.
+$L$ jest ciałem rozkładu $X^4-2$ nad $ℚ$, zatem jest Galois.
+% a=2^{1/8}; a^2=-2^{1/4};
+% TODO stopień 8
+\fi
+
+\section*{6/5a}
+Wiemy, że $[ℚ(\sqrt{5}, \sqrt{7}) ∶ ℚ] = 4$.
+Ponadto jest to rozszerzenie rozkładu wielomianu $(X^2-5)(X^2-7)$,
+więc jest Galois i $|G(ℚ(\sqrt{5}, \sqrt{7})/ℚ)| = 4$.
+
+Możemy wskazać 5 ciał pośrednich:
+$$ℚ,\+ ℚ(\sqrt{5}),\+ ℚ(\sqrt{7}),\+ ℚ(\sqrt{35}),\+ ℚ(\sqrt{5}, \sqrt{7}).$$
+Z zasadniczego twierdzenia teorii Galois te ciała są w bijekcji z
+podgrupami grupy $G(ℚ(\sqrt{5}, \sqrt{7})/ℚ)$.
+Skoro jest ich co najmniej pięć, to ta grupa jest grupą czwórkową Kleina
+i znaleźliśmy jej wszystkie podgrupy.
+Zatem wskazaliśmy wszystkie szukane ciała pośrednie.
+
+
+
+
+\end{document}

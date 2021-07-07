@@ -1,0 +1,229 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\id}{id}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\End}{End}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+\section*{7/1}
+Załóżmy, że $a_0, …, a_{n-1} ∈ ℝ$ są algebraicznie niezależne (nad $ℚ$).
+Udowodnić, że wielomian
+$$W(X) = X^n + a_{n-1}X^{n-1} + … + a_1X + a_0$$
+jest nierozkładalny nad ciałem $ℚ(a_0,…,a_{n-1})$.
+
+\section*{7/2}
+Załóżmy, że $a,b,c ∈ ℝ$ są algebraicznie niezależne.
+To oznacza, że homomorfizm ewaluacji w $(a,b,c)$ ma trywialne jądro.
+
+Niech $g_1(X) =
+Algebraiczna niezależność $a^2+b+c, b^2c, ab+ac^2$ oznacza,
+że
+ewaluacja $
+\fi
+
+\section*{7/4bD}
+Pojęcie $ℤ$-modułu jest równoważne pojęciu grupy abelowej,
+więc $ℤ$-moduły proste to grupy abelowe
+bez nietrywialnych podgrup właściwych.
+Takie grupy muszą być równe podgrupie generowanej
+przez dowolny element niezerowy, czyli są cykliczne.
+Grupa $ℤ$ ma nietrywialne podgrupy właściwe, zatem $ℤ$-moduły proste
+to grupy cykliczne rzędu pierwszego.
+
+Homomorfizm z grupy cyklicznej jest wyznaczony przez wartość dla $1$.
+Dla każdej wartości w $ℤ/pℤ$ otrzymujemy inny endomorfizm $ℤ/pℤ$.
+Czyli pierścień endomorfizmów $ℤ/pℤ$ jest mocy $p$, więc z tw.
+Wedderburna jest izomorficzny z ciałem $F(p)$.
+
+\section*{7/5D}
+Niech $V$ to niezerowa przestrzeń liniowa nad ciałem $K$.
+Ta przestrzeń ma pewną bazę $\mathcal{B}$ i każdy element możemy utożsamić
+z jego współrzędnymi w tej bazie (indeksowanymi elementami bazy).
+
+Jest to oczywiście $\End_K(V)$-moduł z operacją stosowania endomorfizmu na
+wektorze.
+To, że $\End_K(V)$ jest pierścieniem, wynika z nietrywialności $V$.
+
+Taki endomorfizm jest jednoznacznie wyznaczony przez wartości dla elementów
+$\mathcal{B}$.
+Z kolei taka wartość to dowolna kombinacja liniowa współrzędnych, tzn.
+należy do wolnej grupy abelowej $V ≅ \bigoplus_{b∈\mathcal{B}} K$.
+Czyli pierścień $\End_K(V)$ jest izomorficzny z $V^{\mathcal{B}}$.
+
+Załóżmy nie wprost, że mamy nietrywialny podmoduł właściwy $V' < V$ jako
+$\End_K(V)$-moduł,
+czyli podprzestrzeń liniową niezmienniczą na wszystkie endomorfizmy $V$.
+Wtedy przestrzeń $V'$ jest rozpinana przez pewnien układ wektorów $\mathcal{C}$,
+który się rozszerza do $\mathcal{D}$ bazy $V$.
+Elementy $V'$ mają zerowe współrzędne dla wektorów z
+$\mathcal{D} ∖ \mathcal{C}$.
+Istnieje endomorfizm $V$, który wektor z $\mathcal{C}$ przekształca
+na wektor w $\mathcal{D} ∖ \mathcal{C}$, więc $V'$ nie jest zamknięte
+na mnożenie przez skalar.
+Sprzeczność.
+
+\newpage
+\section*{7/6D}
+Załóżmy, że $M$ jest $R$-modułem.
+Wówczas $M$ jest też $R'$-modułem, gdzie $R' = \End_R(M)$.
+Dla $r ∈ R$ definiujemy $f_r: M → M$ przez $f_r(m) = rm$.
+%Zauważmy, że $f_r ∈ \End_R(M)$.
+
+Niech $r', s' ∈ \End_R(M)=R'$ i $m_1,m_2 ∈ M$.
+\begin{align*}
+f_r(r'(m_1) + s'(m_2))
+	&= r(r'(m_1) + s'(m_2)) &\text{definicja }f_r \\
+	&= rr'(m_1) + rs'(m_2) &\text{rozdzielność mnożenia skalarnego} \\
+	&= r'(r m_1) + s'(r m_2) &\text{$R$-liniowość} \\
+	&= r'(f_r(m_1)) + s'(f_r(m_2)) &\text{definicja }f_r
+\end{align*}
+Zatem $f_r$ jest endomorfizmem $R'$-modułu $M$ (jest funkcją $R'$-liniową).
+
+\end{document}

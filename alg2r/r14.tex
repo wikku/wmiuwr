@@ -1,0 +1,257 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\id}{id}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{8/1b}
+Załóżmy, że $g: M → N$ jest monomorfizmem.
+Udowodnić, że $g(M)$ jest składnikiem prostym modułu $N$
+$⇔$
+$∃f: N → M,\, f∘g = \id_M$.
+% Obraz monomorfizmu jest składnikiem prostym przeciwdziedziny
+% wtedy i tylko wtedy, gdy ten homomorfizm jest lewostronnie odwracalny.
+
+\subsection*{$(⇒)$}
+Monomorfizm $g$ indukuje izomorfizm $M → g(M)$,
+więc mamy też izomorfizm odwrotny $g': g(M) → M$.
+
+Z własności uniwersalnej koproduktu
+$g'$ się faktoryzuje na pewne $f: N → M$ i włożenie $i: g(M) → N$, tzn.
+$g' = f ∘ i$.
+Składając prawostronnie z $g$ otrzymujemy
+$\id_M = f ∘ i ∘ g = f ∘ g,$
+bo $i$ to w tym wypadku po prostu inkluzja.
+
+\subsection*{$(⇐)$}
+Zauważmy, że
+$$n = (n - g(f(n))) + g(f(n)),$$
+więc $N = \ker f + \im g$.
+Jeśli $n ∈ \ker f ∩ \im g$, to $f(n) = 0$ i $n = g(m)$ dla pewnego $m$.
+Mamy $0 = f(n) = f(g(m)) = m$, więc $N = \ker f ⊕ \im g$.
+
+\section*{8/2}
+
+\subsection*{(a) $⇒$ (b)}
+
+Załóżmy, że dla każdego epimorfizmu $f: M → N$ dowolnych modułów
+$M, N$ i każdego $g: P → N$ istnieje $h: P → M$ takie, że $f ∘ h = g$.
+
+% $P$ projektywny $⇔$ dla każdego epimorfizmu $f: M → P$ mamy $M = \ker f ⊕ M'$
+% jeśli $f: M → P$ i $g: P → P$, to $h: P → M$ i $f ∘ h = g$
+Weźmy epimorfizm $f: M → P$ i $g = id_P$,
+wtedy mamy $h: P → M$ takie, że $f ∘ h = id_P$.
+Z 8/1a to oznacza, że $f$ się rozszczepia, zatem $P$ jest projektywny.
+
+\subsection*{(b) $⇒$ (c)}
+Załóżmy, że moduł $P$ jest projektywny.
+To oznacza, że dla każdego
+epimorfizmu $f: M → P$ jądro $f$ jest składnikiem prostym $M$.
+
+Niech $M$ to moduł wolny składający się z formalnych
+kombinacji liniowych elementów $P$.
+Istnieje epimorfizm $f: M → P$ interpretujący
+napis formalny operacjami modułowymi $P$,
+więc $M = \ker f ⊕ M'$ dla pewnego podmodułu $M' ⊆ M$.
+Z zasadniczego twierdzenia o homomorfizmie mamy
+$$P ≅ M/(\ker f) = (\ker f ⊕ M')/(\ker f) ≅ M'.$$
+
+\subsection*{(c) $⇒$ (a)}
+Załóżmy, że istnieje moduł $L$ taki, że $P ⊕ L$ jest wolny z bazą $X$.
+
+Niech $p$ to rzut $P ⊕ L → P$.
+% rzutowanie p: P ⊕ L → P
+% włożenie i: P → P ⊕ L
+
+Weźmy epimorfizm $f: M → N$ i homomorfizm $g: P → N$.
+% Ten drugi się rozszerza do $g ∘ p: P ⊕ L$, gdzie $p$ to rzut $P ⊕ L → P$.
+% cel: ∃h: P → M, f∘h = g
+% cel?: ∃h : P ⊕ L → M,  f∘h = g∘p
+Dla każdego $x∈X$ mamy wartość $n=g(p(x))∈N$,
+więc istnieje
+$m∈M$ taki,
+że $f(m) = n$.
+To wyznacza pewną funkcję $X → M$,
+która się rozszerza do homomorfizmu
+$h: P ⊕ L → M$ takiego,
+że $$f ∘ h = g ∘ p.$$
+Składając prawostronnie z włożeniem $i: P → P ⊕ L$ otrzymujemy
+$$f ∘ (h ∘ i) = g ∘ p ∘ i = g,$$
+gdzie $h ∘ i: P → M$.
+
+% g ∘ p : P ⊕ L → N   wyznaczony jednoznacznie przez wartości dla bazy
+% g ∘ p = g ⊕ 0
+
+
+\section*{8/4a}
+
+\subsection*{($⇒$)}
+Załóżmy, że $M=⊕_{i∈I} M_i$ jest projektywny.
+To oznacza, że $M$ jest składnikiem prostym pewnego modułu wolnego,
+zatem każdy jego składnik prosty $M_i$ też jest składnikiem prostym modułu wolnego.
+
+\subsection*{($⇐$)}
+Załóżmy,
+że $M_i$ jest projektywny dla każdego $i ∈ I$.
+
+Weźmy epimorfizm $f: L → N$ i homomorfizm $g: M → N$.
+Niech $j_i$ to włożenia $M_i → M$, wtedy
+$g ∘ j_i: M_i → N$.
+Z projektywności $M_i$ i zad. 8/2a
+istnieją $h_i: M_i → L$ takie, że $f∘h_i=g∘j_i$.
+Z uniwersalnej własności koproduktu istnieje $h: M → L$ takie,
+że $h ∘ j_i = h_i$, więc
+$$f∘h∘j_i = g∘j_i.$$
+Z uniwersalnej własności koproduktu $φ=f∘h-g$ jest jedynym
+homomorfizmem spełniającym
+$$φ∘j_i = 0,$$
+a więc jest homomorfizmem zerowym i $f∘h=g$.
+Zatem $M$ jest projektywny.
+
+\end{document}

@@ -1,0 +1,252 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{Algebra 2R, lista 4}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\section*{4/1}
+Pierwiastki $F_m$ to dokładnie $m$-te pierwiastki pierwotne z jedynki,
+tzn.
+$$F_m(x) = ∏_{\substack{1≤k≤m \\ \gcd(k,m)=1}} \left(x-\exp(2πi\frac{k}{m})\right).$$
+
+Łatwo sprawdzić, że
+\begin{align*}
+	F_1(x) &= x-1, \\
+	F_2(x) &= x+1, \\
+	F_3(x) &= (x-\exp(\tfrac{4}{3}πi))(x-\exp(-\tfrac{4}{3}πi))
+		= x^2 - 2x\cos \tfrac{4π}{3} + 1 \\
+		&= x^2 + x + 1.
+\end{align*}
+
+Natomiast dla $m>1$
+$$F_{2^m}(x) = ∏_{1≤k≤2^{m-1}} \left(x-\exp(2πi\frac{2k-1}{2^m})\right),$$
+bo $\{1, 3, …, 2^m-1\}$ to wszystkie liczby naturalne $≤2^m$ względnie pierwsze z $2^m$.
+Zauważmy, że
+$$ \exp(2πi\frac{2k-1}{2^m})^{2^{m-1}} = \exp(πi\frac{2k-1}{2^{m-1}}2^{m-1})
+= \exp(πi(2k-1)) = \exp(-πi) = -1,$$
+czyli $2^m$-te pierwiastki pierwotne z $1$ to $2^{m-1}$-e pierwiastki z $-1$.
+Jest ich $2^{m-1}$, więc są to wszystkie takie pierwiastki i $F_{2^m}(x) = x^{2^{m-1}}+1$.
+W szczególności
+\begin{align*}
+	F_4(x) = x^2+1, \\
+	F_8(x) = x^4+1, \\
+	F_{16}(x) = x^8+1.
+\end{align*}
+
+Ze wzoru
+$$W_m(x) = x^m-1 = ∏_{d|m} F_d(x)$$
+otrzymujemy
+\begin{align*}
+F_{15}(x)
+&= \frac{x^{15}-1}{F_1(x)F_3(x)F_5(x)}
+= \frac{(x^{5})^3-1^3}{F_3(x)(x^5-1)}
+= \frac{x^{10}+x^5+1}{x^2+x+1} \\
+&= x^8-x^7+x^5-x^4+x^3-x+1.
+\end{align*}
+
+Dla homomorfizmu ilorazowego $j: ℤ → ℤ_3$,
+$j(F_m)$ to wielomian $F_m$, w którym nałożono $j$ na współczynniki.
+
+Wielomiany $F_1$ i $F_2$ są liniowe, a więc nierozkładalne.
+Można sprawdzić, że $F_4(x) = x^2+1$ nie ma pierwiastków w $ℤ_3$, a
+może się rozłożyć tylko na czynniki liniowe, więc jest nierozkładalny.
+
+Niech $a$ to $2^m$-ty pierwotny pierwiastek z jedynki w pewnym
+rozszerzeniu $ℤ_3$.
+Element $a$ generuje rozszerzenie stopnia $n$, gdzie $n$ to najmniejsza
+liczba taka, że $2^m | 3^n - 1$.
+Dla $m=3$ jest to $n=2$, dla $m=4$ jest to $n=4$.
+W obu przypadkach wielomian minimalny $a$ nad $ℤ_3$ ma stopień mniejszy
+od stopnia $F_{2^m}$, więc są one rozkładalne.
+
+Mamy $x^{15}-1 = (x^5-1)^3$, więc pierwiastki $F_{15}$ w $\hat{ℤ_3}$
+są pierwiastkami $x^5-1$.
+Zatem wielomian minimalny każdego pierwiastka $F_{15}$ nad $ℤ_3$
+ma stopień co najwyżej $5 < \deg F_{15} = 8$.
+Możemy podzielić $F_{15}$ przez ten wielomian minimalny, otrzymując
+nietrywialny rozkład $F_{15}$ nad $ℤ_3$.
+
+
+% F_n nierozkładalny ℤ₃ ⇔ 3 jest generatorem ℤ_n^* (?)
+
+\section*{4/3}
+Załóżmy, że $[L ∶ K] = 2$, $a ∈ L\setminus K$.
+Mamy $[L ∶ K(a)][K(a) ∶ K] = 2$ i stąd $[K(a) ∶ K] = 2$,
+bo inaczej $K(a)$ byłoby równe $K$.
+Zatem $L = K(a)$ jest algebraicznym rozszerzeniem $K$.
+Element $a$ ma wielomian minimalny $W_a$ stopnia $2$ nad $K$.
+Ale $W_a(x) = (x-a)g(x)$, gdzie $g$ jest liniowy z pierwiastkiem w $L$,
+więc $W_a$ rozkłada się na czynniki liniowe.
+Zatem z rozszerzenie $K ⊆ L$ jest normalne.
+
+
+\iffalse
+\section*{4/4}
+Załóżmy, że rozszerzenie $K⊂L$ jest algebraiczne i $f: L→L$ jest monomorfizmem,
+$f|_K = id$.
+
+Weźmy $α∈L$,
+jest to pierwiastek pewnego wielomianu $W=∑_{i=0}^n k_iX^i$, gdzie $k_i ∈ K$.
+Zatem
+$$0=f(0)=f(W(α)) = f(∑_{i=0}^n k_iα^i) = ∑_{i=0}^n f(k_iα^i) = ∑_{i=0}^n k_if(α)^i = W(f(α)),$$
+czyli $f(α)$ też jest pierwiastkiem tego wielomianu.
+Takich pierwiastków jest skończenie wiele, a funkcja $f$ jest iniektywna,
+więc je permutuje.
+W szczególności $α$ jest wartością $f$ dla jakiegoś pierwiastka $W$.
+
+Zatem monomorizm $f$ jest surjektywny.
+% każdy l∈L jest pierwiastkiem
+\fi
+
+
+
+\section*{4/5}
+Załóżmy, że $K ⊂ L ⊂ \hat{K}$ i rozszerzenie $K ⊂ L$ jest radykalne.
+% dla każdego a∈L wielomian minimalny W_a ma tylko jeden pierwiastek
+% (wielokrotny) w \hat{K}
+
+Każdy homomorfizm, który jest identycznością na $L$, jest w szczególności
+identycznością na $K$, więc $G(\hat{K}/K) ⊇ G(\hat{K}/L)$.
+
+Każdy automorfizm $f: \hat{K} → \hat{K}$ stały na $K$ permutuje
+pierwiastki wielomianów z $K[X]$.
+Wielomian minimalny nad $K$ elementu radykalnego nad $K$
+ma tylko jeden pierwiastek, więc jest on zachowywany przez $f$.
+Każdy element $L$ jest radykalny nad $K$,
+więc każdy taki $f$ jest identycznością na $L$.
+Zatem $G(\hat{K}/K) ⊆ G(\hat{K}/L)$.
+
+\end{document}

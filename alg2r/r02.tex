@@ -1,0 +1,232 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{Algebra 2R lista 2}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+\section*{1/5d}
+\begin{align*}
+ & w ∈ ℚ[X_1, X_2], w(X^3, X^2) = 0 \\
+⇒& w ∈ ℚ[X_2][X_1], w(X^3)(X^2) = 0 \\
+⇒& v=w(X^3) ∈ ℚ[X_2][X^3] ≅ ℚ[X^3][X_2], v(X^2) = 0 \\
+⇒& v=(X^2-X_2)q(X_2), \\
+ &\text{w iloczynie }X\text{ występuje tylko w potędze podzielnej przez }3 \\
+\end{align*}
+$w ∈ ℚ[X_1, X_2], w(X^3, X^2)$
+
+$w ∈ ℚ[X_1][X_2]$
+$w(X^2) ∈ ℚ[X_1][X^2] ≅ ℚ[X^2][X_1]$
+
+%wielomian ∈ Q[X^3][X_2]
+\fi
+
+\section*{2/3D}
+Załóżmy, że $f: K→K$ jest niezerowym endomorfizmem ciała $K$.
+Niech $Fix(f) = \{ x ∈ K ∶ f(x) = x \}$.
+
+Jeśli $x,y ∈ Fix(f)$, tzn. $f(x) = x$ i $f(y) = y$, to z homomorficzności:
+\begin{itemize}
+	\item $f(0) = 0$,
+	\item $f(1) = 1$,
+	\item $f(-x) = -f(x) = -x$,
+	\item $f(x^{-1}) = (f(x))^{-1} = x^{-1}$,
+	\item $f(x+y) = f(x)+f(y)=x+y$,
+	\item $f(xy) = f(x)f(y) = xy$,
+\end{itemize}
+więc $Fix(f)$ zawiera $0$ i $1$ oraz jest zamknięte na
+negację, odwracanie, dodawanie i mnożenie.
+Zatem $Fix(f)$ jest podciałem $K$.
+
+
+
+\section*{2/4}
+Załóżmy, że $K$ jest ciałem skończonym charakterystyki $p$.
+
+\subsection*{(a)D}
+Niech $K=F(q)$, $q = p^k$, $f ∈ K[X]$ to wielomian nierozkładalny stopnia $m$.
+
+Wtedy stopień rozszerzenia $K$ o pierwiastek $a$ wynosi
+$[K(a) ∶ K] = m$, więc $a ∈ K(a) ≅ F(q^m)$.
+% tu coś może zepsułem :)
+Ciało rozkładu $f$ nad $K$ jest rozszerzeniem $K[X]/(f)$
+(takie ciało mamy po pierwszym kroku konstrukcji ciała rozkładu).
+Rozszerzenie z $K$ do $K[X]/(f)$ jest stopnia $m$.
+Wiemy, %z wykładu?
+że potęgi $a^k$ dla $0 ≤ k < m$ są liniowo niezależne,
+więc $K(a)$ jest stopnia $m$ nad $K$
+i z jedyności ciał skończonych o danej mocy $K(a) ≅ K[X]/(f)$.
+
+% tu może coś zepsułem :)
+W $F(q^m)$ dla każdego $x≠0$ zachodzi $x^{q^m-1} = 1$,
+więc $X^{q^m-1} - 1 ∈ (f)$.
+Zatem $f$ dzieli $X^{q^m-1} -1$, gdzie $q^m-1 ≡ p^{mk}-1 \not≡ 0 \pmod{p}$.
+
+\iffalse
+Niech $f ∈ K[X]$ to wielomian nierozkładalny i
+$L$ to jego ciało rozkładu nad $K$.
+
+Konstrukcja ciała rozkładu $L$ polega na rozszerzaniu ciała
+$K(a_1, …, a_{i-1})$ o pierwiastek $a_i$ czynnika nierozkładalnego $f$,
+więc wiemy w szczególności, że
+$$[K(a_1, …, a_{i-1})(a_i) ∶ K(a_1, …, a_{i-1})] < ∞.$$
+Zatem stopień rozszerzenia
+$$[L∶K] = [K(a_1, …, a_{r-1})(a_r) ∶ K(a_1, …, a_{r-1})]…[K(a_1) ∶ K]$$
+jest skończony i ciało $L$ jest skończone.
+
+Skoro $f = c(X-a_1)…(X-a_r)$ jest nierozkładalny w $K[X]$, to pierwiastki $a_i$ są
+niezerowe.
+W skończonym ciele $L$ oznacza to, że są one pierwiastkami z jedynki.
+Żaden z nich nie może mieć najmniejszej krotności $kp$ ($p \nmid k$), bo
+jeśli $0 = x^{kp} - 1 = (x^k-1)^p$, to $x$ ma krotność $k<p$.
+
+Niech $n$ to NWW pierwotnych krotności pierwiastków z jedynki $a_i$,
+ta liczba jest niepodzielna przez $p$.
+Każdy pierwiastek $f$ jest pierwiastkiem $W_n$, więc $f$ dzieli $W_n$.
+\fi
+
+\subsection*{(b)}
+Mamy $n=p^0 n_1$, $p \nmid n_1$.
+Uwaga (3.3) mówi, że każdy pierwiastek $W_n$ ma krotność $p^0 =1$.
+Skoro $f$ dzieli $W_n$, to każdy jego pierwiastek jest też jednokrotny.
+
+\section*{2/5aD}
+Niech $K ⊆ L$ to ciała skończone, $\abs{K} = p^m$, $\abs{L} = p^n$.
+$L$ jest przestrzenią wektorową nad $K$ i
+$\abs{L} =\abs{K}^{[L ∶ K]} = p^{m[L ∶ K]}$,
+więc $n = m[L ∶ K]$.
+
+\end{document}

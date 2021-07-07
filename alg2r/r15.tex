@@ -1,0 +1,262 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+
+% https://tex.stackexchange.com/a/438184
+% https://tex.stackexchange.com/q/528480
+\newunicodechar{∶}{\mathbin{\text{:}}}
+\def\newcolon{%
+  \nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{\text{:}}%
+  \mskip 6mu plus 1 mu \relax}
+\mathcode`:="8000
+{\catcode`:=\active \global\let:\newcolon}
+% colon: for types; ratio∶ (digr :R) for relations (set builder)
+
+
+\begin{document}
+
+\maketitle
+\section*{8/6a}
+Niech $K_1, K_2$ będą ciałami, zaś $R = K_1 × K_2$ i $M$ to $R$-moduł.
+
+Zauważmy, że $V_1 = (1,0)M$ i $V_2 = (0,1)M$ to podmoduły $M$ i $M = V_1 + V_2$.
+Jeśli
+$$(1,0)m = (0,1)m' \quad \text{ dla }m, m' ∈ M,$$
+to
+$$(0,1)(1,0)m = (0,0)m = 0 = (0,1)(0,1)m' = (0,1)m',$$
+zatem $V_1 ∩ V_2 = \{ 0 \}$.
+Stąd $M = V_1 ⊕ V_2 ≅ V_1 × V_2$.
+
+Na $V_1$ możemy określić strukturę $K_1$-modułu
+przez $k_1 v_1 = (k_1,0)v_1$, podobnie z $V_2$.
+
+Każdy $v_1∈V_1$ jest równy $(1,0)v_1'$ dla pewnego $v_1' ∈ M$,
+analogicznie z $v_2 ∈ V_2$.
+Zatem
+\begin{align*}
+(k_1, k_2)(v_1 + v_2)
+&= (k_1,k_2)v_1 + (k_1,k_2)v_2
+= (k_1,k_2)(1,0)v_1' + (k_1,k_2)(0,1)v_2' \\
+&= (k_1,0)(1,0)v_1' + (0,k_2)(0,1)v_2'
+= (k_1,0)v_1 + (0,k_2)v_2 \\
+&= k_1v_1 + k_2v_2.
+\end{align*}
+
+
+\section*{9/1b}
+Niech $I,J ◁ R$.
+
+Niech
+$f: R/I × R/J → R/(I+J)$,
+$f(r+I,s+J) = rs + (I + J)$.
+Jest to epimorfizm dwuliniowy,
+więc z uniwersalnej własności produktu tensorowego
+istnieje epimorfizm $\tilde{f}: R/I ⊗_R R/J → R/(I+J)$
+taki,
+że $f = \tilde{f} ∘ ⊗$.
+
+Weźmy $(r+I)⊗(s+J) ∈ \ker \tilde{f}$.
+Z dwuliniowości mamy
+$$(r+I)⊗(s+J) = (r+I)⊗s(1+J) = (rs+I)⊗(1+J).$$
+Z definicji $f$ mamy $rs ∈ I+J$, więc $r = x+y$,
+gdzie $x∈I$ i $y ∈ J$.
+Stąd
+\begin{align*}
+	(rs+I)⊗(1+J) &= (x+y+I)⊗(1+J) = ((x+I)+(y+I))⊗(1+J) \\
+				 &= (x+I)⊗(1+J)+(y+I)⊗(1+J) \\
+				 &= 0⊗(1+J) + (1+I)⊗(y+J) = 0.
+\end{align*}
+Jądro $\tilde{f}$ jest trywialne, zatem jest to izomorfizm.
+
+\section*{9/2a}
+Niech $G$ będzie grupą abelową.
+
+Każdy element $ℚ ⊗_ℤ G$ jest postaci
+$$∑_{i∈I} \frac{p_i}{q_i} ⊗ g_i, \quad \text{ gdzie }|I|<∞, p_i∈ℤ, q_i ∈ ℕ_+, g_i ∈ G.$$
+
+Możemy zdefiniować mnożenie elementów tej grupy przez
+liczby wymierne zgodne z mnożeniem liczb wymiernych:
+$$ \frac{p}{q} \left( \frac{r}{s} ∑_{i∈I} \frac{p_i}{q_i} ⊗ g_i \right)
+=  \frac{p}{q} \left( ∑_{i∈I} \frac{r p_i}{s q_i} ⊗ g_i \right)
+=  ∑_{i∈I} \frac{p r p_i}{q s q_i} ⊗ g_i
+=  \frac{pr}{qs} \left( ∑_{i∈I} \frac{p_i}{q_i} ⊗ g_i \right). $$
+To działanie naturalnie rozszerza mnożenie skalarne przez liczby całkowite.
+Rozdzielność mnożenia względem dodawania wektorów i to, że mnożenie
+przez $\frac{1}{1}$ jest identycznością są jasne.
+
+Jest to grupa podzielna, bo możemy mnożyć przez $\frac{1}{n}$.
+
+Załóżmy, że $nx = 0$ dla pewnego $n∈ℕ_+$ i $x∈ ℚ ⊗_ℤ G$.
+Wtedy $$x = \frac{n}{n} x = \frac{1}{n} nx = 0,$$
+więc grupa jest beztorsyjna.
+
+Można sprawdzić rozdzielność mnożenia względem dodawania skalarów:
+\begin{align*}
+\left(\frac{p}{q} + \frac{r}{s} \right) ∑_{i∈I} \frac{p_i}{q_i} ⊗ g_i
+&= \frac{ps+qr}{qs} ∑_{i∈I} \frac{p_i}{q_i} ⊗ g_i
+= ∑_{i∈I} \frac{(ps+qr)p_i}{qs q_i} ⊗ g_i \\
+&= ∑_{i∈I} \left( \frac{ps p_i}{qs q_i} + \frac{qr p_i}{qs q_i} \right) ⊗ g_i
+= ∑_{i∈I} \frac{ps p_i}{qs q_i} ⊗ g_i + ∑_{i∈I} \frac{qr p_i}{qs q_i} ⊗ g_i \\
+&= \frac{p}{q} ∑_{i∈I} \frac{p_i}{q_i} ⊗ g_i + \frac{r}{s} ∑_{i∈I} \frac{ p_i}{q_i} ⊗ g_i
+\end{align*}
+Zatem jest to $ℚ$-moduł, czyli przestrzeń liniowa nad $ℚ$.
+
+\section*{9/3}
+Załóżmy, że $R$ jest pierścieniem przemiennym z jedynką i
+$M$ jest $R$-modułem prostym.
+Ustalmy pewien niezerowy $a∈M$.
+
+Homomorfizm $(r ↦ ra) : R → M$ jest surjektywny, bo
+jest niezerowy, a jego obraz jest podmodułem modułu prostego $M$.
+
+Niech $f: R → \End_R(M)$, $f(r)(m) = rm$.
+Pokażemy, że to epimorfizm.
+
+Weźmy $h ∈ \End_R(M)$.
+Mamy $h(a) = ra$ dla pewnego $r∈R$.
+Więc
+$$(m ↦ h(m) - rm) = h - f(r)$$
+jest endomorfizmem $M$
+z nietrywialnym jądrem, a więc homomorfizmem zerowym.
+Zatem $h=f(r)$.
+
+Z zasadniczego twierdzenia o homomorfizmie
+$R/I ≅ \End_R(M)$ dla $I=\ker f ◁ R$.
+$\End_R(M)$ jest ciałem z lematu Schura,
+a skoro $R/I$ jest ciałem, to $I$ jest ideałem
+maksymalnym $R$.
+
+\end{document}
