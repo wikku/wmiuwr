@@ -1,0 +1,88 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{cmll}
+\usepackage{bussproofs}
+\setcounter{secnumdepth}{0}
+
+\title{Logika liniowa: ćwiczenia}
+\author{Wiktor Kuchta}
+\date{27 kwietnia 2021}
+
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+
+
+\begin{document}
+
+\maketitle
+
+\textbf{Zadanie 1.}
+Udowodnij
+$⊢ (A \with B) \with C \multimapboth A \with (B \with C)$
+oraz
+$⊢ (A ⊗ B) ⊗ C \multimapboth A ⊗ (B ⊗ C)$
+w rachunku sekwentów logiki liniowej.
+
+\textbf{Zadanie 2.}
+Udowodnij
+$⊢ (\wn A \parr \wn B) \multimapboth (\wn (A ⊕ B))$
+w rachunku sekwentów logiki liniowej.
+
+\textbf{Zadanie 3.}
+Uzasadnij, że
+w rachunku sekwentów logiki liniowej
+nie da się udowodnić pustego sekwentu $⊢$.
+Wywnioskuj, że nie da się mieć jednocześnie $⊢ A$ i $⊢ A^⊥$.
+
+\textbf{Zadanie 4.}
+W liniowej intuicjonistycznej dedukcji naturalnej
+możemy średnikiem oddzielać formuły nieograniczone (po lewej) i formuły liniowe.
+Mamy aksjomaty
+\begin{center}
+	\AxiomC{}
+	\RightLabel{$u$}
+	\UnaryInfC{$Γ; A ⊢ A$}
+	\DisplayProof
+	\hskip 1em
+	\AxiomC{}
+	\RightLabel{$v$}
+	\UnaryInfC{$(Γ, A); · ⊢ A$}
+	\DisplayProof
+\end{center}
+Kropka ($·$) oznacza brak formuł.
+Możemy wprowadzić nowy spójnik ,,nieograniczonej implikacji'':
+\begin{center}
+	\AxiomC{$(Γ, A); Δ ⊢ B$}
+	\RightLabel{$⊃$I}
+	\UnaryInfC{$Γ; Δ ⊢ A ⊃ B$}
+	\DisplayProof
+	\hskip 1em
+	\AxiomC{$Γ; Δ ⊢ A ⊃ B$}
+	\AxiomC{$Γ; · ⊢ A$}
+	\RightLabel{$⊃$E}
+	\BinaryInfC{$Γ; Δ ⊢ B$}
+	\DisplayProof
+\end{center}
+Uzasadnij, że w prawej przesłance reguły eliminacji niepoprawne byłoby zastąpienie
+$·$ przez $Σ$,
+tzn. niepoprawne byłoby zezwolenie na liniowe założenia w prawej przesłance.
+\end{document}
