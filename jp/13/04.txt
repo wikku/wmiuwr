@@ -1,0 +1,49 @@
+t ∷= x | λx. t | let x = t in t | t t
+T ∷= B | T → T | X
+S ∷= T | ∀X1…Xn. T
+Γ ∷= · | x : S, Γ
+η  podstawienia zmiennych typowych
+σ  podstawienia zmiennych termowych
+
+Najpierw definiujemy predykaty dla typów bez zmiennych
+V_A (v)  ⇔  ⊤
+V_T1→T2 (v)  ⇔  ∀u. V_T1 (u) ⇒ E_T2 (v u)
+
+Dla typów ze zmiennymi sprawdzamy wszystkie możliwe podstawienia
+U_T (v)  ⇔  ∀η. V_ηT (v)
+
+E_T (t)  ⇔  t →* v ∧ U_T (v)
+
+
+Lemat. (12.1.5)
+
+
+Jeśli  x₁: ∀X₁…. T₁ ⊢ t : T  i  ⊢ v₁ : T₁…  i  U_T₁ (v₁)…  to
+E_T (σt)  gdzie  σ = [x₁↦v₁]…
+
+T-VAR
+x:∀X₁…. T in Γ
+————————————————————
+Γ ⊢ x : [X₁↦T₁…]T
+
+Mamy v1 : T i U_T(v1)
+chcemy E_T(v1), co wynika wprost z definicji E.
+
+T-ABS
+OK?
+
+T_APP
+OK?
+
+T-LET
+Γ ⊢ t₁ : T₁   x:∀X₁…. T₁, Γ ⊢ t₂ : T₂   X₁… ∩ ftv(Γ) = ∅
+————————————————————————————————————————————————————————
+             Γ ⊢ let x = t₁ in t₂ : T₂
+
+Z zał. ind. E_T₁ (σt₁), więc t₁ →* v₀ i U_T₁ (v₀).
+Z zał. ind. E_T₂ ([x↦v₀]σt₂), więc [x↦v₀]σt₂ →* v i U_T₂ (v).
+
+let x = σt₁ in σt₂
+→* let x = v₀ in σt₂
+→* [x↦v₀]σt₂
+→* v
