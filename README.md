@@ -27,3 +27,9 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * Funkcje analityczne R
 * Równania różniczkowe 1 R
 * Seminarium: Logiki nieklasyczne: teoria i zastosowania
+
+## Semestr zimowy 2021/2022
+* Języki programowania
+* Rachunek prawdopodobieństwa dla informatyków
+* Systemy operacyjne
+* Topologia algebraiczna 1
