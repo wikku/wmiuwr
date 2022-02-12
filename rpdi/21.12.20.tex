@@ -1,0 +1,73 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{microtype}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\DeclareMathOperator{\EX}{E}
+
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∑}{\sum}
+
+\begin{document}
+
+\maketitle
+
+\section*{4/3}
+Mamy chód losowy na liczbach naturalnych,
+gdzie z prawdopodobieństwem $p$ idziemy w lewo o $1$,
+a z prawdopodobieństwem $1-p$ w prawo o $1$.
+Chcemy się dowiedzieć, jakie jest prawdopodobieństwo,
+że startując z $b$ kiedyś osiągniemy $0$.
+
+Na początek rozpatrzmy przypadek $b=1$.
+Zero możemy osiągnąć tylko w nieparzystą liczbę kroków.
+Aby osiągnąć zero po raz pierwszy po dokładnie $2k+1$ krokach,
+musimy wykonać $k+1$ kroków w lewo i $k$ w prawo.
+Ostatni krok musi być krokiem w lewo, a w trakcie pierwszych $2k$
+kroków zawsze musiało być wykonanych nie więcej kroków w lewo niż w prawo.
+Liczba możliwych takich ścieżek to liczba Catalana $C_n$.
+
+Prawdopodobieństwo osiągnięcia $0$ zaczynając z $b=1$ to będzie zatem
+$$∑_{k=0}^∞ C_k p^{k+1} (1-p)^k.$$
+Do obliczenia szeregu możemy skorzystać z funkcji tworzącej liczb Catalana
+$$c(x) = ∑_{k=0}^∞ C_n x^n = \frac{1-\sqrt{1-4x}}{2x},$$
+wtedy otrzymujemy
+\begin{align*}
+∑_{k=0}^∞ C_k p^{k+1} q^k
+&= p∑_{k=0}^∞ C_k p^k q^k \\
+&= p c(p(1-p)) \\
+&= p\frac{1-\sqrt{1-4p(1-p)}}{2p(1-p)} \\
+&= \frac{1-\sqrt{1-4p+4p^2}}{2(1-p)} \\
+&= \frac{1-\abs{1-2p}}{2(1-p)} \\
+&= \max \left\{\frac{p}{1-p}, 1\right\}.
+\end{align*}
+
+Zauważmy,
+że jest to ogólniej prawdopodobieństwo osiągnięcia $n$ zaczynając z $n+1$,
+zatem prawdopodobieństwo osiągnięcia $0$ zaczynając z $b$ to będzie jego $b$-ta
+potęga:
+$$\max \left\{1, \left(\frac{p}{1-p}\right)^b \right\}.$$
+
+\section*{4/10}
+Algorytm losowo produkuje litery z alfabetu 26-znakowego.
+Jaka jest spodziewana ilość wystąpień słowa ,,robak'' w ciągu 1000000 znaków?
+
+Niech $X_i$ to indykator zdarzenia,
+że na pozycji $i$ w ciągu mamy słowo ,,robak''.
+Wtedy $\EX[X_i] = P(X_i=1) = 26^{-5}.$
+
+Zatem oczekiwana liczba wystąpień to
+$$\EX\left[∑_{k=1}^{999996} X_i\right] = ∑_{k=1}^{999996} \EX[X_i]
+= \frac{999996}{26^5}.$$
+
+\end{document}

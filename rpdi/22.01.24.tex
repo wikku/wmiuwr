@@ -1,0 +1,102 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\DeclareMathOperator{\EX}{E}
+\DeclareMathOperator{\Var}{Var}
+
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{μ}{\mu}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≠}{\ne}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+
+\begin{document}
+
+\maketitle
+
+\section*{5/16}
+Niech $B, B_1, …, B_n$ to niezależne zmienne losowe przyjmujące z równym
+prawdopodobieństwem wartości $-1$ i $1$.
+
+Niech $S = B + p_1B_1 + … + p_nB_n.$
+Interesuje nas
+$$\Pr\left( \sgn S ≠ \sgn B\right),$$
+co możemy oszacować z góry przez
+$$\frac{1}{2}\Pr \left(\abs{∑_{i=1}^n p_i B_i} > 1\right),$$
+bo $X = ∑_{i=1}^n p_i B_i$ musi mieć moduł większy od jeden, ale
+z symetrii z prawdopodobieństwem $\frac{1}{2}$ ma znak równy $B$.
+
+Zauważmy, że $μ = \EX[X] = \EX[B_i] = 0$ i z wzoru na wariancję kombinacji liniowej:
+\begin{align*}
+	σ^2 = \Var(X) &= ∑_{i=1}^n p_i^2 \Var(B_i) = ∑_{i=1}^n p_i^2 (\EX[B_i^2] - \EX[B_i]^2) = ∑_{i=1}^n p_i^2.
+\end{align*}
+
+Nierówność Czebyszewa daje nam
+$$\Pr(|X|>1) ≤ \Pr\left(|X-μ| ≥ \frac{1}{σ}σ\right) ≤ σ^2,$$
+zatem
+$$\Pr(\sgn S ≠ \sgn B) ≤ \frac{1}{2}∑_{i=1}^n p_i^2.$$
+
+\newpage
+
+\section*{5/18}
+
+Mamy graf $n$-wierzchołkowy,
+w którym krawędź między wierzchołkami istnieje z prawdopodobieństem $p$.
+
+Niech $X_i$ to indykator mówiący, czy wierzchołek $i$ jest izolowany,
+tzn. jego stopień wynosi $0$, a $X = ∑_{i=1}^n X_i$.
+Wtedy
+\begin{align*}
+	\EX [X_i] &= (1-p)^{n-1}, \\
+	\EX [X] &= n \EX [X_i] = n (1-p)^{n-1}, \\
+	\Var(X) &= \EX[X^2] - \EX[X]^2 \\
+			&= ∑_{i=1}^n \EX[X_i^2] + ∑_{\stackrel{1 ≤ i, j ≤ n}{i≠j}} \EX[X_i X_j] - (n(1-p)^{n-1})^2 \\
+			&= ∑_{i=1}^n \EX[X_i] + ∑_{\stackrel{1 ≤ i, j ≤ n}{i≠j}} (1-p)^{2n-3} - n^2(1-p)^{2n-2} \\
+			&= n (1-p)^{n-1} + n(n-1) (1-p)^{2n-3} - n^2(1-p)^{2n-2}.
+\end{align*}
+
+Teraz przyjmijmy $p = \frac{c \ln n}{n}$.
+Zauważmy, że
+$$\left(1- \frac{c \ln n}{n}\right)^{n-1} \sim \left(1- \frac{c \ln n}{n}\right)^n \sim e^{-c \ln n} \sim n^{-c},$$
+zatem
+$$\EX[X] = n (1-p)^{n-1} \sim n^{1-c} →
+\begin{cases}
+	0, &\text{ gdy }c > 1 \\
+	1, &\text{ gdy }c = 1 \\
+	∞, &\text{ gdy }c < 1
+\end{cases}.$$
+
+Korzystając z nierówności Markowa otrzymujemy,
+że dla $c > 1$ duże grafy prawie na pewno nie mają wierzchołków izolowanych:
+$$\Pr(X ≥ 1) ≤ \frac{\EX[X]}{1} → 0.$$
+
+% Tu może coś nie tak/nie o to chodzi
+Prawdopodobieństwo, że jakiś wierzchołek jest izolowany wynosi
+$$(1-p)^{n-1} \stackrel{\text{Bernoulli}}{≥} 1-(n-1)p ≥ 1- \frac{c(n-1)}{n \ln n} ≥ 1 - \frac{c}{\ln n},$$
+zatem
+$$\Pr(X=0) ≤ \frac{c}{\ln n}.$$
+
+
+\end{document}

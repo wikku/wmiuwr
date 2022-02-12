@@ -1,0 +1,50 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.16}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+\DeclareMathOperator{\EX}{E}
+
+\newunicodechar{∑}{\sum}
+
+\begin{document}
+
+\maketitle
+
+\section*{5/11}
+Niech $X \sim B(n,p)$ i $Y \sim B(m,p)$ będą niezależnymi zmiennymi losowymi.
+\begin{align*}
+	\shortintertext{Z definicji możemy obliczyć funkcję tworzącą momenty $X$:}
+	M_X(t)
+		&= \EX[e^{tX}] \\
+		&= ∑_{i=0}^n e^{ti} \binom{n}{i}p^i(1-p)^{n-i} \\
+		&= ∑_{i=0}^n \binom{n}{i} (e^t p)^i (1-p)^{n-i} \\
+		&= (e^t p + 1 - p)^n. \\ \\
+	\shortintertext{To daje nam ogólny wzór, więc dla zmiennej $Y$:}
+	M_Y(t)
+		&= (e^t p + 1 - p)^m.
+		\\
+		\\
+	\shortintertext{Korzystając z niezależności obliczamy funkcję tworzącą momenty $X+Y$:}
+	M_{X+Y}(t)
+		&= \EX[e^{t(X+Y)}] \\
+		&= \EX[e^{tX} e^{tY}] \\
+		&= \EX[e^{tX}] \EX[e^{tY}] \\
+		&= (e^t p + 1 - p)^n (e^t p + 1 - p)^m \\
+		&= (e^t p + 1 - p)^{n+m}.
+\end{align*}
+Skoro funkcje tworzące momenty jednoznacznie wyznaczają rozkład,
+to
+$$X+Y \sim B(n+m, p).$$
+
+\end{document}

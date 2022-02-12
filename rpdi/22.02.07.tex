@@ -1,0 +1,71 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\DeclareMathOperator{\EX}{E}
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{≈}{\approx} % Digr ?2
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+
+
+\begin{document}
+
+\maketitle
+
+\section*{7/8}
+Niech $X_0=0$, $X_{j+1} \sim \mathcal{U}[X_{j}, 1]$ i $Y_k=2^k(1-X_k)$.
+Zauważmy, że $\EX[X_k] = 1 - 2^{-k}$,
+więc $\EX[Y_k] = 2^k(1-(1-2^{-k}))=1$.
+
+Ogólniej,
+$$\EX(X_{k+1} \mid X_1=x_1, …, X_k=x_k) = \frac{x_k+1}{2},$$ tzn.
+$$\EX(X_{k+1} \mid X_1, …, X_k) = \frac{X_k+1}{2}.$$
+
+Z liniowości wartości oczekiwanej
+\begin{align*}
+	\EX(2^{k+1}(1-X_{k+1}) \mid X_1,…,X_k)
+		&= 2^{k+1}\left(1-\frac{X_k+1}{2}\right) \\
+		&= 2^{k+1} - 2^kX_k - 2^k \\
+		&= 2^k(1-X_k),\\
+	\EX(Y_k \mid X_1,…,X_k) &= Y_k.
+\end{align*}
+Ciąg $(Y_i)$ jest martyngałem względem $(X_i)$,
+a więc też względem samego siebie.
+
+\section*{7/13}
+Liczbę zepsutych laptopów możemy modelować zmienną o rozkładzie Bernoulliego
+$X \sim B(1000, p)$ o wartości oczekiwanej $\EX[X] = 1000p$ i wariancji $\Var(X) = p(1-p)$.
+Skoro liczba prób jest duża, to $X$ możemy aproksymować rozkładem normalnym,
+a $X/1000$ (szansę awarii) aproksymować zmienną $Y \sim N(p, \frac{p(1-p)}{1000})$.
+
+$$\Pr(\frac{|Y-p|}{\sqrt{p(1-p)/1000}} < x) = 1 - 2Φ(-x) = 2Φ(x)-1.$$
+Chcemy $2Φ(x)-1 = 0.9$, więc $x = Φ^{-1}(0.95) ≈ 1.645$.
+$$\Pr(|Y-p| < x{\sqrt{p(1-p)/1000}}) ≈ 0.95.$$
+
+\iffalse
+
+% CHYBA NAMIESZANE
+
+Wstawiając pomiar $p=0.016$ otrzymujemy
+$x{\sqrt{p(1-p)/1000}} ≈ 0.00653$,
+więc przedział ufności to $0.016 ± 0.00653$.
+
+\fi
+
+\end{document}

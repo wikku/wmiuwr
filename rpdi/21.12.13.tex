@@ -1,0 +1,80 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+% ŹLE ZROZUMIANE — ostatnia kula nie musi być czarna
+\section*{4/2}
+W urnie mamy $b$ kul białych i $c$ czarnych.
+Po wyciągnięciu kuli z urny wrzucamy ją z powrotem
+i dokładamy $d$ kul tego samego koloru.
+Jakie jest prawdopodobieństwo wyciągnięcia $k$ kul czarnych w $n$ losowaniach?
+
+Weźmy przykładowo $k=3$, $n=5$ i spójrzmy na prawdopodobieństwo
+wybrania czarnej kuli za pierwszym, trzecim i piątym razem:
+$$
+\frac{c}{c+b} ·
+\frac{b}{c+b+d} ·
+\frac{c+d}{c+b+2d} ·
+\frac{b+d}{c+b+3d} ·
+\frac{c+2d}{c+b+4d}.
+$$
+Liczniki to liczby kul czarnych bądź białych w urnie,
+a mianowniki to liczby wszystkich kul w urnie.
+Rozwiązaniem jest suma wszystkich prawdopodobieństw takiej postaci.
+
+Mianowniki zawsze będą takie same
+— po $l$ losowaniach w urnie jest $c + b + ld$ kul.
+Liczniki się zawsze wymnożą do $∏_{l=0}^{k-1} (c+ld) ∏_{m=0}^{n-k} (b+md)$
+— po $l$ wylosowaniach kul czarnych w puli jest $c+ld$ kul czarnych,
+a po $m$ wylosowaniach kul białych $b+md$ kul białych.
+
+Liczba możliwych kolejności losowania to $\binom{n-1}{k-1}$,
+bo interesują nas sytuacje, gdzie ostatnie losowanie daje nam kulę czarną.
+
+Zatem sumarycznie prawdopodobieństwo wynosi
+$$\frac{∏_{l=0}^{k-1}(c+ld) ∏_{l=0}^{n-k}(b+ld)}{∏_{l=0}^{n-1}(c+b+ld)}\binom{n-1}{k-1}.$$
+
+\fi
+
+\section*{4/6}
+
+Przesyłane siecią pliki mogą z prawdopodobieństem $p$ być poprawnie przesłane,
+z prawdopodobieństwem $q$ być przesłane, ale z pewnymi uszkodzeniami
+albo z prawdopodobieństwem $1-p-q$ w trakcie przesyłu sieć może się zawiesić.
+Jakie jest prawdopodobieństwo, że w trakcie wielokrotnego (niezależnego)
+przesyłania plików poprawne przesłanie nastąpi przed zawieszeniem sieci?
+
+Inaczej mówiąc, próbujemy przesłać pliki do skutku.
+Prawdopodobieństwo zdarzenia,
+że zanim się udało, przesłaliśmy $k$ razy (z uszkodzeniami),
+wynosi $q^k p$.
+
+Rozwiązaniem jest suma takich prawdopodobieństw dla wszystkich możliwych $k$:
+$$∑_{k=0}^∞ q^kp = p∑_{k=0}^∞ q^k = p \frac{1}{1-q} = \frac{p}{1-q}.$$
+
+
+\end{document}

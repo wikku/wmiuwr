@@ -1,0 +1,95 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\DeclareMathOperator{\EX}{E}
+\DeclareMathOperator{\Var}{Var}
+
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{σ}{\sigma}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≠}{\ne}
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+
+\begin{document}
+
+\maketitle
+
+\section*{6/9}
+Niech $nX \sim B(n,p)$, wtedy $\EX[X] = p$ i $\Var(X) = σ^2 = \frac{1}{n}p(1-p) ≤ \frac{1}{4n}$.
+
+Z nierówności Czebyszewa możemy oszacować
+\begin{align*}
+	\Pr(|X-p|>δ) =
+	\Pr(|X-p|>\frac{δ}{σ}σ) ≤ \frac{σ^2}{δ^2}.
+\end{align*}
+
+\begin{enumerate}[i)]
+	\item
+		Jeśli $p< \frac{3}{10} $; to $σ^2 ≤ \frac{1}{n} · \frac{3}{10} · \frac{7}{10} = \frac{21}{100n}.$
+		Wstawiając do powyższego i przyjmując $δ= \frac{1}{100} $ otrzymujemy
+		$$\Pr(|X-p|> \frac{1}{100} ) ≤ \frac{2100}{n},$$
+		co jest mniejsze niż $ \frac{1}{20} $ dla $n≥42000$.
+	\item Jeśli nic nie wiemy o $p$, to
+		$$\Pr(|X-p|> \frac{1}{100} ) ≤ \frac{2500}{n},$$
+		co jest mniejsze niż $ \frac{1}{20} $ dla $n≥50000$.
+\end{enumerate}
+
+
+\newpage
+
+\section*{6/11}
+Niech $X_i$ dla $i=0,1,…$ będzie ciągiem wzajemnie niezależnych zmiennych
+losowych o rozkładzie $\Pr(X_i=e^i)=\Pr(X_i=e^{3i})= \frac{1}{2}$ i $N \sim \mathcal{N}(0,1)$.
+
+Niech $Z_i ∈ \{-1,1\}$ tak, aby $X_i = e^{(2+ Z_i) i}$.
+Zauważmy, że $\frac{1}{n}∑_{i=1}^n Z_i \rightsquigarrow \mathcal{N}( 0 , 1 )$.
+\begin{enumerate}[a)]
+	\item
+		\begin{align*}
+			X_i^{\frac{1}{in}} &= e^{\frac{(2+Z_i)i}{in}} = e^{\frac{2+Z_i}{n}}, \\
+			∏_{i=1}^{n+2018} X_i^{\frac{1}{in}} &= e^{\frac{1}{n}∑_{i=1}^{n+2018} (2+Z_i)}
+			→ e^{2+N}. \\
+			\Pr\left(∏_{i=1}^{n+2018} X_i^{\frac{1}{in}} < x\right) &≈ \Pr(2+N < \ln x) = Φ\left( \ln x - 2\right).
+		\end{align*}
+	\iffalse
+	% ŹLE
+	\item
+		\begin{align*}
+			\frac{X_i^{\frac{1}{i\sqrt{n}}}}{e^{\frac{2}{\sqrt{n}}}} &=
+				\frac{e^{\frac{(2+Z_i)i}{i\sqrt{n}}}}{e^{\frac{2}{\sqrt{n}}}} =
+				e^{\frac{(2+Z_i)}{\sqrt{n}}-\frac{2}{\sqrt{n}}} = % ≠ !!!
+				e^{\frac{Z_i}{n}}, \\
+			∏_{i=1}^{n+2018} \frac{X_i^{\frac{1}{i\sqrt{n}}}}{e^{\frac{2}{\sqrt{n}}}} &\rightarrow e^{N}. \\
+			\Pr\left(∏_{i=1}^{n+2018} \frac{X_i^{\frac{1}{i\sqrt{n}}}}{e^{\frac{2}{\sqrt{n}}}} < x\right) &≈
+			\Pr(N < \ln x) = Φ\left( \ln x \right).
+		\end{align*}
+	\fi
+\end{enumerate}
+
+
+\end{document}
