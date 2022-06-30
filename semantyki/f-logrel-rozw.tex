@@ -1,0 +1,116 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{stmaryrd}
+\setcounter{secnumdepth}{0}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\newcommand{\Val}{\mathrm{Val}}
+\newcommand{\bool}{\mathsf{bool}}
+\newcommand{\true}{\mathsf{true}}
+\newcommand{\false}{\mathsf{false}}
+\newcommand{\Rel}{\mathrm{Rel}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\LReq}{\stackrel{\mathrm{LR}}{≈}}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{α}{\alpha}
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{τ}{\tau}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+
+
+\begin{document}
+
+\maketitle
+
+{\bf Zadanie 2.}
+
+Załóżmy nie wprost, że istnieje $e$ takie, że $⊢ e : ∀α.\,α$.
+Wtedy z fundamentalnego twierdzenia relacji logicznych mamy
+$⊢ e \LReq e : ∀α.\,α$, tzn. $(e,e) ∈ \E⟦∀α.\,α⟧$.
+A więc $e$ ewaluuje się do $v=Λα.\,e'$ takiego, że $(v,v) ∈ \V⟦∀α.\,α⟧$.
+Z definicji mamy
+$$∀τ_1,τ_2,R∈\Rel[τ_1,τ_2].\,(e'\{α↦τ_1\},e'\{α↦τ_2\})∈\E⟦α⟧_{[α↦(τ_1,τ_2,R)]}.$$
+Weźmy dowolne $τ_1,τ_2$ i
+przyjmijmy $R=∅$, które trywialnie spełnia warunek należenia do $\Rel[τ_1,τ_2]$.
+Wtedy $e'\{α↦τ_1\}$ i $e'\{α↦τ_2\}$ ewaluują się odpowiednio do $v_1$, $v_2$ takich, że
+$(v_1,v_2) ∈ \V⟦α⟧_{[α↦(τ_1,τ_2,R)]} = R = ∅$.
+Sprzeczność.
+
+{\bf Zadanie 3.}
+
+Weźmy $e$ takie, że $⊢ e : ∀α.\,α → α → α$.
+Wtedy z fundamentalnego twierdzenia relacji logicznych mamy
+$(e,e) ∈ \E⟦∀α.\,α→α→α⟧$.
+Rozwijając definicje relacji logicznych otrzymujemy
+\begin{align*}
+	&∃e'.\,e →^* Λα.\,e' \; ∧ \\
+	&∀τ_1, τ_2, R ∈ \Rel[τ_1,τ_2].\\
+	&∃e_1, e_2.\, e'\{α↦τ_1\} →^* λx:τ_1.\,e_1 ∧ e'\{α↦τ_2\} →^* λx:τ_2.\,e_2 \; ∧ \\
+	&∀(v_1,v_2) ∈ R.\\
+	&∃e_1', e_2'.\, e_1\{v_1/x\} →^* λx:τ_1.\,e_1' ∧ e_2\{v_2/x\} →^* λx:τ_2.\,e_2' \; ∧ \\
+	&∀(v_1',v_2') ∈ R.\\
+	&∃(v_1'', v_2'') ∈ R.\, e_1'\{v_1'/x\} →^* v_1'' ∧ e_2'\{v_2'/x\} →^* v_2''.
+\end{align*}
+Wyciągając kwantyfikatory uniwersalne na początek i redukując
+\begin{align*}
+	&e\;τ_i\;v_i\;v_i' → e'\{α↦τ_i\}\;v_i\;v_i' → ^* \\
+	&(λx:τ_i.\,e_i)\;v_i\;v_i' → e_i\{v_i/x\}\;v_i' → ^* \\
+	&(λx:τ_i.\,e_i')\;v_i' → e_i'\{v_i'/x\} →^* v_i''
+\end{align*}
+otrzymujemy
+\begin{align*}
+&∀τ_1,τ_2,R∈\Rel[τ_1,τ_2],(v_1,v_2)∈R,(v_1',v_2')∈R.\, \\
+&∃(v_1'',v_2'')∈R.\,
+e\;τ_1\;v_1\;v_1' →^* v_1'' ∧ e\;τ_2\;v_2\;v_2' →^* v_2''.
+\end{align*}
+
+
+Darmowe twierdzenie w stylu Wadlera otrzymamy, jeśli ograniczmy $R$ do funkcji:
+$$∀τ_1,τ_2,r\colon \Val_{τ_1} → \Val_{τ_2}, v_1 ∈ \Val_{τ_1}, v_1' ∈ \Val_{τ_1}.\,
+r(e\;τ_1\;v_1\;v_1') = e\;τ_2\;r(v_2)\;r(v_2'),$$
+gdzie przez równość rozumiemy równość wartości otrzymanych po ewaluacji ($r$ traktujemy
+jako funkcję call-by-value).
+
+Pokażemy, że funkcja $e$ zawsze zwraca pierwszy argument albo zawsze zwraca drugi argument.
+
+Weźmy dowolne $v$, $v'$ dowolnego typu $τ$.
+Niech $r(\true) = v$, $r(\false) = v'$.
+Mamy
+$$r(e\;\bool\;\true\;\false) = e\;τ\;r(\true)\;r(\false) = e\;τ\;v\;v'.$$
+Co oznacza, że wynik ewaluacji $e\;τ\;v\;v'$ to będzie $v$, jeśli
+$e\;\bool\;\true\;\false$ ewaluuje się do $\true$ i $v'$, jeśli do $\false$
+(darmowe twierdzenie mówi, że któreś z tych musi zajść).
+
+Możemy wywnioskować, że typ $∀α.\,α→α→α$ koduje typ $\bool$ (lub np. \textsf{Unit + Unit}) przez eliminację,
+tzn. jest to typ wartości boolowskich w kodowaniu Churcha.
+Każda wartość tego typu zachowuje się tak samo jak $Λα.\,λt{:}α.\,λf{:}α.\,t$ albo jak $Λα.\,λt{:}α.\,λf{:}α.\,f$.
+
+\end{document}

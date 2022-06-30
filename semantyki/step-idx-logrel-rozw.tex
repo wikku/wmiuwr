@@ -1,0 +1,156 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{stmaryrd}
+\usepackage{mathpartir}
+
+\title{}
+\author{Wiktor Kuchta}
+\date{\vspace{-4ex}}
+
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\bool}{\mathtt{bool}}
+\newcommand{\true}{\mathtt{true}}
+\newcommand{\false}{\mathtt{false}}
+\newcommand{\pack}{\mathtt{pack}}
+\newcommand{\fold}{\mathtt{fold}}
+\newcommand{\CVal}{\mathrm{CVal}}
+\newcommand{\SemType}{\textit{SemType}}
+
+\newcommand{\N}{\mathbb{N}}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+
+\newunicodechar{α}{\alpha}
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{τ}{\tau}
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{≤}{\le}
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{│}{\mid} % Digr vv
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+
+\begin{document}
+
+\maketitle
+
+\section*{Zadanie 1.}
+
+\begin{lemat}[Monotoniczność]
+	Jeśli $(k,v) ∈ \V⟦τ⟧ δ$,
+	to $∀j≤k.\,(j,v) ∈ \V⟦τ⟧δ$.
+	Jeśli $(k,e) ∈ \E⟦τ⟧δ$, to $∀j≤k.\,(j,e) ∈ \E⟦τ⟧δ$.
+\end{lemat}
+
+\begin{proof}
+
+Indukcja względem struktury typu $τ$.
+
+Pierwsza część: załóżmy, że $(k,v) ∈ \V⟦τ⟧δ$.
+
+Przypadek $τ=α$. Mamy $\V⟦α⟧δ = δ(α) ∈ \SemType$.
+Teza wynika z definicji: $$\SemType =
+\{S ∈ \mathcal{P}(ℕ × \CVal) │ ∀(k, v) ∈ S.\,∀j < k.\,(j,v) ∈ S\}.$$
+
+Przypadek $τ=\bool$. Mamy $\V⟦\bool⟧δ = \{(k,b) │ k ∈ ℕ ∧ b ∈ \{\true, \false\}\}$.
+Zatem teza też wynika z definicji.
+
+Przypadek $τ=∀α.\,τ$. Mamy
+$$\V⟦∀α.\,τ⟧δ = \{(k, Λ.\,e) │ (Λ.\,e) ∈ \CVal ∧ ∀S ∈ \SemType.\,(k,e) ∈ \E⟦τ⟧(δ, α↦S)\}.$$
+Zatem $v$ ma postać $Λ.\,e$. Weźmy $j≤k$. Chcemy pokazać, że
+$(j, Λ.\,e) ∈ \V⟦∀α.\,τ⟧δ$.
+Z założenia indukcyjnego lemat zachodzi dla $(k,e) ∈ \E⟦τ⟧(δ, α↦S)$ dla dowolnego $S ∈ \SemType$.
+Zatem $(j,e) ∈ \E⟦τ⟧(δ, α↦S)$ dla dowolnego $S ∈ \SemType$,
+a więc tezę mamy z definicji.
+
+Przypadek $τ=∃α.\,τ$. Mamy
+$$\V⟦∃α.\,τ⟧δ = \{(k, \pack\;v) │ ∃S ∈ \SemType.\,(k,v) ∈ \V⟦τ⟧(δ, α↦S)\}.$$
+Zatem $v$ ma postać $\pack\;v'$.
+Weźmy $S∈\SemType$ świadczące o $(k, \pack\;v') ∈ \V⟦∃α.\,τ⟧δ$
+i $j≤k$.
+Chcemy pokazać, że $(j,\pack\;v') ∈ \V⟦∃α.\,τ⟧δ$.
+Z założenia indukcyjnego lemat zachodzi dla $(k,v') ∈ \V⟦τ⟧(δ, α↦S)$,
+zatem $(j,v') ∈ \V⟦τ⟧(δ, α↦S)$ i teza zachodzi z definicji.
+
+Przypadek $τ=μα.\,τ$. Mamy
+$$\V⟦μα.\,τ⟧δ = \{(k, \fold\;v) │ v ∈ \CVal ∧ ∀j<k.\,(j,v) ∈ \V⟦τ[μα.\,τ/α]⟧δ\}.$$
+Weźmy $j≤k$, wtedy $(j, v) ∈ \V⟦μα.\,τ⟧δ$ wynika łatwo z definicji.
+
+Przypadek $τ=τ_1 → τ_2$. Mamy
+\begin{align*}
+	\V⟦τ_1 → τ_2⟧δ = \{(k, λx.\,e) │\ &(λx.\,e) ∈ \CVal \ ∧ \\ &∀j ≤ k.\,∀v.\,(j,v) ∈ \V⟦τ_1⟧δ ⇒ (j, e[v/x]) ∈ \E⟦τ_2⟧δ\}.
+\end{align*}
+Weźmy $j≤k$, wtedy $(j, v) ∈ \V⟦τ_1 → τ_2⟧δ$ wynika łatwo z definicji.
+
+Druga część: teraz załóżmy, że $(k, e) ∈ \E⟦τ⟧δ$.
+Mamy
+$$\E⟦τ⟧δ = \{(k, e) │ ∀j<k, e'.\,e \searrow^j e' ⇒ (k-j, e') ∈ \V⟦τ⟧δ\}.$$
+Weźmy $j≤k$.
+Chcemy pokazać, że $(j,e) ∈ \E⟦τ⟧δ$.
+Weźmy $j' < j$.
+Wiemy, że $e \searrow^{j'} e'$ implikuje $(k-j', e') ∈ \V⟦τ⟧δ$,
+a chcemy pokazać, że implikuje $(j-j', e') ∈ \V⟦τ⟧δ$.
+Ale to wynika z monotoniczności dla $\V⟦τ⟧δ$, którą przed chwilą udowodniliśmy.
+
+\end{proof}
+
+\section*{Zadanie 2.}
+\begin{lemat}[Kompatybilność aplikacji]
+	$$
+	\inferrule
+		{Δ; Γ ⊨ e_1 : τ_1 → τ_2 \\ Δ; Γ ⊨ e_2 : τ_1}
+		{Δ; Γ ⊨ e_1\,e_2 : τ_2 }
+	$$
+\end{lemat}
+\begin{proof}
+	Weźmy $δ ∈ \mathcal{D}⟦Δ⟧$ i $(k,γ)∈\mathcal{G}⟦Γ⟧δ$.
+	Chcemy pokazać $(k, γ(e_1\,e_2)) ∈ \E⟦τ_2⟧δ$.
+
+	Wiemy, że $(k, γ(e_1)) ∈ \E⟦τ_1 → τ_2⟧δ$,
+	więc pokażemy $(k, γ(e_1\, e_2)) ∈ \E⟦τ_2⟧$
+	korzystając z lematu Bind.
+	Musimy pokazać, że $∀j≤k.\,∀v.\,(j,v) ∈ \V⟦τ_1→τ_2⟧δ ⇒ (j,v\,γ(e_2)) ∈ \E⟦τ_2⟧δ$.
+
+	Zatem weźmy takie $j$ i $v$.
+	Wiemy (z definicji $⊨$ i monotoniczności), że $(j, γ(e_2)) ∈ \E⟦τ_1⟧δ$,
+	więc pokażemy $(j, v\,γ(e_2)) ∈ \E⟦τ_2⟧δ$
+	korzystając z lematu Bind.
+	Musimy pokazać, że $∀l≤j.\,∀u.\,(l,u) ∈ \V⟦τ_1⟧δ ⇒ (l, v\,u) ∈ \E⟦τ_2⟧δ$.
+
+	Zatem weźmy takie $l$ i $u$.
+	Z definicji relacji dla typu funkcyjnego wiemy, że $v$ ma postać $λx.\,e$
+	i $(l, e[u/x]) ∈ \E⟦τ_2⟧δ$.
+	Z Closure under expansion mamy $(l+1, v\, u) ∈ \E⟦τ_2⟧δ$,
+	więc z monotoniczności $(l, v\,u) ∈ \E⟦τ_2⟧δ$ tak, jak chcieliśmy.
+
+\end{proof}
+
+
+
+\end{document}

@@ -33,3 +33,9 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * Rachunek prawdopodobieństwa dla informatyków
 * Systemy operacyjne
 * Topologia algebraiczna 1
+
+## Semestr letni 2021/2022
+* Bazy danych
+* Języki formalne i złożoność obliczeniowa
+* Projekt: kuźnia rdzeni
+* Seminarium: Zaawansowane zagadnienia semantyki języków programowania

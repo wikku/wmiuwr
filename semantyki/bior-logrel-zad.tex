@@ -1,0 +1,92 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{newunicodechar}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{mathpartir}
+\setcounter{secnumdepth}{0}
+\pagenumbering{gobble}
+
+\title{Biortogonalne relacje logiczne — zadania}
+\author{Wiktor Kuchta}
+\date{\vspace{-2ex}}
+
+\newcommand{\subst}[2]{\{#1/#2\}}
+\newcommand{\cont}{\textsf{cont}}
+\newcommand{\Cont}{\textsf{Cont}}
+\newcommand{\Letcc}{\textsf{letcc}}
+\newcommand{\Throw}{\textsf{throw}}
+\newcommand{\Obs}{\mathrm{Obs}}
+
+\newunicodechar{∷}{::} % Digr ::
+\newunicodechar{□}{\square} % Digr OS
+\newunicodechar{│}{\mid} % Digr vv
+\newunicodechar{λ}{\lambda}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+
+\begin{document}
+
+\maketitle
+
+\hrulefill
+
+{\bf Zadanie 1.}
+Dla ustalonego języka (który ma termy $t$, kotermy $E$ i pojęcie złączania ich
+w pełną konfigurację $E[t]$) i zbioru jego konfiguracji $\Obs$, dopełnienia
+ortogonalne definiujemy następująco:
+
+Jeśli $S$ to zbiór termów, to $S^{⊥} = \{E │ ∀t∈S.\,E[t] ∈ \Obs\}$.
+
+Jeśli $S$ to zbiór kotermów, to $S^{⊥} = \{t │ ∀E∈S.\, E[t] ∈ \Obs\}$.
+
+Załóżmy, że $S$ to zbiór termów albo kotermów.
+Pokaż, że $S ⊆ S^{⊥⊥}$ i $S^{⊥⊥⊥} ⊆ S^{⊥}$.
+
+{\bf Zadanie 2.}
+Rozważamy rachunek lambda call-by-value z typami prostymi rozszerzony o
+kontynuacje niedelimitowane.
+\begin{align*}
+	v &∷= x │ λx.\,t │ \cont\;E \\
+	t &∷= v │ t\;t │ \Letcc\;x.\,t │ \Throw\;t\;t \\
+	E &∷= □ │ E\;t │ v\;E │ \Throw\;E\;t │ \Throw\;v\;E
+\end{align*}
+\begin{mathpar}
+	E[(λx.\,t)\;v] → E[t\subst{v}{x}]
+
+	E[\Letcc\;x.\,t] → E[t\subst{\cont\;E}{x}]
+
+	E[\Throw\;(\cont\;E')\;v] → E'[v]
+\end{mathpar}
+Intencja jest oczywiście taka, że kontekst ewaluacyjny zapakowany w wartość postaci $\cont\;E$ jest ,,zamrożony''
+tzn. występujące w nim dziury $□$ nie podlegają podstawieniom i nie są miejscami redukcji.
+
+Interesuje nas terminacja ewaluacji.
+
+Zdefiniuj odpowiednie relacje logiczne i udowodnij lematy kompatybilności dla
+reguł wprowadzających $\Letcc$ i $\Throw$:
+\begin{mathpar}
+	T ∷= B │ T → T │ \Cont\;T
+
+	\inferrule
+		{Γ, x : \Cont\;T ⊢ t : T}
+		{Γ ⊢ \Letcc\;x.\,t:T}
+
+	\inferrule
+		{Γ ⊢ t_1 : \Cont\;T \\ Γ ⊢ t_2 : T}
+		{Γ ⊢ \Throw\;t_1\;t_2 : T'}
+\end{mathpar}
+
+
+\end{document}
