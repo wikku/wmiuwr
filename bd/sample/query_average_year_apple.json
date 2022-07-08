@@ -1,0 +1,6 @@
+{
+	"action": "query_items",
+	"group": true,
+	"aggregate": ["AVG((i_attrs->>'year')::numeric)"],
+	"where": ["=", "manufacturer", "'Apple'"]
+}

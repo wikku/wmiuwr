@@ -1,0 +1,4 @@
+{
+	"action": "query_items",
+	"where": [">", "year", ["AVG", "year"]]
+}

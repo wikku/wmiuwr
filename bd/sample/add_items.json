@@ -1,0 +1,31 @@
+{
+	"action": "add_items",
+	"items": [
+		{
+			"category": "phone",
+			"attrs": {
+				"manufacturer": "Apple",
+				"name": "iPhone 13",
+				"year": 2021,
+				"mobileos": "iOS"
+			}
+		},
+		{
+			"category": "phone",
+			"attrs": {
+				"manufacturer": "Samsung",
+				"name": "Galaxy S22",
+				"year": 2022,
+				"mobileos": "Android"
+			}
+		},
+		{
+			"category": "laptop",
+			"attrs": {
+				"manufacturer": "Apple",
+				"name": "MacBook Air",
+				"year": 2022
+			}
+		}
+	]
+}

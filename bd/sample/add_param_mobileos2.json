@@ -1,0 +1,5 @@
+{
+	"action": "add_or_extend_parameter",
+	"name": "mobileos",
+	"type": ["Android", "iOS", "Windows Phone"]
+}
