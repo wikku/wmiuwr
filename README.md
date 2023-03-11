@@ -39,3 +39,10 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * Języki formalne i złożoność obliczeniowa
 * Projekt: kuźnia rdzeni
 * Seminarium: Zaawansowane zagadnienia semantyki języków programowania
+
+## Semestr zimowy 2022/2023
+* Algorytmy tekstowe
+* Konstrukcja kompilatorów
+* Manipulacje i nadużycia na rynku finansowym
+* Metody implementacji algorytmów
+* Złożoność obliczeniowa
