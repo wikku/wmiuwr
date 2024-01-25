@@ -46,3 +46,15 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * Manipulacje i nadużycia na rynku finansowym
 * Metody implementacji algorytmów
 * Złożoność obliczeniowa
+
+## Semestr letni 2022/2023
+* An Introduction to Finite and Classical Model Theory
+* Kryptografia
+* Seminarium: Logika i teoria typów
+* Teoretyczne podstawy języków programowania
+
+## Semestr zimowy 2023/2024
+* Kurs języka Elixir
+* Machine Learning
+* Seminar: algebraic effects
+* Teoria kategorii w informatyce

@@ -1,0 +1,526 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{newunicodechar}
+\usepackage{stmaryrd}
+\usepackage{mathpartir}
+
+\title{Relational interpretation of algebraic effects}
+\author{Wiktor Kuchta}
+\date{January 17, 2024}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\E}{\mathcal{E}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\PS}{\mathcal{P}}
+\newcommand{\ol}{\overline}
+\newcommand{\+}{\enspace}
+\newcommand{\keyword}[1]{\textsf{\textup{#1}}}
+\newcommand{\KwHandle}{\keyword{handle}}
+\newcommand{\Handle}{\KwHandle\;}
+\newcommand{\KwLift}{\keyword{lift}}
+\newcommand{\Lift}[1]{\KwLift#1}
+\newcommand{\Free}{\textrm{-}\mathrm{free}}
+\newcommand{\subst}[2]{[#1/#2]}
+\newcommand{\Op}{\mathit{op}}
+\newcommand{\Int}{\mathsf{int}}
+\newcommand{\Ask}{\mathsf{ask}}
+
+\newcommand{\kT}{\mathsf{T}}
+\newcommand{\kE}{\mathsf{E}}
+\newcommand{\kR}{\mathsf{R}}
+
+\newunicodechar{│}{\mid} % Digr vv
+\newunicodechar{╱}{\mathbin{/}} % Digr FD
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{□}{\square} % Digr OS
+\newunicodechar{∷}{::} % Digr ::
+\newunicodechar{α}{\alpha}
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⇒}{\Rightarrow} % Digr =>
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\section{Intro}
+
+\begin{frame}
+	\frametitle{Background: operational semantics}
+	So far, we've formalized the semantics of effects and handlers as step relations between expressions:
+	\begin{equation*}
+		\begin{aligned}[c]
+			&\Handle \\
+			&\quad\Ask () + 5 \\
+			&\{ \Ask\;()\;k → k\;10\}
+		\end{aligned}
+	\qquad→\qquad
+		\begin{aligned}[c]
+			&\Handle \\
+			&\quad10 + 5 \\
+			&\{ \Ask\;()\;k → k\;10\}
+		\end{aligned}
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background: type-and-effect systems}
+	Expressions have not only a type, but also potential effects:
+	$$\Ask() + 5 : \Int ╱ \Ask$$
+
+	\pause
+
+	Formally, we have %syntax-directed
+	rules for constructing typing judgments, e.g.,
+	\begin{mathpar}
+	\inferrule
+		{Γ, x:τ_1 ⊢ e : τ_2 ╱ ρ}
+		{Γ ⊢ λx.\,e : τ_1 →_ρ τ_2 ╱ ·}
+	\end{mathpar}
+	% But this is not just a game of pushing Greek letters around.
+	% There is a purpose behind it, a meaning.
+	% We have an intuition for it.
+\end{frame}
+
+\begin{frame}
+	\frametitle{But what does $e : τ ╱ ρ$ mean?}
+
+	Intuitively,
+		``$e$ may perform $ρ$ before evaluating to a $τ$''.
+	% $e$ performing an effect or evaluating to something is a question for the *semantics*
+
+	\pause
+	So it refers to how the program behaves – to the \textit{semantics}.
+	\pause
+
+	Such program properties are undecidable.
+
+	A type system can only \textit{approximate} the real notion.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Agenda}
+	\begin{enumerate}
+	\item
+		Definition of semantic typing, using the step relation $→$.
+		$$Γ ⊨ e : τ ╱ ρ$$
+	\item
+		Compatibility with (i.e., soundness of) syntactic typing.
+		$$Γ ⊢ e : τ ╱ ρ$$
+		(\textit{Corollary:} well-typed programs $⊢ e : τ ╱ ·$ indeed terminate.)
+	\item
+		Row polymorphism. Semantic equivalence.
+		$$Δ; Γ ⊨ e_1 ≈ e_2 : τ ╱ ρ$$
+	\end{enumerate}
+\end{frame}
+
+
+
+\section{A simple calculus with effect handlers}
+
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+	\frametitle{Syntax}
+	We extend the call-by-value $λ$-calculus.
+
+	Assume $\Op$ ranges over a set of operation names, e.g. $\mathrm{ask}, \mathrm{pick}$...
+
+\begin{align*}
+	%\textrm{Var} ∋ f,r,x,y,…    &                    \\%&\textrm{(variables)}\\
+	v,u          &::= x │ λx.\,e \\
+	e            &::=
+		%v │ e\;e │ \Do v │ \Handle e\,\{x,r.\,e;\,x.\,e\}
+		v │ e\;e │ \Op\;v │ \Handle e\,\{\Op\;x\;k→\,e\} \\
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reduction}
+	$$
+	K            ::=
+		□ │ K\;e │ v\;K │ \Handle K\,\{\Op\;x\;k→e\}
+	$$
+
+\begin{mathpar}
+
+	(λx.\,e)\;v ↦ e\subst{v}{x}
+
+	%\Lift{v} ↦ v
+
+	\inferrule
+		{K \Op\Free \\ v_c = λz.\,\Handle K[z]\,\{\Op\;x\;k→e_h\}}
+		{\Handle K[\Op\; v]\,\{\Op\;x\;k→e_h\} ↦ e_h\subst{v}{x}\subst{v_c}{k}}
+
+	\Handle v\,\{\Op\;x\;k→e_h\} ↦  v
+\end{mathpar}
+
+\begin{mathpar}
+	\inferrule
+		{e_1 ↦ e_2}
+		{K[e_1] → K[e_2]}
+\end{mathpar}
+\end{frame}
+
+
+\section{Semantic typing.}
+\frame{\tableofcontents[currentsection]}
+
+
+
+\begin{frame}
+	Consider closed terms first.% Ultimately, we want to define $\E⟦τ/ρ⟧$.
+	\begin{align*}
+		%\V⟦·⟧ &: \mathrm{Type} → \PS(\mathrm{Val})\\
+		\V⟦\mathsf{bool}⟧ &= \{ \mathsf{true}, \mathsf{false} \} \\
+		\V⟦\mathsf{σ →_ρ τ}⟧ &= \{ λx.\,e \mid ∀v∈\V⟦σ⟧.\,e\subst{v}{x} ∈ \E⟦τ/ρ⟧ \}
+	\end{align*}
+	\pause
+	\begin{align*}
+		\E⟦τ'╱\ol{\Op_i:{σ_i{⇒}τ_i}}⟧ &= \{ e │ ∃v∈\V⟦τ'⟧.\,e→^*v \}\\
+						&\mspace{2mu}∪\mspace{2mu} \{ e \\
+						&\quad\,│ ∃K, i, v.\, e →^* K[\Op_i\;v] \\
+						&\quad\mspace{0.5mu}∧ K\,\Op_i\textrm{-free}\\
+						&\quad\mspace{0.5mu}∧ v∈\V⟦σ_i⟧\\
+						&\quad\mspace{0.5mu}∧ ∀u∈\V⟦τ_i⟧.\,K[u] ∈ \E⟦τ'╱\ol{\Op_i:{σ_i{⇒}τ_i}}⟧ \}
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Inductive definition, formally in set theory}
+	$\E⟦τ'╱\ol{\Op_i:{σ_i{⇒}τ_i}}⟧$ is the least fixed point of the following function.
+	\begin{align*}
+		\E'({\color<2->{orange}X})&= \{ e │ ∃v∈\V⟦τ'⟧.\,e→^*v \}\\
+						&\mspace{2mu}∪\mspace{2mu} \{ e \\
+						&\quad\,│ ∃K, i, v.\, e →^* K[\Op_i\;v] \\
+						&\quad\mspace{0.5mu}∧ K\,\Op_i\textrm{-free}\\
+						&\quad\mspace{0.5mu}∧ v∈\V⟦σ_i⟧\\
+						&\quad\mspace{0.5mu}∧ ∀u∈\V⟦τ_i⟧.\,K[u] ∈ {\color<2->{orange}X} \} \\
+	\end{align*}
+	\pause
+	The function $\E'$ is monotone, so it has a least fixed point by the Knaster-Tarski theorem.
+	%\pause
+	%More precisely, it's the intersection of its prefix points ($\E'$-closed sets):
+	%$$\bigcap\{X │ \E'(X) ⊆ X \}.$$
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Examples (blackboard)}
+
+	$$\mathrm{ask}() \;\mathsf{xor}\; \mathrm{ask()} : \mathsf{bool} ╱ {\mathrm{ask}:\mathsf{unit}⇒\mathsf{bool}}$$
+\end{frame}
+
+\begin{frame}
+	\frametitle{Closing}
+
+	$$\G⟦Γ⟧ = \{ γ : \mathrm{Var} → \mathrm{Val} \mid ∀x:τ∈Γ.\,γ(x) ∈ \V⟦τ⟧ \}$$
+
+	$$ Γ ⊨ e : τ ╱ ρ \iff ∀γ∈\G⟦Γ⟧.\,γ(e)∈\E⟦τ/ρ⟧ $$
+\end{frame}
+
+\section{Simple type system. Compatibility.}
+\frame{\tableofcontents[currentsection]}
+\begin{frame}
+	\frametitle{Simple typing}
+	\begin{mathpar}
+	τ ::= b │ τ→_ρτ
+
+	ε ::= \Op:τ ⇒ τ
+
+	ρ ::= · │ ε · ρ
+
+
+	\inferrule
+		{x : τ ∈ Γ}
+		{Γ ⊢ x : τ ╱ ·}
+
+	\inferrule
+		{Γ, x:τ_1 ⊢ e : τ_2 ╱ ρ}
+		{Γ ⊢ λx.\,e : τ_1 →_ρ τ_2 ╱ ·}
+
+	\inferrule
+		{Γ ⊢ e_1 : τ_1 →_ρ τ_2 ╱ ρ \\ Γ ⊢ e_2 : τ_1 ╱ ρ}
+		{Γ ⊢ e_1\,e_2 : τ_2 ╱ ρ}
+
+	\inferrule
+		{Γ ⊢ v : τ_1 ╱ ·}
+		{Γ ⊢ \Op\;v : τ_2 ╱ \Op:τ_1 \Rightarrow τ_2}
+	%\inferrule
+	%	{Γ ⊢ e : τ ╱ τ_1{⇒}τ_2 · ρ \\
+	%	 Γ,x:τ_1,r:τ_2→_ρ τ_r ⊢ e_h : τ_r ╱ ρ \\
+	%	 Γ, x:τ ⊢ e_r : τ_r ╱ ρ}
+	%	{Γ ⊢ \Handle e\;\{x,r.\,e_h;x.\,e_r\} : τ_r ╱ ρ}
+
+	\inferrule
+		{Γ ⊢ e : τ ╱ \Op:τ_1{⇒}τ_2 · ρ \\
+		 Γ,x:τ_1,k:τ_2→_ρ τ ⊢ e_h : τ ╱ ρ}
+		{Γ ⊢ \Handle e\;\{\Op\;x\;k→e_h\} : τ ╱ ρ}
+
+	%\inferrule
+	%	{Δ ⊢ τ_1 <: τ_2 \\ Δ ⊢ ρ_1 <: ρ_2 \\ Δ;Γ ⊢ e : τ_1 ╱ ρ_1}
+	%	{Δ;Γ ⊢ e : τ_2 ╱ ρ_2}
+
+\end{mathpar}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Compatibility}
+
+	For a typing rule
+	$$
+	\inferrule
+		{Γ, x:τ_1 ⊢ e : τ_2 ╱ ρ}
+		{Γ ⊢ λx.\,e : τ_1 →_ρ τ_2 ╱ ·}
+	$$
+	the corresponding compatibility lemma is
+
+	\begin{lemma}[Lambda compatibility]
+	If $$Γ, x:τ_1 ⊨ e : τ_2 ╱ ρ$$ then $$Γ ⊨ λx.\,e : τ_1 →_ρ τ_2 ╱ · $$
+	\end{lemma}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Tying everything together: fundamental theorem}
+	By the compatibility lemmas for each typing rule, we have
+	$$Γ ⊢ e : τ ╱ ρ \implies Γ ⊨ e : τ ╱ ρ.$$
+
+	In particular, if $⊢ e : τ ╱ ·$, then $e ∈ \E⟦τ/·⟧$.
+	For the empty row $·$, the only possibility is termination to a value.
+
+\end{frame}
+
+
+
+
+\section{Polymorphism. Semantic equivalence.}
+\frame{\tableofcontents[currentsection]}
+ \begin{frame}
+	\frametitle{Polymorphic typing: kinding}
+	\begin{mathpar}
+	τ ::= α │ ∀α.\,τ │ b │ τ→_ρτ │ · │ (\Op:τ⇒τ) · ρ \\
+		κ ::= \kT │ \kR \\
+
+	\inferrule
+		{Δ ⊢ τ_1 ∷ \kT \\ Δ ⊢ ρ ∷ \kR \\ Δ ⊢ τ_2 ∷ \kT}
+		{Δ ⊢ τ_1 →_ρ τ_2 ∷ \kT}
+		\\
+
+	\inferrule
+		{α ∷ κ ∈ Δ}
+		{Δ ⊢ α ∷ κ}
+
+	\inferrule
+		{Δ, α :: κ ⊢ τ ∷ \kT}
+		{Δ ⊢ ∀α::κ.\, τ ∷ \kT}
+
+%	\inferrule
+%		{Δ ⊢ τ_1 ∷ \kT \\ Δ ⊢ τ_2 ∷ \kT}
+%		{Δ ⊢ τ_1 \Rightarrow τ_2 ∷ \kE}
+		\\
+
+
+	\inferrule
+		{ }
+		{Δ ⊢ · ∷ \kR}
+
+	\inferrule
+		{Δ ⊢ τ_1 ∷ \kT \\ Δ ⊢ τ_2 ∷ \kT \\ Δ ⊢ ρ ∷ \kR}
+		{Δ ⊢ (\Op : τ_1 ⇒ τ_2) · ρ ∷ \kR}
+\end{mathpar}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Polymorphic typing}
+	$$
+		τ ::= α │ ∀α.\,τ │ b │ τ→_ρτ │ · │ (\Op:τ⇒τ) · ρ
+	$$
+
+	Old rules get a type variable environment $Δ$, e.g.
+$$
+	\inferrule
+		{Δ;Γ, x:τ_1 ⊢ e : τ_2 ╱ ρ}
+		{Δ;Γ ⊢ λx.\,e : τ_1 →_ρ τ_2 ╱ ·}
+$$
+
+Rules pertaining to polymorphism actually use it:
+$$
+	\inferrule
+	{Δ,α∷κ;Γ ⊢ e : τ ╱ ·}
+	{Δ;Γ ⊢ e : ∀α∷κ.\,τ ╱ ·}
+$$
+$$
+		\inferrule
+		{Δ ⊢ σ ∷ κ \\ Δ;Γ ⊢ e : ∀α∷κ.\, τ ╱ ρ}
+		{Δ;Γ ⊢ e : τ\subst{σ}{α} ╱ ρ}
+$$
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lift}
+	What if we have a row
+	$$(\Op : {σ⇒τ}) · ρ$$ and then substitute something
+	that also has $\Op$ for $ρ$?
+
+	\vspace{1ex}
+	To be able to use the second occurrence of $\Op$, we introduce \textit{lift},
+	which makes operations inside skip the nearest handler:
+	$${\color<3,4>{orange}\Handle} {\color<2,4>{blue}\Handle} ({\color<2,4>{blue}\Op\;1}) + (\Lift^\Op{({\color<3,4>{orange}\Op\;\mathtt{"text"}})})\, {\color<2,4>{blue}\{\Op ... \}}\, {\color<3,4>{orange}\{\Op ... \}}$$
+
+\pause\pause\pause
+
+%Formally, we use a \textit{freeness} judgment on contexts:
+%\begin{mathpar}
+%	\inferrule
+%		{ }
+%		{0\Free(□)}
+%
+%	\inferrule
+%		{n\Free(K)}
+%		{n\Free(K\;e)}
+%
+%	\inferrule
+%		{n\Free(K)}
+%		{n\Free(v\;K)}
+%
+%	\inferrule
+%		{n\Free(K)}
+%		{{n+1}\Free(\Lift{K})}
+%
+%	\inferrule
+%		{{n+1}\Free(K)}
+%		%{n\Free(\Handle K\,\{x,r.\,e_h;\,x.\,e_r\})}
+%		{n\Free(\Handle K\,\{x,r.\,e_h\})}
+%\end{mathpar}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Binary relations: interpretation of kinds}
+
+	\begin{align*}
+		⟦\kT⟧ &= \mathcal{P}(\mathrm{Val}^2) \\
+		⟦\kR⟧ &= \mathcal{P}(\mathrm{Exp}^2\times(\mathrm{Op}→ℕ)^2\times⟦\kT⟧) \\
+	\end{align*}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Binary relations: values and effects}
+	\begin{align*}
+		⟦\mathsf{bool}⟧_η &= \{ (\mathsf{true}, \mathsf{true}), (\mathsf{false}, \mathsf{false}) \} \\
+		⟦\mathsf{σ →_ρ τ}⟧_η &= \{ (λx.\,e_1, λx.\,e_2)\\
+							   &\quad\,\mid ∀(v_1,v_2)∈⟦σ⟧_η.\,(e_1\subst{v_1}{x}, e_2\subst{v_2}{x}) ∈ \E⟦τ/ρ⟧_η \}
+		\end{align*}
+	\begin{align*}
+		⟦\Op:σ⇒τ⟧_η &= \{ (\Op\;v_1, \Op\;v_2, (\Op↦0), (\Op↦0), ⟦τ⟧_η)\\
+					  &\quad\,│ (v_1, v_2) ∈ ⟦σ⟧_η \} \\
+		⟦·⟧_η &= ∅ \\
+		⟦(\Op:ε)·ρ⟧_η &= ⟦\Op:ε⟧_η ∪ (⟦ρ⟧_η\uparrow^\Op)
+	\end{align*}
+	\begin{align*}
+	⟦α⟧_η &= η(α) \\
+	⟦∀α∷κ.\,τ⟧_η &= \bigcap_{μ∈⟦κ⟧} ⟦τ⟧_{η[α↦μ]}
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Binary relations: expressions}
+
+	\begin{align*}
+		\E⟦τ╱ρ⟧_η &= \{ (e_1,e_2) │ ∃(v_1,v_2)∈⟦τ⟧_η.\,e_i→^*v_i \}\\
+						&\mspace{2mu}∪\mspace{2mu} \{ (e_1,e_2) \\
+						&\quad\,│ ∃K_1, K_2, (e_1', e_2', f_1, f_2, μ)∈⟦ρ⟧_η.\, e_i →^* K_i[e_i'] \\
+						&\quad\mspace{0.5mu}∧ K_i\,f_i\Free \\
+						&\quad\mspace{0.5mu}∧ ∀(u_1,u_2)∈μ,(K_1[u_1], K_2[u_2]) ∈ \E⟦τ╱ρ⟧_η \} \\
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Equivalence examples (blackboard)}
+	\begin{align*}
+	&f: ∀α.\,(1 →_α \mathsf{int})­→_α τ ⊨ \\
+	&\Handle f\;\mathrm{ask}\;\{\mathrm{ask}\;\_\;k → k\;5 \}
+	≈ f\; (λx.\,5) : τ ╱ ·
+	\end{align*}
+\end{frame}
+
+\section{Homework}
+
+\begin{frame}
+	\frametitle{Problem 1: Finish the equivalence example}
+	We have
+	\begin{equation}
+		R = \Big\{\big(\mathrm{ask}\;(), (λx.\,5)\;(), (\mathrm{ask}↦0), ∅, \{(5,5)\}\big)\Big\}
+	\end{equation}
+	\begin{equation}
+		(f_1\;\mathrm{ask}, f_2\;(λx.\,5)) ∈ \E⟦τ ╱ α⟧_{[α↦R]}
+	\end{equation}
+	Show by induction on (2) that
+	$$(\Handle f_1\;\mathrm{ask}\;\{\mathrm{ask}\;x\;k→k\;5\}, f_2\;(λx.\,5)) ∈ \E⟦τ ╱ ·⟧_∅$$
+
+	You should only need to know this about freeness:
+	$K\,(\mathrm{ask}↦0)\Free$ means $\Handle K[\mathrm{ask} ()] \{\mathrm{ask}...\}$ can be reduced.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Problem 2: Interpretation of polymorphic operations}
+	Consider polymorphic operations, e.g.
+	$$(\mathrm{id}\;(λx.\,x+2))\;(\mathrm{id}\;40) : \mathsf{int} ╱ \mathrm{id} : {α{∷}\kT}.\,{α⇒α}$$
+	(This is a different feature than polymorphic effects that let you e.g. have a $\mathrm{state}\;\textsf{int}$ handler and $\mathrm{state}\;\textsf{string}$ handler.)
+
+	Which semantic interpretation is correct? Why?
+
+	\begin{equation}
+		⟦\mathrm{op} : {α{∷}κ}.\,σ⇒τ⟧_η = \bigcap_{μ∈⟦κ⟧} ⟦\mathrm{op} : σ⇒τ⟧_{η[α↦μ]}
+	\end{equation}
+	\begin{equation}
+		⟦\mathrm{op} : {α{∷}κ}.\,σ⇒τ⟧_η = \bigcup_{μ∈⟦κ⟧} ⟦\mathrm{op} : σ⇒τ⟧_{η[α↦μ]}
+	\end{equation}
+
+
+\end{frame}
+
+
+\end{document}
