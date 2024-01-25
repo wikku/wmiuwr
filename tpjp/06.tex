@@ -1,0 +1,182 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\usepackage{listings}
+\setcounter{secnumdepth}{0}
+
+\title{Lista 6}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\newtheorem*{lemat}{Lemat}
+
+\DeclareMathOperator{\im}{Im}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\+}{\enspace}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{7}{c|} }
+	\hline
+	1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+	\hline
+	+ & + &   & + & + & + & + \\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{1.}
+
+\begin{lemat}
+Jeśli $Γ ⊢ M : σ $, to $Γ[α:=τ] ⊢ M : σ[α:=τ]$.
+\end{lemat}
+\begin{proof}
+Indukcja względem wyprowadzenia $Γ ⊢ M : σ$.
+Rozważamy wszystkie przypadki reguł mogących konczyć wyprowadzenie:
+\begin{itemize}
+	\item (Ass)
+		Mamy $x : σ ⊢ x : σ$, czyli $Γ ≡ x : σ$ i $M ≡ x$.
+		Z reguły (Ass) mamy
+		$$x : σ[α:=τ] ⊢ x : σ[α:=τ],$$
+		co należało pokazać, bo $x : σ[α:=τ] ≡ Γ[α:=τ]$.
+	\item ($→I$)
+		Mamy $Γ ⊢ λx.M' : σ_1 → σ_2$, czyli $M≡λx.M'$ i $σ ≡ σ_1→σ_2$.
+		Z założenia indukcyjnego mamy $(Γ, x:σ_1)[α:=τ] ⊢ M' : σ_2[α:=τ]$.
+		Skoro $(Γ, x:σ_1)[α:=τ] ≡ Γ[α:=τ], x:σ_1[α:=τ]$, z reguły ($→I$) mamy
+		$$Γ[α:=τ] ⊢ λx.M' : σ_1[α:=τ] → σ_2[α:=τ],$$
+		co należało pokazać, bo $σ_1[α:=τ] → σ_2[α:=τ] ≡ σ[α:=τ]$.
+	\item ($→E$)
+		Mamy $Γ_1, Γ_2 ⊢ N_1 N_2 : σ$, czyli $Γ ≡ Γ_1 Γ_2$ i $M ≡ N_1 N_2$.
+		Z założenia indukcyjnego mamy
+		$Γ_1[α:=τ] ⊢ N_1 : (ρ → σ)[α:=τ]$ oraz $Γ_2[α:=τ] ⊢ N_2 : ρ[α:=τ]$.
+		Skoro $(ρ → σ)[α:=τ] ≡ ρ[α:=τ] → σ[α:=τ]$,
+		z reguły ($→E$) mamy
+		$$Γ_1[α:=τ],Γ_2[α:=τ] ⊢ N_1 N_2 : σ[α:=τ],$$
+		co należało pokazać, bo $Γ_1[α:=τ],Γ_2[α:=τ] ≡ Γ[α:=τ]$.
+	\item ($W$)
+		Mamy $Γ', x:ρ ⊢ M : σ$, czyli $Γ ≡ Γ', x:ρ$.
+		Z założenia indukcyjnego mamy
+		$Γ'[α:=τ] ⊢ M : σ[α:=τ]$, więc z reguły ($W$) otrzymujemy
+		$$Γ'[α:=τ], x:ρ[α:=τ] ⊢ M : σ[α:=τ],$$
+		co należało pokazać, bo $Γ'[α:=τ], x:ρ[α:=τ] ≡ Γ[α:=τ]$.
+\end{itemize}
+
+\end{proof}
+
+
+
+\end{document}

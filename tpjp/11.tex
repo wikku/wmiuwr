@@ -1,0 +1,365 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\usepackage{listings}
+\usepackage{lplfitch}
+\renewcommand{\formula}[1]{\ensuremath{#1}}
+\renewcommand{\subproof}[2]{&\hfuzz\maxdimen\fitchprf{#1}{#2}\\} %https://tex.stackexchange.com/questions/494503/package-lplfitch-and-overfull-hbox
+\setcounter{secnumdepth}{0}
+
+\title{Lista 11}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\newtheorem*{lemat}{Lemat}
+
+\DeclareMathOperator{\im}{Im}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\+}{\enspace}
+\newcommand{\If}{\mathsf{if}}
+\newcommand{\True}{\mathsf{true}}
+\newcommand{\False}{\mathsf{false}}
+\newcommand{\Bool}{\mathsf{Bool}}
+\newcommand{\Fst}{\mathsf{fst}}
+\newcommand{\Snd}{\mathsf{snd}}
+\newcommand{\Pair}{\mathsf{pair}}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+\newunicodechar{□}{\square}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{7}{c|} }
+	\hline
+	1 & 2 & 3 & 4 & 5 & 6 \\
+	\hline
+	+ & + & + & + & + & + \\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{1.}
+
+\begin{prooftree}
+	\AxiomC{}
+	\LeftLabel{(Sort)}
+	\UnaryInfC{$∅ ⊢ *:□$}
+	\AxiomC{}
+	\LeftLabel{(Sort)}
+	\UnaryInfC{$∅ ⊢*:□$}
+	\LeftLabel{(Form)}
+	\BinaryInfC{$∅ ⊢ * → * : □$}
+	\AxiomC{}
+	\LeftLabel{(Sort)}
+	\UnaryInfC{$∅ ⊢*:□$}
+	\LeftLabel{(Form)}
+	\BinaryInfC{$∅ ⊢ (* → *) → * : □$}
+\end{prooftree}
+
+\begin{center}
+\fitchprf{}{
+	\pline[1.]{* : □}[Sort] \\
+	\pline[2.]{* → * : □}[Form, 1, 1] \\
+	\pline[3.]{(* → *) → * : □}[Form, 2, 1]
+}
+\end{center}
+
+\section*{2.}
+
+\begin{center}
+\fitchprf{
+	\pline[1.]{α : *} \\
+	\pline[2.]{x : α}
+}{
+	\subproof{
+		\pline[3.]{y:α}
+	}{
+		\pline[4.]{x : α}[Weak, 2]
+	}
+	\pline[5.]{λ{y:α}.\,x : α → α}[Abst, 3–4] \\
+	\pline[6.]{λ{y:α}.\,x : (λ{β:*}.\,β→β)\,α}[Conv, 5]
+}
+\end{center}
+
+\section*{3.}
+
+\setlength{\fitchprfwidth}{4.5in}
+\begin{center}
+\fitchprf{}{
+	\subproof{\pline[1.]{∀x∈S.\,P(x) → Q(x)}}{
+		\subproof{\pline[2.]{∀y∈S.\,P(y)}}{
+			\boxedsubproof[3.]{z}{z∈S}{
+				\pline[4.]{P(z)}[$∀$E, 2] \\
+				\pline[5.]{P(z) → Q(z)}[$∀$E, 1] \\
+				\pline[6.]{Q(z)}[$→$E, 5, 4]
+			}
+			\pline[7.]{∀z∈S.\,Q(z)}[$∀$I, 3–6]
+		}
+		\pline[8.]{(∀y∈S.\,P(y)) → ∀z∈S.\,Q(z)}[$→$I, 2–7]
+	}
+	\pline[9.]{
+		(∀x∈S.\,P(x) → Q(x)) → (∀y∈S.\,P(y)) → ∀z∈S.\,Q(z)
+	}[$→$I, 1–8]
+}
+\end{center}
+
+\setlength{\fitchprfwidth}{4.5in}
+\begin{center}
+\fitchprf{
+	\pline[1.]{S : *} \\
+	\pline[2.]{P : S → *} \\
+	\pline[3.]{Q : S → *}
+}{
+	\subproof{\pline[4.]{t : Πx:S.\,P(x) → Q(x)}}{
+		\subproof{\pline[5.]{a : Πy:S.\,P(y)}}{
+			\subproof{\pline[6.]{z:S}}{
+				\pline[7.]{az : P(z)}[Appl, 5, 6] \\
+				\pline[8.]{tz : P(z) → Q(z)}[Appl, 4, 6] \\
+				\pline[9.]{t z (a z) : Q(z)}[Appl, 8, 7]
+			}
+			\pline[10.]{λz.\, tz(az) : Πz:S.\,Q(z)}[Abst, 6–9]
+		}
+		\pline[11.]{λaz.tz(az) : (Πy:S.\,P(y)) → Πz:S.\,Q(z)}[Abst, 5–10]
+	}
+	\pline[12.]{
+		\begin{aligned}
+			&λtaz.tz(az) \\
+			&: (Πx:S.\,P(x) → Q(x)) → (Πy:S.\,P(y)) → Πz:S.\,Q(z)
+		\end{aligned}
+	}[Abst, 4–11]
+}
+\end{center}
+
+\section*{4.}
+
+\begin{prooftree}
+	\AxiomC{}
+	\LeftLabel{(Sort)}
+	\UnaryInfC{$∅ ⊢ * : □$}
+	\AxiomC{}
+	\LeftLabel{(Sort)}
+	\UnaryInfC{$∅ ⊢ * : □$}
+	\LeftLabel{(Var)}
+	\UnaryInfC{$α : * ⊢ α : *$}
+	\LeftLabel{(Form)}
+	\BinaryInfC{$∅ ⊢ (Πα:*.\,α) : *$}
+\end{prooftree}
+
+\setlength{\fitchprfwidth}{2in}
+\begin{center}
+\fitchprf{}{
+	\pline[1.]{* : □}[Sort] \\
+	\subproof{\pline[2.]{α:*}}{
+		\pline[3.]{α : *}[Var, 1]
+	}
+	\pline[4.]{(Πα:*.\,α) : *}[Form, 1, 2–3]
+}
+\end{center}
+
+\section*{5.}
+
+\subsection*{(a)}
+Przypomnienie:
+\begin{prooftree}
+	\AxiomC{$Γ⊢A:s_1$}
+	\AxiomC{$Γ,x:A⊢B:s_2$}
+	\LeftLabel{(Form)}
+	\BinaryInfC{$Γ⊢(Πx:A.\,B):s_2$}
+\end{prooftree}
+$$A → B = Π\_:A.\,B$$
+Aby móc uformować $A → B$ bądź $Πx:A.\,B$ potrzebujemy reguły (Form)
+dla pary $(s_1, s_2)$, gdzie $s_1$ jest rodzajem $A$, a $s_2$ rodzajem $B$.
+
+Aby uformować $⊥ = Πα : *.\, α$ potrzebujemy reguły dla $(□, *)$.
+$$M = λS : *.λP : \ul{S → *}.λx : S.\ul{P x → ⊥}.$$
+Aby uformować pierwszy i drugi podkreślony typ, potrzebujemy odpowiednio $(*,□)$ i $(*, *)$.
+Innymi słowy, w wyrażeniu korzystamy z polimorfizmu ($⊥$), typów zależnych ($P$) i przestrzeni funkcyjnej
+($P x → ⊥$), co wymaga $λP2$.
+
+$M$ jest jednak funkcją zwracającą typ (konstruktorem typu), zatem otypowanie $M$ wymaga całego $λC$.
+
+\subsection*{(b)}
+
+\setlength{\fitchprfwidth}{4in}
+\begin{center}
+\fitchprf{
+
+}{
+	\subproof{\pline[1.]{S:*}}{
+		\subproof{\pline[2.]{P:S→*}}{
+			\subproof{\pline[3.]{x:S}}{
+				\pline[4.]{P x : *}[Appl, 2, 3] \\
+				\pline[5.]{⊥ : *}[Form] \\
+				\pline[6.]{P x → ⊥ : *}[Form, 4, 5]
+			}
+			\pline[7.]{λx : S.\,P x → ⊥ : S → *}[Abst, 3–6]
+		}
+		\pline[8.]{λP : S → *.\, λx : S.\,P x → ⊥ : (S→*) → S→*}[Abst, 2–7]
+	}
+	\pline[9.]{
+		\begin{aligned}
+		&λS:*.\,λP : S → *.\, λx : S.\,P x → ⊥ \\
+		&: ΠS:*.\,(S→*) → S → *
+		\end{aligned}
+	}[Abst, 1–8]
+}
+\end{center}
+
+\subsection*{(c)}
+$S → *$ interpretuje się zwykle jako predykaty na $S$ czy typ własności $S$
+(w językach terminalnych $S → \mathtt{Bool}$ może wyrazić tylko własności rozstrzygalne).
+Jeśli $P : S → *$, to w teorii konstruktywnej $P s$ możemy rozumieć jako typ dowodów własności $P$ dla $a$.
+Jeśli dowody nas nie obchodzą, to $P$ rozumiemy jako zbiór elementów z $S$.
+
+Zatem term $M$ zamienia predykat (na dowolnym $S$) na jego negację.
+Teoriomnogościowo jest to dopełnienie zbioru (w uniwersum $S$).
+
+\section*{6.}
+
+
+\subsection*{(a)}
+\setlength{\fitchprfwidth}{4.7in}
+\begin{center}
+\fitchprf{
+	\pline[1.]{S:*}\\
+	\pline[2.]{P:S→*}
+}{
+	\subproof{\pline[3.]{c : Πα:*.\,(Πx:S.\,Px→α)→α}}{
+		\subproof{\pline[4.]{n : Πx:S.\,Px→⊥}}{
+			\pline[5.]{⊥ : *}[Form] \\
+			\pline[6.]{c\,⊥ : (Πx:S.\,Px→⊥)→⊥}[Appl, 3, 5]\\
+			\pline[7.]{c\,⊥\,n : ⊥}[Appl]
+		}
+		\pline[8.]{λn.\,c\,⊥\,n : (Πx:S.\,Px→⊥) → ⊥}[Abst, 4–7]
+	}
+	\pline[9.]{
+		\begin{aligned}
+		&λcn.\,c\,⊥\,n \\
+		&: (Πα:*.\,(Πx:S.\,Px→α) → α) → (Πx:S.\,Px→⊥) → ⊥
+		\end{aligned}
+	}[Abst, 3–8]
+}
+\end{center}
+
+\subsection*{(b)}
+Korzystamy z typów zależnych i polimorfizmu, ale nie z konstruktorów typów, więc wystarczy $λP2$.
+
+\subsection*{(c)}
+
+Term $N$ to jedna strona prawa De Morgana:
+jeśli istnieje element $S$ spełniający $P$,
+to nieprawdą jest, że dla każdego elementu $S$ zachodzi $¬P$.
+
+\end{document}

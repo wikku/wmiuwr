@@ -1,0 +1,276 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\usepackage{listings}
+\usepackage{lplfitch}
+\renewcommand{\formula}[1]{\ensuremath{#1}}
+\renewcommand{\subproof}[2]{&\hfuzz\maxdimen\fitchprf{#1}{#2}\\} %https://tex.stackexchange.com/questions/494503/package-lplfitch-and-overfull-hbox
+\setcounter{secnumdepth}{0}
+
+\title{Lista 13}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\newtheorem*{lemat}{Lemat}
+
+\DeclareMathOperator{\im}{Im}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\+}{\enspace}
+\newcommand{\If}{\mathsf{if}}
+\newcommand{\True}{\mathsf{true}}
+\newcommand{\False}{\mathsf{false}}
+\newcommand{\Bool}{\mathsf{Bool}}
+\newcommand{\Fst}{\mathsf{fst}}
+\newcommand{\Snd}{\mathsf{snd}}
+\newcommand{\Pair}{\mathsf{pair}}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+\newunicodechar{□}{\square}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{7}{c|} }
+	\hline
+	1 & 2 & 3 & 4 & 5 & 6 & 7\\
+	\hline
+	+ & + & + & + & + & + & +\\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{1.}
+Term można otypować na nieskończnie wiele sposobów (wykorzystujemy przechodniość i tranzytywność ile razy chcemy),
+ale każda wynikła translacja jest konwertowalna z jednym z poniższych termów:
+\begin{gather*}
+(λx:\textit{string}.\,x)\; (\texttt{intToString}\;1) \\
+(λx:\textit{string}.\,x)\; (\texttt{realToString}\;(\texttt{intToReal}\;1)) \\
+\end{gather*}
+Pierwszy term się ewaluuje do \texttt{"1"}, a drugi do \texttt{"1.0"}.
+Funkcje koercji są niekoherentne.
+
+\newenvironment{scprooftree}[1]%
+  {\gdef\scalefactor{#1}\begin{center}\proofSkipAmount \leavevmode}%
+  {\scalebox{\scalefactor}{\DisplayProof}\proofSkipAmount \end{center} }
+
+\section*{2.}
+\begin{scprooftree}{0.62}
+	\AxiomC{}
+	\RightLabel{Ass}
+	\UnaryInfC{$r : \{ x : \mathrm{Nat} \} ⊢ r : \{ x : \mathrm{Nat}\}$}
+	\RightLabel{\{\}E}
+	\UnaryInfC{$r : \{ x : \mathrm{Nat} \} ⊢ (r.x) : \mathrm{Nat}$}
+	\RightLabel{→I}
+	\UnaryInfC{$ ⊢ λr : \{ x : \mathrm{Nat} \}.\,(r.x) : \{ x : \mathrm{Nat} \} → \mathrm{Nat}$}
+	\AxiomC{}
+	\RightLabel{cst}
+	\UnaryInfC{$⊢ 0 : \mathrm{Nat}$}
+	\AxiomC{}
+	\RightLabel{cst}
+	\UnaryInfC{$⊢ 1 : \mathrm{Nat}$}
+	\RightLabel{\{\}I}
+	\BinaryInfC{$⊢ \{ x = 0, y = 1\} : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}$}
+	\AxiomC{}
+	\RightLabel{\{\}w $<:$ }
+	\UnaryInfC{$\{ x : \mathrm{Nat}, y : \mathrm{Nat} \} <: \{ x : \mathrm{Nat} \}$}
+	\RightLabel{Sub}
+	\BinaryInfC{$⊢ \{ x = 0, y = 1\} : \{ x : \mathrm{Nat} \}$}
+	\RightLabel{→E}
+	\BinaryInfC{$ ⊢ (λr : \{ x : \mathrm{Nat} \}.\,(r.x)) \{ x = 0, y = 1\} : Nat$}
+\end{scprooftree}
+
+\begin{scprooftree}{0.52}
+	\AxiomC{}
+	\RightLabel{Ass}
+	\UnaryInfC{$r : \{ x : \mathrm{Nat} \} ⊢ r : \{ x : \mathrm{Nat}\}$}
+	\RightLabel{\{\}E}
+	\UnaryInfC{$r : \{ x : \mathrm{Nat} \} ⊢ (r.x) : \mathrm{Nat}$}
+	\RightLabel{→I}
+	\UnaryInfC{$ ⊢ λr : \{ x : \mathrm{Nat} \}.\,(r.x) : \{ x : \mathrm{Nat} \} → \mathrm{Nat}$}
+	\AxiomC{}
+	\RightLabel{\{\}w $<:$ }
+	\UnaryInfC{$\{ x : \mathrm{Nat}, y : \mathrm{Nat} \} <: \{ x : \mathrm{Nat} \}$}
+	\AxiomC{}
+	\RightLabel{Refl $<:$}
+	\UnaryInfC{$\mathrm{Nat} <: \mathrm{Nat}$}
+	\RightLabel{→$<:$}
+	\BinaryInfC{$\{ x : \mathrm{Nat} \} → Nat <: \{ x : \mathrm{Nat}, y : \mathrm{Nat} \} → \mathrm{Nat}$}
+	\RightLabel{Sub}
+	\BinaryInfC{$ ⊢ λr : \{ x : \mathrm{Nat} \}.\,(r.x) : \{ x : \mathrm{Nat}, y : \mathrm{Nat} \} → \mathrm{Nat}$}
+	\AxiomC{}
+	\RightLabel{cst}
+	\UnaryInfC{$⊢ 0 : \mathrm{Nat}$}
+	\AxiomC{}
+	\RightLabel{cst}
+	\UnaryInfC{$⊢ 1 : \mathrm{Nat}$}
+	\RightLabel{\{\}I}
+	\BinaryInfC{$⊢ \{ x = 0, y = 1\} : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}$}
+	\RightLabel{→E}
+	\BinaryInfC{$ ⊢ (λr : \{ x : \mathrm{Nat} \}.\,(r.x)) \{ x = 0, y = 1\} : Nat$}
+\end{scprooftree}
+
+\section*{3.}
+
+$$(λr : \{ x : \mathrm{Nat} \}.\,(r.x))\;(\ul{(λr : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.\,\{x = r.x\})\{ x = 0, y = 1\}}) $$
+$$→$$
+$$(λr : \{ x : \mathrm{Nat} \}.\,(r.x))\;\{x = \ul{\{ x = 0, y = 1\}.x}\} $$
+$$→$$
+$$(λr : \{ x : \mathrm{Nat} \}.\,(r.x))\;\{x = 0\} → \{x = 0\}.x→0$$
+
+$$\begin{gathered}(λf:\{ x : \mathrm{Nat} \} → \mathrm{Nat}.\,λx:\{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.\\\,\ul{(λx:\mathrm{Nat}.\,x)(f((λr : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.\,\{x = r.x\})x))})\\
+(λr : \{ x : \mathrm{Nat} \}.\,(r.x))\;\{ x = 0, y = 1\} \end{gathered}$$
+$$→$$
+$$\begin{gathered}\ul{(λf:\{ x : \mathrm{Nat} \} → \mathrm{Nat}.\,λx:\{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.}\\\,\ul{(f((λr : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.\,\{x = r.x\})x)))}\\
+\ul{(λr : \{ x : \mathrm{Nat} \}.\,(r.x))}\;\{ x = 0, y = 1\} \end{gathered}$$
+$$→$$
+$$\begin{gathered}\ul{(λx:\{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.}\\\,\ul{((λr : \{ x : \mathrm{Nat} \}.\,(r.x))((λr : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.\,\{x = r.x\})x)))}\\
+\;\ul{\{ x = 0, y = 1\}} \end{gathered}$$
+$$→$$
+$$(λr : \{ x : \mathrm{Nat} \}.\,(r.x))(\ul{(λr : \{ x : \mathrm{Nat}, y : \mathrm{Nat}\}.\,\{x = r.x\})\{x=0,y=1\}})$$
+$$→$$
+$$(λr : \{ x : \mathrm{Nat} \}.\,(r.x))\{x = \ul{\{x=0,y=1\}.x}\}$$
+$$→$$
+$$(λr : \{ x : \mathrm{Nat} \}.\,(r.x))\{x = 0\} → \{x = 0\}.x → 0$$
+
+\section*{4.}
+\subsection*{(a)}
+Wszystkie typy rekordów z polami $x : ⊤$ i $y:⊤$ oraz typ $⊤$.
+
+\subsection*{(b)}
+$$τ_i = \{l_1:⊤,…,l_i:⊤\}$$
+
+\subsection*{(c)}
+$$τ_i = \{l_1:⊤,…,l_i:⊤\} → ⊤$$
+
+\section*{5.}
+\subsection{(a)}
+Nie, można udowodnić lematy o inwersji mówiące,
+że podtyp typu funkcyjnego jest typem funkcyjnym, a podtyp rekordu jest rekordem.
+
+\subsection*{(b)}
+Nie, z lematu o inwersji dla typu funkcyjnego musielibyśmy mieć nadtyp i podtyp dowolnego typu.
+
+\section*{6.}
+Można, korzystając z \texttt{fst} jako koercji.
+
+\section*{7.}
+Załóżmy, że $\texttt{bot} <: \texttt{int} <: \texttt{float}$.
+
+Gdyby \texttt{ref} był kowariantny, to moglibyśmy do \texttt{int ref} przypisać \texttt{3.14},
+i przy dereferencji otrzymać \texttt{3.14 : int}.
+
+Gdyby \texttt{ref} był kontrawariantny, to moglibyśmy \texttt{int ref} podtypować do \texttt{bot ref}
+i przy dereferencji otrzymać wartość typu pustego.
+
+\end{document}

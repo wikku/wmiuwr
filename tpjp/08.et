@@ -1,0 +1,22 @@
+(*   Wiktor Kuchta  315599   *)
+(* | 2 | 3a | *)
+(* | + | + | *)
+
+
+datatype PAIR 'a 'b = Pair from 'a 'b;
+let fst = \p. _PAIRit p (\a b. a);
+let snd = \p. _PAIRit p (\a b. b);
+let pairc = \fst snd self. Pair (fst self) (snd self);
+\a b self. fst (pairc a b self) = \a b self. a self;
+\a b self. snd (pairc a b self) = \a b self. b self;
+
+codatatype PAIRc 'a 'b = Fst to 'a & Snd to 'b;
+let pair = \a b. _PAIRcci fst snd (Pair a b);
+let pairIt = \p f. f (Fst p) (Snd p);
+\a b. pairIt (pair a b) = \a b f. f a b;
+
+
+codatatype STREAM 'a = Shd to 'a & Stl to STREAM 'a;
+let sMap = \f s. _STREAMci (\self. f (Shd self)) Stl s;
+\f s. Shd (sMap f s) = \f s. f (Shd s);
+\f s. Stl (sMap f s) = \f s. sMap f (Stl s);

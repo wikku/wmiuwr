@@ -1,0 +1,255 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\setcounter{secnumdepth}{0}
+
+\title{Lista 3}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{6}{c|} }
+	\hline
+	1 & 2 & 3 & 4 & 5 & 6 \\
+	\hline
+	+ & + & + & + & & + \\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{1.}
+
+Podkreślone $β$-redeksy:
+$$\ul{(λx.x)(\ul{(λx.x)(λz.\ul{(λx.x)z})})}$$
+
+\section*{2.}
+
+\begin{align*}
+	(λx.xx)(λyz.yz)
+		&\rightarrow xx[x:=(λyz.yz)] ≡ (λyz.yz)(λyz.yz) \\
+		&\rightarrow (λz.yz)[y:=(λyz.yz)] ≡ λz.(λyz.yz)z \\
+		&\rightarrow λz.(λz.yz)[y:=z] ≡ λz.(λt.yt)[y:=z] ≡ λz.(λt.zt) ≡ λzt.zt \\
+\end{align*}
+
+\section*{3.}
+
+Pokażemy równoważność poniższych reguł:
+
+\begin{center}
+	\AxiomC{}
+	\RightLabel{$η$}
+	\UnaryInfC{$λx.Mx=M$}
+	\DisplayProof
+	\, gdzie $x\not\in FV(M)$
+
+	\AxiomC{$Mx=Nx$}
+	\RightLabel{Ext}
+	\UnaryInfC{$M=N$}
+	\DisplayProof
+	\, gdzie $x\not\in FV(M)∪FV(N)$
+
+\end{center}
+
+Wyprowadzamy (Ext) z $(η)$. Zakładamy $x \not\in FV(M) ∪ FV(N)$.
+\begin{prooftree}
+	\AxiomC{}
+	\RightLabel{$η$}
+	\UnaryInfC{$λx.Mx=M$}
+	\RightLabel{Sym}
+	\UnaryInfC{$M=λx.Mx$}
+	\AxiomC{$Mx=Nx$}
+	\RightLabel{MonAbs}
+	\UnaryInfC{$λx.Mx=λx.Nx$}
+	\AxiomC{}
+	\RightLabel{$η$}
+	\UnaryInfC{$λx.Nx=N$}
+	\RightLabel{Trans}
+	\BinaryInfC{$λx.Mx=N$}
+	\RightLabel{Trans}
+	\BinaryInfC{$M=N$}
+\end{prooftree}
+
+Wyprowadzamy $(η)$ z (Ext). Zakładamy $x \not\in FV(M)$.
+\begin{prooftree}
+	\AxiomC{}
+	\RightLabel{$β$}
+	\UnaryInfC{$(λx.Mx)x=Mx$}
+	\RightLabel{Ext}
+	\UnaryInfC{$λx.Mx=M$}
+\end{prooftree}
+
+\section*{4.}
+Ustalmy $λ$-termy $M$ i $N$ takie, że $M=N$.
+Indukcją względem struktury kontekstów pokażemy,
+że dla każdego kontekstu $C$ zachodzi $C[M] = C[N]$.
+
+\begin{enumerate}
+	\item
+		Jeśli $C$ ma postać $x$ (zmienna),
+		to $C[M] ≡ C[N] ≡ x$, a więc $C[M] = C[N]$ wnioskujemy regułą Refl.
+	\item
+		Jeśli $C≡[]$, to $C[M] ≡ M$ i $C[N] ≡ N$,
+		więc korzystamy bezpośrednio z założenia $M=N$.
+	\item
+		Jeśli $C$ ma postać $C_1[]C_2[]$,
+		to z założenia indukcyjnego mamy $C_1[M] = C_1[N]$ oraz $C_2[M]=C_2[N]$.
+		Korzystając z MonApp otrzymujemy
+		$$C[M] ≡ C_1[M]C_2[M] = C_1[N]C_2[N] ≡ C[N].$$
+	\item
+		Jeśli $C$ ma postać $λx. C_1[]$,
+		to z założenia indukcyjnego mamy $C_1[M] = C_1[N]$.
+		Korzystając z MonAbs otrzymujemy
+		$$C[M] ≡ λx. C_1[M] = λx. C_1[N] ≡ C[N].$$
+\end{enumerate}
+
+
+\section*{6.}
+
+Niech $ω_3 ≡ λx. (λt_1. (λt_2. (λt_3. x t_3) t_2) t_1) x$,
+tzn. standardowa $ω ≡ λx. x x$, tylko że $x$ którego aplikujemy został trzykrotnie $η$-ekspandowany.
+
+\subsection*{a)}
+
+$ω_3 ω_3$
+
+\subsection*{b)}
+
+$ω ω (ω_3 ω_3)$
+
+\end{document}

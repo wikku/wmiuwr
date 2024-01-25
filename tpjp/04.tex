@@ -1,0 +1,255 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\usepackage{listings}
+\setcounter{secnumdepth}{0}
+
+\title{Lista 4}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Char}{char}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\inner}[2]{( #1 \, | \, #2)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\modulus}[1]{\left| #1 \right|}
+\newcommand{\abs}{\modulus}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemat}{Lemat}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\+}{\enspace}
+\newcommand{\sump}{\sideset{}{'}{∑}} % sum prime
+\newcommand{\sumb}{\sideset{}{"}{∑}} % sum bis
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{8}{c|} }
+	\hline
+	1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+	\hline
+	+ & + & + & + & + & + & + & \\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{1.}
+
+\begin{align*}
+	\lnot &= λb. \mathsf{if}\;b\;\mathsf{false}\;\mathsf{true} \\
+	\wedge &= λbc. \mathsf{if}\;b\;c\;\mathsf{false} \\
+	\vee &= λbc. \mathsf{if}\;b\;\mathsf{true}\;c \\
+	\rightarrow &= λbc. \mathsf{if}\;b\;c\;\mathsf{true}
+\end{align*}
+
+
+\section*{2.}
+
+\begin{align*}
+	\mathsf{0} &= λfx.x \\
+	\mathsf{suc} &= λnfx. f (nfx) \\
+	\mathsf{Iter} &= λnfa. nfa
+\end{align*}
+
+\begin{align*}
+	\mathsf{Iter}\;\mathsf{0}\;M\;N
+	&≡ (λnfa. nfa) (λfx.x)\;M\;N \\
+	&\rightarrow (λfa. (λfx.x)\;f\;a)\;M\;N \\
+	&\rightarrow (λa. (λfx.x)\;M\;a)\;N \\
+	&\rightarrow (λfx.x)\;M\;N \\
+	&\rightarrow (λx.x)\;N \\
+	&\rightarrow N
+\end{align*}
+
+\begin{align*}
+	\mathsf{Iter}\;(\mathsf{suc}\;n)\;M\;N
+	&≡ (λnfa. nfa)\;((λnfx.f(nfx))\;n)\;M\;N \\
+	&\rightarrow (λnfa. nfa)\;(λfx.f(nfx))\;M\;N \\
+	&\rightarrow^3 (λfx.f(nfx))\;M\;N \\
+	&\rightarrow (λx.M(nMx))\;N \\
+	&\rightarrow M\;(n\;M\;N)\\
+	&\leftarrow^3 M\;((λnfa. nfa)\;n\;M\;N) \\
+	&≡ M\;(\mathsf{Iter}\;n\;M\;N)
+\end{align*}
+
+\section*{3.}
+$$G=λyf.f(yf)$$
+
+$$∀F.\,MF=F(MF) \iff ∀F.\,MF=GMF \iff M=GM$$
+W pierwszym przejściu korzystamy z $GMF=F(MF)$ oraz przechodniości,
+a w drugim $η$-redukcji (za $F$ bierzemy zmienną) w prawo i kompatybilności z aplikacją w lewo.
+
+\section*{4.}
+$$M(SI)F=SI(M(SI))F=IF(M(SI)F)=F(M(SI)F)$$
+
+\section*{5.}
+\begin{align*}
+	Y^1 = Y(SI) = (λx.SI(xx))(λx.SI(xx)) &= (λx.λz.Iz(xxz))(λx.λz.Iz(xxz)) \\ &= (λxz.z(xxz))(λxz.z(xxz) = Θ
+\end{align*}
+
+\section*{6.}
+\begin{lstlisting}
+newtype Self a = Fold { unfold :: Self a -> a }
+
+a :: Self ((a -> b) -> a) -> (a -> b) -> b
+a x y = y (unfold x x y)
+
+theta :: (a -> a) -> a
+theta = a (Fold a)
+\end{lstlisting}
+
+\section*{7.}
+\begin{align*}
+	h(\bar{x}) &= add(U^2_3(\bar x), U^3_3(\bar x)) \\
+	mult(0,n) &= U^1_1(n) \\
+	mult(S(m), n) &= h(m, mult(m, n), n)
+\end{align*}
+
+\begin{align*}
+	h(\bar{x}) &= mult(U^2_3(\bar x), U^3_3(\bar x)) \\
+	flippow(0,m) &= S(Z(m)) \\
+	flippow(S(n), m) &= h(n, flippow(n, m), m) \\
+	pow(\bar{x}) &= flippow(U^2_2(\bar{x}), U^1_2(\bar{x}))
+\end{align*}
+
+\begin{align*}
+	sucfst(\bar x) &= S(U^1_2(\bar x)) \\
+	h(\bar{x}) &= mult(sucfst(\bar x), U^2_2(x)) \\
+	fact(0) &= 1 \\
+	fact(S(n)) &= h(n, fact(n))
+\end{align*}
+
+\iffalse
+\section*{8.}
+
+\begin{align*}
+	le(0,n) &= 1 \\
+	le(S(m),n) &=  \\
+	lt(m,n) &= le(S(m), n) \\
+	min(0,n) &= 0 \\
+	min(S(m), n) &= min(m,n) + lt(m, n)
+\end{align*}
+\fi
+
+\end{document}

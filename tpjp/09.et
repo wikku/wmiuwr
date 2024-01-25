@@ -1,0 +1,96 @@
+(*   Wiktor Kuchta  315599   *)
+(* | 2 | 3 | 4 | *)
+(* | + | + | + | *)
+
+
+(**********************************************************)
+datatype Nat = Suc from Nat | O;
+let one = Suc O;
+let two = Suc one;
+let three = Suc two;
+let four = Suc three;
+let five = Suc four;
+
+
+(**********************************************************)
+datatype OPTION 'a = Some from 'a | None;
+
+
+(**********************************************************)
+datatype LIST 'a = Cons from 'a (LIST 'a) | Nil;
+let isNil = \xs. _LISTit xs (\h t.False) True;
+let head = \l. _LISTit l (\hd tl. Some hd) None;
+let tail = \l. _LISTrec l (\hd p. fst p) Nil;
+val append = fn xs ys => _LISTit xs Cons ys;
+
+let revAppend = \xs. _LISTit xs (\x f ys. f (Cons x ys)) (\ys. ys);
+\ys. revAppend Nil ys = \ys. ys;
+\h t ys. revAppend (Cons h t) ys = \h t ys. revAppend t (Cons h ys);
+
+let reverse = \xs. revAppend xs Nil;
+
+
+(**********************************************************)
+codatatype QUEUE 'a = QUEUE'enqueue to 'a -> QUEUE 'a &
+                      QUEUE'first to OPTION 'a        &
+                      QUEUE'dequeue to QUEUE 'a       &
+                      QUEUE'isEmpty to BOOL;
+
+let norm = \q. _PAIRit q \xs ys. _BOOLit (isNil xs) (Pair (reverse ys) xs) q;
+
+let and = \b1 b2. _BOOLit b1 b2 False;
+
+(*               Utworzenie pustej kolejki                *)
+let qUEUE'empty =
+  _QUEUEci
+   (\q e. _PAIRit q \xs ys. norm (Pair xs (Cons e ys)))
+   (\q. head (fst q))
+   (\q. norm (_PAIRit q \xs ys. Pair (tail xs) ys))
+   (\q. _PAIRit q \xs ys. and (isNil xs) (isNil ys))
+   (Pair Nil Nil);
+
+(*                        TESTY                           *)
+QUEUE'first qUEUE'empty;
+QUEUE'dequeue qUEUE'empty;
+QUEUE'isEmpty (QUEUE'dequeue qUEUE'empty);
+
+let q0 = QUEUE'enqueue qUEUE'empty O;
+QUEUE'first q0;
+QUEUE'dequeue q0;
+QUEUE'isEmpty (QUEUE'dequeue q0);
+
+let q01 = QUEUE'enqueue q0 (Suc O);
+QUEUE'first q01;
+QUEUE'dequeue q01;
+QUEUE'isEmpty (QUEUE'dequeue q01);
+QUEUE'first (QUEUE'dequeue q01);
+
+(**********************************************************)
+let add = \m n. _Natit m Suc n;
+let mult = \m n. _Natit m (add n) O;
+
+codatatype BTinf 'a = BTinfRoot to 'a & BTinfL to BTinf 'a & BTinfR to BTinf 'a;
+
+let natBTinf = \n. _BTinfci (\m. m) (\m. mult two m) (\m. Suc (mult two m)) n;
+
+\n. BTinfRoot (natBTinf n) = \n. n;
+\n. BTinfL (natBTinf n) = \n. natBTinf (mult two n);
+\n. BTinfR (natBTinf n) = \n. natBTinf (Suc (mult two n));
+
+codatatype STREAM 'a = Shd to 'a & Stl to STREAM 'a;
+
+let ltake = \n._Natit n (\f s.Cons (Shd s) (f (Stl s))) (\s.Nil);
+
+let breadthBTi = \bt.
+  _STREAMci
+   (\q. _OPTIONit (QUEUE'first q)
+          (\a. BTinfRoot a)
+          ((*impossible*) BTinfRoot bt))
+   (\q. _OPTIONit (QUEUE'first q)
+          (\a. QUEUE'enqueue (QUEUE'enqueue (QUEUE'dequeue q) (BTinfL a)) (BTinfR a))
+          ((*impossible*) q))
+   (QUEUE'enqueue qUEUE'empty bt);
+
+ltake five (breadthBTi (natBTinf one));
+
+

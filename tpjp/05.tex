@@ -1,0 +1,198 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\usepackage{listings}
+\setcounter{secnumdepth}{0}
+
+\title{Lista 4}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\DeclareMathOperator{\im}{Im}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\+}{\enspace}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{6}{c|} }
+	\hline
+	1 & 2 & 3 & 4 & 5 & 6 \\
+	\hline
+	 & + & + & + & + & + \\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{3.}
+
+Niech $\mathsf{Iter} = λnfz.\,\mathsf{Rec}\;n\;(λx.f)\;z.$
+
+
+\begin{align*}
+	\mathsf{Iter}\;0\;M\;N &\rightarrow^3 \mathsf{Rec}\;0\;(λx.M)\;N = N \\
+	\mathsf{Iter}\;(\mathsf{suc}\;n)\;M\;N &\rightarrow^3 \mathsf{Rec}\;(\mathsf{suc}\;n)\;(λx.M)\;N
+	= \ul{(λx.M)\;n}\;(\mathsf{Rec}\;n\;(λx.M)\;N) \\
+	&\rightarrow M\;(\mathsf{Rec}\;n\;(λx.M)\;N) \leftarrow^3 M\;(\mathsf{Iter}\;n\;M\;N)
+\end{align*}
+
+($x \not\in FV(M)$)
+
+\section*{4.}
+
+\begin{align*}
+	\mathsf{Rec} &= λnfz.\,nfz \\
+	\mathsf{0} &= λfz.\,z \\
+	\mathsf{suc} &= λnfz.\,f\;n\;(\mathsf{Rec}\;n\;f\;z)\\ \\
+	\mathsf{Rec}\;\mathsf{0}\;M\;N &\rightarrow^3 \mathsf{0}\;M\;N →^2 N \\
+	\mathsf{Rec}\;(\mathsf{suc}\;n)\;M\;N &\rightarrow^3 \mathsf{suc}\;n\;M\;N →^3 M\;n\;(\mathsf{Rec}\;n\;M\;N)
+\end{align*}
+
+\section*{5.}
+
+
+
+\begin{align*}
+	\mathsf{0} &= λfz.\,z \\
+	\mathsf{suc} &= λnfz.\,f\;n\\ \\
+	\mathsf{Rec} &= λnfz.\,n\;(λn.\,f\;n\;(\mathsf{Rec}\;n\;f\;z)\;z \\
+	\mathsf{Rec} &= \mathsf{Y}\;(λrnfz.\,n\;(λn.\,f\;n\;(r\;n\;f\;z)\;z) \\
+	\mathsf{Rec}\;\mathsf{0}\;M\;N &\rightarrow^3 \mathsf{0}\;(λn.\,M\;n\;(\mathsf{Rec}\;n\;M\;N)\;N →^2 N \\
+	\mathsf{Rec}\;(\mathsf{suc}\;n)\;M\;N &\rightarrow^3
+	\mathsf{suc}\;n\;(λn.\;M\;n\;(\mathsf{Rec}\;n\;M\;N))\;N \\
+	&\rightarrow^4 M\;n\;(\mathsf{Rec}\;n\;M\;N) \\ \\
+	\mathsf{isZero} &= λn.\,\mathsf{Rec}\;n\;(λxy.\,\mathsf{false})\;\mathsf{true} \\
+	\mathsf{pred} &= λn.\,\mathsf{Rec}\;n\;(λxy.\,x)\;\mathsf{0}
+\end{align*}
+
+\section*{6.}
+
+Drzewo typowania musiałoby mieć taką postać:
+\begin{prooftree}
+	\AxiomC{}
+	\RightLabel{Ass}
+	\UnaryInfC{$Γ, x:σ ⊢ x : ρ → τ$}
+	\AxiomC{}
+	\RightLabel{Ass}
+	\UnaryInfC{$Γ, x:σ ⊢ x : ρ$}
+	\RightLabel{$→E$}
+	\BinaryInfC{$Γ, x:σ ⊢ x\;x : τ$}
+	\RightLabel{$→I$}
+	\UnaryInfC{$Γ ⊢ λx.\,x\;x : σ → τ$}
+\end{prooftree}
+Skąd mamy sprzeczność $ρ=ρ→τ$.
+
+\end{document}

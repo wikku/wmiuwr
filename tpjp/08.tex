@@ -1,0 +1,202 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{silence}
+\usepackage{polski}
+\usepackage{parskip}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{newunicodechar}
+\usepackage{etoolbox}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{bussproofs}
+\usepackage{listings}
+\setcounter{secnumdepth}{0}
+
+\title{Lista 8}
+\author{Wiktor Kuchta (nr indeksu 315599)}
+
+\newtheorem*{lemat}{Lemat}
+
+\DeclareMathOperator{\im}{Im}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\+}{\enspace}
+\newcommand{\If}{\mathsf{if}}
+\newcommand{\True}{\mathsf{true}}
+\newcommand{\False}{\mathsf{false}}
+\newcommand{\Bool}{\mathsf{Bool}}
+\newcommand{\Fst}{\mathsf{fst}}
+\newcommand{\Snd}{\mathsf{snd}}
+\newcommand{\Pair}{\mathsf{pair}}
+
+\newunicodechar{∅}{\emptyset} % Digr /0
+\newunicodechar{∞}{\infty} % Digr 00
+\newunicodechar{∂}{\partial} % Digr dP
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ξ}{\xi} % Digr c*
+\newunicodechar{δ}{\delta} % Digr d*
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{φ}{\varphi}
+\newunicodechar{γ}{\gamma} % Digr g*
+\newunicodechar{θ}{\theta} % Digr h*
+\newunicodechar{ι}{\iota} % Digr i*
+\newunicodechar{κ}{\kappa}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{μ}{\mu}
+\newunicodechar{π}{\pi}
+\newunicodechar{ψ}{\psi}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{ω}{\omega}
+\newunicodechar{η}{\eta} % Digr y*
+\newunicodechar{ζ}{\zeta} % Digr z*
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Γ}{\Gamma}
+\newunicodechar{Λ}{\Lambda}
+\newunicodechar{Θ}{\Theta}
+\newunicodechar{Φ}{\Phi} % Digr F*
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ψ}{\Psi} % digr Q*
+\newunicodechar{Σ}{\Sigma} % digr S*
+\newunicodechar{Ω}{\Omega} % digr W*
+\newunicodechar{ℕ}{\N} % Digr NN 8469 nonstandard
+\newunicodechar{ℤ}{\Z} % Digr ZZ 8484 nonstandard
+\newunicodechar{ℚ}{\Q} % Digr QQ 8474 nonstandard
+\newunicodechar{ℝ}{\R} % Digr RR 8477 nonstandard
+\newunicodechar{ℂ}{\C} % Digr CC 8450 nonstandard
+\newunicodechar{∑}{\sum}
+\newunicodechar{∏}{\prod}
+\newunicodechar{∫}{\int}
+\newunicodechar{∓}{\mp}
+\newunicodechar{⌈}{\lceil} % Digr <7
+\newunicodechar{⌉}{\rceil} % Digr >7
+\newunicodechar{⌊}{\lfloor} % Digr 7<
+\newunicodechar{⌋}{\rfloor} % Digr 7>
+\newunicodechar{≅}{\cong} % Digr ?=
+\newunicodechar{≡}{\equiv} % Digr 3=
+\newunicodechar{◁}{\triangleleft} % Digr Tl
+\newunicodechar{▷}{\triangleright} % Digr Tr
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+\newunicodechar{≪}{\ll} % Digr <*
+\newunicodechar{≫}{\gg} % Digr *>
+\newunicodechar{≠}{\ne}
+\newunicodechar{⊆}{\subseteq} % Digr (_
+\newunicodechar{⊇}{\supseteq} % Digr _)
+\newunicodechar{⊂}{\subset} % Digr (C
+\newunicodechar{⊃}{\supset} % Digr C)
+\newunicodechar{∩}{\cap} % Digr (U
+\newunicodechar{∖}{\setminus} % Digr -\ 8726 nonstandard
+\newunicodechar{∪}{\cup} % Digr )U
+\newunicodechar{∼}{\sim} % Digr ?1
+\newunicodechar{≈}{\approx} % Digr ?2
+\newunicodechar{∈}{\in} % Digr (-
+\newunicodechar{∋}{\ni} % Digr -)
+\newunicodechar{∇}{\nabla} % Digr NB
+\newunicodechar{∃}{\exists} % Digr TE
+\newunicodechar{∀}{\forall} % Digr FA
+\newunicodechar{∧}{\wedge} % Digr AN
+\newunicodechar{∨}{\vee} % Digr OR
+\newunicodechar{⊥}{\bot} % Digr -T
+\newunicodechar{⊢}{\vdash} % Digr \- 8866 nonstandard
+\newunicodechar{⊨}{\models} % Digr \= 8872 nonstandard
+\newunicodechar{⊤}{\top} % Digr TO 8868 nonstandard
+\newunicodechar{⇒}{\implies} % Digr =>
+\newunicodechar{⊸}{\multimap} % Digr #> nonstandard
+\newunicodechar{⇐}{\impliedby} % Digr <=
+\newunicodechar{⇔}{\iff} % Digr ==
+\newunicodechar{↔}{\leftrightarrow} % Digr <>
+\newunicodechar{↦}{\mapsto} % Digr T> 8614 nonstandard
+\newunicodechar{∘}{\circ} % Digr Ob
+\newunicodechar{⊕}{\oplus} % Digr O+ 8853
+\newunicodechar{⊗}{\otimes} % Digr OX 8855
+\newunicodechar{⟦}{\llbracket} % Digr [[ 10214 nonstandard (needs pkg stmaryrd)
+\newunicodechar{⟧}{\rrbracket} % Digr ]] 10215 nonstandard
+\newunicodechar{✓}{\checkmark}
+
+% cursed
+\WarningFilter{newunicodechar}{Redefining Unicode}
+\newunicodechar{·}{\ifmmode\cdot\else\textperiodcentered\fi} % Digr .M
+\newunicodechar{×}{\ifmmode\times\else\texttimes\fi} % Digr *X
+\newunicodechar{→}{\ifmmode\rightarrow\else\textrightarrow\fi} % Digr ->
+\newunicodechar{←}{\ifmmode\leftarrow\else\textleftarrow\fi} % Digr ->
+\newunicodechar{⟨}{\ifmmode\langle\else\textlangle\fi} % Digr LA 10216 nonstandard
+\newunicodechar{⟩}{\ifmmode\rangle\else\textrangle\fi} % Digr RA 10217 nonstandard
+\newunicodechar{…}{\ifmmode\dots\else\textellipsis\fi} % Digr .,
+\newunicodechar{±}{\ifmmode\pm\else\textpm\fi} % Digr +-
+\newunicodechar{¬}{\ifmmode\lnot\else\textlnot\fi} % Digr NO
+
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+	\begin{tabular}{ |*{7}{c|} }
+	\hline
+	1 & 2 & 3 & 4 \\
+	\hline
+	+ & + & + & + \\
+	\hline
+\end{tabular}
+\end{center}
+
+\section*{1.}
+
+\begin{align*}
+	\texttt{BT}\;β &= ∀α.\,(β → α → α → α) → α → α \\
+	\texttt{Node} &= Λβ.\,λx^β.\,λl^{\texttt{BT}\;β}.\,λr^{\texttt{BT}\;β}.\,
+	Λα.\,λn^{β→α→α→α}.\,λt^α.\,n\;x\;(l\;α\;n\;t)\;(r\;α\;n\;t) \\
+	\texttt{Tip} &= Λβ.\,Λα.\,λn^{β→α→α→α}.\,λt^α.\,t \\
+	\texttt{\_BTit} &= Λβ.\,λb^{\texttt{BT}\;β}.\,Λα.\,λn^{β→α→α→α}.\,λt^α.\,b\;α\;n\;t
+\end{align*}
+
+\begin{align*}
+	\texttt{\_BTit}\;β\;(\texttt{Node}\;β\;x\;l\;r)\;α\;n\;t &\rightarrow^*
+	n\;x\;(\texttt{\_BTit}\;β\;l\;α\;n\;t)\;(\texttt{\_BTit}\;β\;r\;α\;n\;t) \\
+	\texttt{\_BTit}\;β\;\texttt{Tip}\;α\;n\;t &\rightarrow^*
+	t
+\end{align*}
+
+\section*{4.}
+
+\begin{prooftree}
+	\AxiomC{}
+	\RightLabel{$Ax$}
+	\UnaryInfC{$Γ, ∀α.\,φ[α] → γ ⊢ ∀α.\,φ[α] → γ$}
+	\RightLabel{$∀E$}
+	\UnaryInfC{$Γ, ∀α.\,φ[α] → γ ⊢ φ[α:=σ] → γ$}
+	\AxiomC{$Γ ⊢ φ[α:=σ]$}
+	\RightLabel{$W$}
+	\UnaryInfC{$Γ, ∀α.\,φ[α] → γ ⊢ φ[α:=σ]$}
+	\RightLabel{$→E$}
+	\BinaryInfC{$Γ, ∀α.\,φ[α] → γ ⊢ γ$}
+	\RightLabel{$→I$}
+	\UnaryInfC{$Γ ⊢ (∀α.\,φ[α] → γ) → γ$}
+	\RightLabel{$∀I$}
+	\UnaryInfC{$Γ ⊢ ∀γ.\,(∀α.\,φ[α] → γ) → γ$}
+\end{prooftree}
+
+\begin{prooftree}
+	\AxiomC{$Γ_1 ⊢ ∀γ.\,(∀α.\,φ[α] → γ) → γ$}
+	\RightLabel{$∀E$}
+	\UnaryInfC{$Γ_1 ⊢ (∀α.\,φ[α] → ψ) → ψ$}
+	\AxiomC{$Γ_2, φ[α] ⊢ ψ$}
+	\RightLabel{$→I$}
+	\UnaryInfC{$Γ_2 ⊢ φ[α] → ψ$}
+	\RightLabel{$∀I$}
+	\UnaryInfC{$Γ_2 ⊢ ∀α.\,φ[α] → ψ$}
+	\RightLabel{$→E$}
+	\BinaryInfC{$Γ_1, Γ_2 ⊢ ψ$}
+\end{prooftree}
+
+
+
+
+
+\end{document}

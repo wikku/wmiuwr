@@ -1,0 +1,137 @@
+(*   Wiktor Kuchta  315599   *)
+(* | 2 | 3 | 4 | 5 | 6 | 7 | *)
+(* | + |   | + | + | + | + | *)
+
+datatype Nat = Suc from Nat | O;
+
+let one = Suc O;
+let two = Suc one;
+let three = Suc two;
+let four = Suc three;
+let five = Suc four;
+let six = Suc five;
+
+(*               is0 O = True               *)
+(*         is0 (Suc m) = False              *)
+
+let is0 = \n. _Natit n (\b.False) True;
+
+(*                     Weryfikacja                    *)
+
+is0 O = True;
+\n.is0 (Suc n) = \n.False;
+
+(*            add O n = n                  *)
+(*      add (Suc m) n = Suc (add m n)      *)
+
+let add = \m n. _Natit m Suc n;
+
+(*                     Weryfikacja                    *)
+
+\n.add O n = \n.n;
+\m n.add (Suc m) n = \m n.Suc (add m n);
+let add = \m n. _Natit m Suc n;
+
+
+(* 2 **************************************************)
+
+
+(* mult O n = O *)
+(* mult (Suc m) n = add n (mult m n) *)
+let mult = \m n. _Natit m (add n) O;
+
+(*  Weryfikacja  *)
+\n. mult O n = \n. O;
+\m n. mult (Suc m) n = \m n. add n (mult m n);
+
+
+(* exp m O = one *)
+(* exp m (Suc n) = mult m (exp m n) *)
+let exp = \m n. _Natit n (mult m) one;
+
+(*  Weryfikacja  *)
+\m. exp m O = \m. one;
+\m n. exp m (Suc n) = \m n. mult m (exp m n);
+
+
+(* pred O = O *)
+(* pred (Suc m) = m *)
+let pred = \m. _Natrec m fst O;
+
+(*  Weryfikacja  *)
+pred O = O;
+\m. pred (Suc m) = \m. m;
+
+
+(* subtr m O = m *)
+(* subtr m (Suc n) = pred (subtr m n) *)
+let subtr = \m n. _Natit n pred m;
+
+(*  Weryfikacja  *)
+\m. subtr m O = \m. m;
+\m n. subtr m (Suc n) = \m n. pred (subtr m n);
+
+
+(* 3 **************************************************)
+
+let le = \m n. is0 (subtr m n);
+let and = \a b. _BOOLit a b False;
+let eq = \m n. and (le m n) (le n m);
+
+
+(* 4 **************************************************)
+
+let fib' = \n. _Natit n (\f. (snd f, add (fst f) (snd f))) (O, one);
+let fib = \n. fst (fib' n);
+fib O = O;
+fib one = one;
+fib two = one;
+fib three = two;
+fib four = three;
+fib five = five;
+
+
+(* 5 **************************************************)
+
+let iterF = \f n. _Natit n f (f one);
+
+(* ack 0 = Suc *)
+(* ack (Suc m) = \n. iterF (ack m) (Suc n) *)
+let ack = \m. _Natit m iterF Suc;
+\n. ack O n = Suc;
+\m. ack (Suc m) O = \m. ack m one;
+\m n. ack (Suc m) (Suc n) = \m n. ack m (ack (Suc m) n);
+
+
+(* 6 **************************************************)
+
+datatype LIST 'a = Cons from 'a (LIST 'a) | Nil;
+
+(* length Nil = 0 *)
+(* length (Cons a as) = Suc (length as)) *)
+let length = \l. _LISTit l (\_. Suc) O;
+length Nil = O;
+\a as. length (Cons a as) = \a as. Suc (length as);
+
+(* append Nil bs = bs *)
+(* append (Cons a as) bs = Cons a (append as bs) *)
+let append = \as bs. _LISTit as Cons bs;
+\bs. append Nil bs = \bs. bs;
+\a as bs. append (Cons a as) bs = \a as bs. Cons a (append as bs);
+
+(* map f Nil = Nil *)
+(* map f (Cons a as) = Cons (f a) (map f as) *)
+let map = \f as. _LISTit as (\a bs. Cons (f a) bs) Nil;
+\f. map f Nil = \f. Nil;
+\f a as. map f (Cons a as) = \f a as. Cons (f a) (map f as);
+
+
+(* 7 **************************************************)
+
+datatype BT 'a = Node from 'a (BT 'a) (BT 'a) | Tip;
+
+(* numOfNodes Tip = O *)
+(* numOfNodes (Node a l r) = Suc (add (numOfNodes l) (numOfNodes r)) *)
+let numOfNodes = \bt. _BTit bt (\_ l r. Suc (add l r)) O;
+numOfNodes Tip = O;
+\a l r. numOfNodes (Node a l r) = \a l r. Suc (add (numOfNodes l) (numOfNodes r));
