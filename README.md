@@ -58,3 +58,9 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * Machine Learning
 * Seminar: algebraic effects
 * Teoria kategorii w informatyce
+
+## Semestr letni 2023/2024
+* Algorytmy funkcjonalne i trwałe struktury danych
+* Algorytmy probabilistyczne
+* Neural Networks. Theory and Practice.
+* Weryfikacja programów w systemie Coq
