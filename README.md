@@ -31,7 +31,7 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 ## Semestr zimowy 2021/2022
 * [Języki programowania](./jp/)
 * [Rachunek prawdopodobieństwa dla informatyków](./rpdi/)
-* Systemy operacyjne
+* [Systemy operacyjne](./so/)
 * Topologia algebraiczna 1
 
 ## Semestr letni 2021/2022
