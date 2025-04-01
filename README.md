@@ -37,11 +37,11 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 ## Semestr letni 2021/2022
 * [Bazy danych](./bd/)
 * Języki formalne i złożoność obliczeniowa
-* Projekt: kuźnia rdzeni
+* [Projekt: kuźnia rdzeni](https://github.com/kuznia-rdzeni/coreblocks)
 * [Seminarium: Zaawansowane zagadnienia semantyki języków programowania](./semantyki/)
 
 ## Semestr zimowy 2022/2023
-* Algorytmy tekstowe
+* [Algorytmy tekstowe](https://github.com/wikku/diffrs)
 * Konstrukcja kompilatorów
 * Manipulacje i nadużycia na rynku finansowym
 * Metody implementacji algorytmów
@@ -54,7 +54,7 @@ Materiały z przedmiotów realizowanych podczas studiów (ISIM/informatyka)
 * [Teoretyczne podstawy języków programowania](./tpjp/)
 
 ## Semestr zimowy 2023/2024
-* Kurs języka Elixir
+* [Kurs języka Elixir](https://github.com/wikku/slackernews)
 * Machine Learning
 * [Seminar: algebraic effects](./semalgeff/)
 * Teoria kategorii w informatyce
